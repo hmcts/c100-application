@@ -1,0 +1,21 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :international_request do %>
+        <p class="govuk-body-l"><%=t '.lead_text' %></p>
+
+        <%= f.govuk_radio_button :international_request, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_text_area :international_request_details %>
+        <% end %>
+        <%= f.govuk_radio_button :international_request, GenericYesNo::NO %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

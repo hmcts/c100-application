@@ -1,0 +1,11 @@
+// GOV.UK Frontend
+// https://frontend.design-system.service.gov.uk
+
+// Style paragraphs (`<p>`) and links (`<a>`) without explicitly having to apply `govuk-body` and `govuk-link` classes
+$govuk-global-styles: true;
+
+$govuk-assets-path: '/assets/govuk-frontend/govuk/assets/';
+@import 'govuk-frontend/govuk/all';
+
+// App-specific custom styles and overrides
+@import 'local/all';

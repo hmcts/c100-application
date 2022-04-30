@@ -1,0 +1,9 @@
+<tr class="answer-box">
+  <td class="question">
+    <%= answer_box.question.is_a?(Symbol) ? t("check_answers.#{answer_box.question}.question") : answer_box.question %>
+  </td>
+
+  <td class="answer answer-value">
+    <input class="box-to-fill" type="text" name="<%= answer_box.object_id %>"/>
+  </td>
+</tr>

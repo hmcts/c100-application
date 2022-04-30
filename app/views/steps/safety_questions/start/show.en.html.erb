@@ -1,0 +1,38 @@
+<% title 'Safety concerns' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Safety concerns</h1>
+
+    <p class="govuk-body-l">
+      The court needs to know if anyone who spends time with the children poses a risk to their safety or yours.
+    </p>
+
+    <div class="govuk-inset-text">
+      We use ‘children’ as a general term to avoid repetition. In this service it applies to whether it is about a child
+      or children.
+    </div>
+
+    <p class="govuk-body">
+      The following questions will ask whether you or the children have experienced, or are at risk of experiencing, any
+      form of harm. Harm to a child means ill treatment or damage to health and development, including, for example,
+      damage suffered from seeing or hearing the ill treatment of another.
+    </p>
+
+    <p class="govuk-body">
+      Find out about the
+      <a href="https://www.nspcc.org.uk/preventing-abuse/child-abuse-and-neglect/" class="govuk-link" rel="external" target="_blank">signs
+        of child abuse</a> and
+      <a href="https://www.refuge.org.uk/get-help-now/help-for-women/recognising-abuse/" class="govuk-link" rel="external" target="_blank">domestic
+        abuse</a>.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      <%=t 'shared.cafcass.safety_title' %>
+    </h2>
+    <%=t 'shared.cafcass.safety_content_html' %>
+
+    <%= link_button 'Continue', edit_steps_safety_questions_address_confidentiality_path %>
+  </div>
+</div>

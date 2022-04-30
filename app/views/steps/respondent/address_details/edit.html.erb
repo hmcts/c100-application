@@ -1,0 +1,38 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
+
+    <div class="govuk-inset-text">
+      <%=t '.body_info_html' %>
+    </div>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_text_field :address_line_1 %>
+      <%= f.govuk_text_field :address_line_2, label: { hidden: true } %>
+      <%= f.govuk_text_field :address_line_3, label: { hidden: true } %>
+      <%= f.govuk_text_field :town, width: 'one-half' %>
+      <%= f.govuk_text_field :country, width: 'one-half' %>
+      <%= f.govuk_text_field :postcode, width: 'one-third' %>
+
+      <%= f.govuk_check_boxes_fieldset :address_unknown, multiple: false, legend: { tag: 'span', size: 'm', hidden: true } do %>
+        <%= f.govuk_check_box :address_unknown, true, false, multiple: false %>
+      <% end %>
+
+      <%= f.govuk_radio_buttons_fieldset :residence_requirement_met, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_radio_button :residence_requirement_met, GenericYesNo::YES, link_errors: true %>
+        <%= f.govuk_radio_button :residence_requirement_met, GenericYesNo::NO do %>
+          <%= f.govuk_text_area :residence_history_no %>
+        <% end %>
+        <%= f.govuk_radio_button :residence_requirement_met, GenericYesNoUnknown::UNKNOWN do %>
+          <%= f.govuk_text_area :residence_history_unknown %>
+        <% end %>
+      <% end %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

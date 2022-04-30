@@ -1,0 +1,51 @@
+<% title 'Back office: emails' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Back office: emails</h1>
+
+    <%= render partial: 'lookup_form' %>
+
+    <h3 class="govuk-heading-m">
+      Failed emails (last 7 days)
+    </h3>
+
+    <p class="govuk-body">
+      This is a report of any failed submission emails (court or applicant confirmation), in the last 7 days.
+    </p>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          About the resend functionality
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Very recent emails can report as ‘callback-missing’. Notify callbacks might be delayed.</li>
+          <li>Some failures are genuine, for instance, due to a typo in the email address. A resend will fail again.</li>
+          <li>After resending a failed email, wait a few minutes and reload the page. The failure should be gone if the email was sent successfully, otherwise a new error will show.</li>
+        </ul>
+        <p class="govuk-body">
+          In addition to this report, an <strong>automated email</strong> will be sent overnight to all back office users in the event of any failed email to court the day before.
+        </p>
+      </div>
+    </details>
+
+    <table class="govuk-table backoffice-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">Sent at</th>
+          <th class="govuk-table__header">Reference</th>
+          <th class="govuk-table__header">Type</th>
+          <th class="govuk-table__header">Error</th>
+          <th class="govuk-table__header"></th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        <%= render partial: 'failure', collection: @report, as: :failure %>
+      </tbody>
+    </table>
+  </div>
+</div>

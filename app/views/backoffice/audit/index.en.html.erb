@@ -1,0 +1,29 @@
+<% title 'Back office: audit records' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Back office: audit records</h1>
+
+    <h3 class="govuk-heading-m"> Actions performed in the last 30 days</h3>
+
+    <table class="govuk-table backoffice-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header govuk-!-width-one-third">Timestamp</th>
+          <th class="govuk-table__header govuk-!-width-one-third">Action</th>
+          <th class="govuk-table__header">Author</th>
+        </tr>
+      </thead>
+
+      <tbody class="govuk-table__body">
+        <% if @report.any? %>
+          <%= render partial: 'record', collection: @report, as: :record %>
+        <% else %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell" colspan="3">No records were found in the time period</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

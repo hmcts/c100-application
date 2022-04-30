@@ -1,0 +1,13 @@
+<h3 class="govuk-heading-m">Lookup sent emails (last 90 days)</h3>
+
+<p class="govuk-body">
+  The reference code is mandatory. Email is optional and can be the email of the applicant, if they chose to receive a
+  copy of the application, or the email of the court where the application was sent.
+</p>
+
+
+<%= form_for(@form, url: lookup_backoffice_emails_path, html: { class: 'govuk-!-margin-bottom-5' }) do |f| %>
+  <%= f.govuk_text_field :reference_code, width: 'one-half', label: { text: 'Reference code' } %>
+  <%= f.govuk_text_field :email_address, width: 'one-half', label: { text: 'Email address (optional)' } %>
+  <%= f.govuk_submit 'Lookup emails'%>
+<% end %>

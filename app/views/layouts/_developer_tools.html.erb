@@ -1,0 +1,42 @@
+<% content_for(:footer_top) do %>
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+        Developer Tools
+      </span>
+    </summary>
+    <div class="govuk-details__text app-util--inline-buttons">
+      <% if current_c100_application %>
+        <h4 class="govuk-heading-s">Current Application ID</h4>
+        <p><%= current_c100_application.id %></p>
+
+        <% if current_c100_application.court %>
+          <h4 class="govuk-heading-s">Current court data</h4>
+          <p>
+            <%= current_c100_application.court.name %><br/>
+            <strong>Court email:</strong> <%= current_c100_application.court.email %><br/>
+            <strong>Documents:</strong> <%= current_c100_application.court.documents_email %>
+          </p>
+        <% end %>
+      <% end %>
+
+      <h3 class="govuk-heading-m">Destroy session</h3>
+      <p>Deletes all data entered in this session and lets you start a new application from scratch.</p>
+
+      <%= button_to session_path, method: :delete,
+                    class: 'govuk-button govuk-button--warning',
+                    data: { module: 'govuk-button', confirm: 'Are you sure?' } do; 'Destroy session'; end %>
+
+      <h3 class="govuk-heading-m">Bypass steps</h3>
+      <p>Speed up some common test scenarios by pre-filling some information</p>
+
+      <%= button_to bypass_postcode_session_path,
+                    class: 'govuk-button govuk-!-margin-right-1',
+                    data: { module: 'govuk-button' } do; 'Bypass postcode'; end %>
+
+      <%= button_to bypass_to_cya_session_path,
+                    class: 'govuk-button',
+                    data: { module: 'govuk-button' } do; 'Bypass to CYA'; end %>
+    </div>
+  </details>
+<% end %>

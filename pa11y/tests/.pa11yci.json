@@ -1,0 +1,237 @@
+{
+  "defaults": {
+    "timeout": 60000,
+    "standard": "WCAG2AA",
+    "viewport": {
+      "width": 600,
+      "height": 500
+    },
+    "concurrency": 1,
+    "hideElements": ".new_cookie, .cookie_return_path, .cookie_usage, .new_cookie, #new_cookie"
+
+  },
+
+  "urls":[
+    {
+      "url": "http://0.0.0.0:3000/steps/opening/warning"
+
+    },
+    {
+      "url":"http://0.0.0.0:3000/steps/opening/postcode",
+      "actions": [
+        "set field #steps-opening-postcode-form-children-postcode-field to nw10 1ht",
+        "click element #new_steps_opening_postcode_form [type=\"submit\"]"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/opening/consent_order_sought",
+      "actions":[
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/opening/child_protection_cases",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #steps-opening-child-protection-cases-form-child-protection-cases-yes-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/cases.png"
+      ]
+    },
+    {
+      "url": "http://0.0.0.0:3000/steps/opening/child_protection_info",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element div.govuk-grid-column-two-thirds .govuk-button"
+      ]
+    },
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/start",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element div.govuk-grid-column-two-thirds .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/start",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element [data-ga-label=\"safety concerns\"]",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/children_info",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element #main-content .govuk-link",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/address_confidentiality",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-safety-questions-address-confidentiality-form-address-confidentiality-yes-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/confi.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/risk_of_abduction",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-safety-questions-risk-of-abduction-form-risk-of-abduction-yes-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/abdu.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/international",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-abduction-international-form-passport-office-notified-yes-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/inter.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/children_have_passport",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-abduction-children-have-passport-form-children-have-passport-yes-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/havepas.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/passport_details",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-abduction-passport-details-form-children-multiple-passports-yes-field",
+        "check field #main-content #steps-abduction-passport-details-form-passport-possession-other-field",
+        "wait for element #steps-abduction-passport-details-form-passport-possession-other-field to be visible",
+        "set field #steps-abduction-passport-details-form-passport-possession-other-field to neighbour",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/pasdet.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/previous_attempt",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-abduction-previous-attempt-form-previous-attempt-no-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/prevatt.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abduction/risk_details",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "set field #main-content #steps-abduction-risk-details-form-risk-details-field to they have sent me messages threatening to take the kids somewhere",
+        "set field #steps-abduction-risk-details-form-current-location-field to at my house",
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/safety_questions/substance_abuse",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-safety-questions-substance-abuse-form-substance-abuse-yes-field",
+        "set field #steps-safety-questions-substance-abuse-form-substance-abuse-details-field to they drink too all day",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/subsab.png"
+    ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/start",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/children_info",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element #main-content .govuk-button"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/question",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "check field #main-content #steps-abuse-concerns-question-form-answer-no-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/quest.png"
+      ]
+    },
+
+    {
+      "url": "http://0.0.0.0:3000/steps/abuse_concerns/details/children/physical",
+      "headers": {
+        "PA11YCI": "nw10 1ht"
+      },
+      "actions": [
+        "click element [data-ga-label=\"abuse details\"]",
+        "set field #steps-abuse-concerns-details-form-behaviour-description-field to something",
+        "set field #steps-abuse-concerns-details-form-behaviour-start-field to hmm",
+        "check field #steps-abuse-concerns-details-form-behaviour-ongoing-no-field",
+        "set field #steps-abuse-concerns-details-form-behaviour-stop-field to recently",
+        "check field #steps-abuse-concerns-details-form-asked-for-help-no-field",
+        "click element #main-content .govuk-button",
+        "screen capture pa11y/screenshots/phys.png"
+      ]
+    }
+
+  ]
+
+}

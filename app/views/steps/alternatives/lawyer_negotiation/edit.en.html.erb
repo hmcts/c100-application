@@ -1,0 +1,51 @@
+<% title 'Lawyer negotiation' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-l">Alternative ways to reach an agreement</span>
+    <h1 class="govuk-heading-xl">Lawyer negotiation</h1>
+
+    <p class="govuk-body">With lawyer negotiation you don’t deal directly with the person. You hire a lawyer to negotiate arrangements for you.</p>
+    <p class="govuk-body">You can still hire a lawyer to negotiate on your behalf even if the other person chooses not to use one.</p>
+    <p class="govuk-body">Lawyer negotiation is suitable for people who prefer not to meet because their relationship is still difficult, or because there’s a lack of trust.</p>
+
+    <p class="govuk-body">
+      <a href="https://helpwithchildarrangements.service.justice.gov.uk/lawyer-negotiation" class="govuk-link" rel="external" target="_blank">
+        Find out more about lawyer negotiation
+      </a>
+    </p>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <div class="app-sidebar-blue-bar"></div>
+    <div class="app-sidebar-grey govuk-!-padding-3">
+      <h2 class="govuk-heading-m">Pros</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--pros">your lawyer supports you throughout</li>
+        <li class="app-list--item--pros">quicker and less stressful than court</li>
+        <li class="app-list--item--pros">you don’t deal directly with the other parent</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">Cons</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--cons">can be a more expensive process</li>
+        <li class="app-list--item--cons">you may feel you’re not in control</li>
+        <li class="app-list--item--cons">can be seen as a confrontational approach</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :alternative_lawyer_negotiation, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

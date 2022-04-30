@@ -1,0 +1,45 @@
+<% title 'Application submitted' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h1 class="govuk-panel__title">
+        Your application has been submitted
+      </h1>
+      <div class="govuk-panel__body">
+        <span class="app-util--no-wrap">Your reference code is:</span>
+        <strong><%= @c100_application.reference_code %></strong>
+      </div>
+    </div>
+
+    <p class="govuk-body-l govuk-!-margin-top-6">
+      Your application has been sent to <%= @court.name %>.
+
+      <% if @c100_application.receipt_email? %>
+        You’ll receive a confirmation email to <strong><%= @c100_application.receipt_email %></strong>
+      <% end %>
+    </p>
+
+    <h2 class="govuk-heading-l">Download a copy of your application</h2>
+    <%= render partial: 'steps/shared/download_pdf_copy', locals: {
+      callout: 'If you want to keep a copy, you must download it now. You cannot return to a submitted application.'
+    } %>
+
+    <% unless @c100_application.online_payment? %>
+      <h2 class="govuk-heading-l govuk-!-margin-top-6">Pay the application fee</h2>
+      <%= render partial: 'steps/shared/payment_instructions', locals: {
+        c100_application: @c100_application
+      } %>
+    <% end %>
+
+    <%= render partial: 'consent_order_section' if @c100_application.consent_order? %>
+
+    <%= render partial: 'under_age_section' if @c100_application.applicants.under_age? %>
+
+    <%= render partial: 'steps/shared/court_documents', locals: {court: @court} %>
+
+    <%= render partial: 'steps/shared/court_help', locals: {court: @court} %>
+
+    <%= render partial: 'steps/shared/feedback' %>
+  </div>
+</div>

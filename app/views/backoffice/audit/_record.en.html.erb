@@ -1,0 +1,22 @@
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell"><%= record.created_at %></td>
+  <td class="govuk-table__cell"><%= record.action.upcase %></td>
+  <td class="govuk-table__cell"><%= record.author %></td>
+</tr>
+
+<% if record.details.present? %>
+  <tr class="govuk-table__row">
+    <td class="govuk-table__cell no-border" colspan="3">
+      <details class="govuk-details govuk-!-margin-bottom-0" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            show details
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <%= record.details %>
+        </div>
+      </details>
+    </td>
+  </tr>
+<% end %>

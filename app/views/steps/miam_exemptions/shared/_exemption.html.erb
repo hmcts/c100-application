@@ -1,0 +1,9 @@
+<h2 class="govuk-heading-m">
+  <%=t "playback.exemptions_claimed.#{exemption.group_name}.header" %>
+</h2>
+
+<ul class="govuk-list govuk-list--bullet">
+  <% exemption.collection.each do |name| %>
+    <li><%=t "playback.exemptions_claimed.#{exemption.group_name}.exemptions.#{name}" %></li>
+  <% end %>
+</ul>

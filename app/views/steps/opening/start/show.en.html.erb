@@ -1,0 +1,46 @@
+<% title 'What is required' %>
+<% step_header(path: Rails.configuration.gds_service_homepage_url) %>
+
+<div class="govuk-grid-row app-inverted--card app-inverted-text">
+  <div class="govuk-grid-column-full">
+    <span class="govuk-caption-xl app-inverted-text">Before you continue</span>
+    <h1 class="govuk-heading-xl app-inverted-text">What you’ll need to complete your application</h1>
+
+    <p class="govuk-body app-inverted-text">You will need the following:</p>
+
+    <ul class="govuk-list govuk-list--bullet app-inverted-text app-inverted-narrow-width">
+      <li>details of the other people (the respondents), including their date of birth</li>
+      <li>the child’s or children’s details, including date of birth</li>
+      <li>contact details of the respondents, including their current address</li>
+      <li>solicitor details (if you have asked one to represent you)</li>
+      <li>details of any previous family court cases</li>
+      <li>signed document confirming <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> attendance (if applicable)</li>
+      <li>written agreement for the court to formalise if you are applying for a consent order</li>
+      <li>completed and signed
+        <a href="https://www.gov.uk/government/publications/form-fp9-certificate-of-suitability-of-litigation-friend" class="govuk-link app-link--inverted" target="_blank" rel="external">certificate
+          of suitability</a> or copy of the court order appointing a ‘litigation friend’ if any of the people making
+        this application are under 18
+      </li>
+    </ul>
+
+    <div class="govuk-grid-row ">
+      <div class="govuk-grid-column-full">
+        <p class="app-inverted-text">If you are applying for a consent order you must have a written agreement signed by you and the respondent for the court to formalise. You must email or send it to the court immediately after submitting your application. If the written agreement is not received the court cannot process your application.</p>
+        <p class="app-inverted-text">You will need to pay the court fee of £232 before the court can process your application. You may be able to <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link app-link--inverted" target="_blank" rel="external">get help paying</a> if you are on a low income, receive certain benefits or have little or no savings. If you do qualify, you'll need to provide your reference number. This will be in the format: HWF-XXX-XXX</p>
+      </div>
+    </div>
+
+    <div class="govuk-inset-text app-inset-text--inverted app-inverted-narrow-width">
+      <p class="app-inverted-text">If you do not know all of the details you can still complete your application but it will take longer to process.</p>
+      <p class="app-inverted-text">If you are currently involved in Child Arrangements, Prohibited Steps or Specific Issue Order proceeding for the same child or children you can apply to the same court using the shorter form C2. Please make sure you state the case number when you submit the form.</p>
+    </div>
+
+    <div class="govuk-button-group govuk-!-margin-top-6">
+      <%= link_button 'Continue', edit_steps_opening_postcode_path, class: 'app-button--l app-button--inverted' %>
+
+      <%= link_to 'Or return to a saved application', new_user_session_path,
+                  class: 'govuk-link app-link--inverted ga-pageLink',
+                  data: { ga_category: 'save and return', ga_label: 'return to draft' } %>
+    </div>
+  </div>
+</div>

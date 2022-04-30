@@ -1,0 +1,7 @@
+# Add court slugs to the blocklist if they do not process online payments.
+#
+# Courts without a GBS code will not receive online payments, no need
+# to add these to the blocklist.
+
+blocklist:
+  - blocklisted-slug-example

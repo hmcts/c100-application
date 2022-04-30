@@ -1,0 +1,13 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object do |f| %>
+      <%= f.govuk_collection_radio_buttons :miam_mediator_exemption, GenericYesNo.values, :value, nil %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

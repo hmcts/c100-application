@@ -1,0 +1,29 @@
+<% title 'Back office: admin users' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Back office: admin users</h1>
+
+    <h3 class="govuk-heading-m">
+      Users with access to the back office
+    </h3>
+
+    <p class="govuk-body">
+      Contact a developer with access to the service in order to add/remove users.
+    </p>
+
+    <table class="govuk-table backoffice-table">
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Email</th>
+        <th class="govuk-table__header">Last login at</th>
+        <th class="govuk-table__header">Current login at</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <%= render partial: 'admin_user', collection: @admins, as: :admin %>
+      </tbody>
+    </table>
+  </div>
+</div>

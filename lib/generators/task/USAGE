@@ -1,0 +1,21 @@
+Description:
+    Generates a task, including;
+
+    - task supercontroller
+    - empty decision tree
+
+Example:
+    rails generate task Sometask
+
+    This will create:
+        app/controllers/steps/some_task/some_task_step_controller.rb
+        app/services/c100_app/some_task_decision_tree.rb
+
+    This will update:
+        config/routes.rb
+          (adds a route namespace for the task)
+
+    You will have to do yourself:
+        - Make the decision tree decide something
+        - Add specs for the decision tree
+        - Add i18n

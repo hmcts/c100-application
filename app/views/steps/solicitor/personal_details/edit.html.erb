@@ -1,0 +1,20 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%=t '.lead_text' %></p>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_text_field :full_name %>
+      <%= f.govuk_text_field :firm_name %>
+      <%= f.govuk_text_field :reference %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

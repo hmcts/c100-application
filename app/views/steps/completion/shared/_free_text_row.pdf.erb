@@ -1,0 +1,11 @@
+<tr id="<%= free_text_row.question %>">
+  <td class="question">
+    <%=t "check_answers.#{free_text_row.question}.question", free_text_row.i18n_opts %>
+  </td>
+
+  <td class="answer answer-value">
+    <%= simple_format(
+      free_text_row.value.presence || t("check_answers.#{free_text_row.question}.absence_answer"), { class: 'user-free-text' }
+    ) %>
+  </td>
+</tr>

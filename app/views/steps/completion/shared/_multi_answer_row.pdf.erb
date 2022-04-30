@@ -1,0 +1,16 @@
+<tr id="<%= multi_answer_row.question %>">
+  <td class="question">
+    <%=t "check_answers.#{multi_answer_row.question}.question" %>
+  </td>
+
+  <td class="answer answer-value">
+    <% if Array(multi_answer_row.value).any? %>
+      <%= multi_answer_row.value.map do |value| %>
+        <% t("check_answers.#{multi_answer_row.question}.answers.#{value}") %>
+      <% end.join('; ') %>
+    <% else %>
+      <%# It will only enter here when using `show: true` in the `MultiAnswer` %>
+      <%=t "check_answers.#{multi_answer_row.question}.absence_answer" %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,80 @@
+<% title t(".page_title.#{@form_object.i18n_key}") %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t ".heading.#{@form_object.i18n_key}" %></h1>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="abuse details">
+          <%=t 'shared.cafcass.safety_title' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t 'shared.cafcass.safety_content_html' %>
+      </div>
+    </details>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.hidden_field :subject %>
+      <%= f.hidden_field :kind %>
+
+      <%= f.govuk_text_area :behaviour_description, label: { size: 'm' } %>
+      <%= f.govuk_text_field :behaviour_start, label: { size: 'm' } %>
+
+      <%= f.govuk_radio_buttons_fieldset :behaviour_ongoing, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_radio_button :behaviour_ongoing, GenericYesNo::YES, link_errors: true %>
+        <%= f.govuk_radio_button :behaviour_ongoing, GenericYesNo::NO do %>
+          <%= f.govuk_text_field :behaviour_stop, label: { size: 's' } %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_radio_buttons_fieldset :asked_for_help, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_radio_button :asked_for_help, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_text_field :help_party, label: { size: 's' } %>
+          <%= f.govuk_collection_radio_buttons :help_provided, GenericYesNo.values, :value, nil, inline: true, legend: { tag: 'span', size: 's' } %>
+          <%= f.govuk_text_area :help_description, label: { size: 's' } %>
+        <% end %>
+        <%= f.govuk_radio_button :asked_for_help, GenericYesNo::NO %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <div class="app-sidebar-blue-bar"></div>
+    <div class="app-sidebar-grey govuk-!-padding-3">
+      <h2 class="govuk-heading-m">Report an incident</h2>
+
+      <p class="govuk-body">
+        Always call 999 if there’s an emergency or if you think a child’s in danger.
+      </p>
+
+      <p class="govuk-body govuk-!-margin-bottom-1">If it is not an emergency, you can:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="https://www.gov.uk/report-child-abuse" class="govuk-link" rel="external" target="_blank">report child abuse</a></li>
+        <li><a href="https://www.gov.uk/report-domestic-abuse" class="govuk-link" rel="external" target="_blank">report domestic abuse</a></li>
+      </ul>
+    </div>
+
+    <h2 class="govuk-heading-m">Get support</h2>
+
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Child safety</h3>
+    <ul class="govuk-list">
+      <li><a href="https://www.nspcc.org.uk" class="govuk-link" rel="external" target="_blank">NSPCC</a></li>
+      <li><a href="https://www.childline.org.uk" class="govuk-link" rel="external" target="_blank">Childline</a></li>
+    </ul>
+
+    <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Domestic abuse</h3>
+    <ul class="govuk-list">
+      <li><a href="http://www.nationaldomesticviolencehelpline.org.uk" class="govuk-link" rel="external" target="_blank">National Domestic Violence Helpline</a></li>
+      <li><a href="https://www.womensaid.org.uk" class="govuk-link" rel="external" target="_blank">Women’s Aid</a></li>
+      <li><a href="http://www.mensadviceline.org.uk" class="govuk-link" rel="external" target="_blank">Men’s Advice Line</a></li>
+    </ul>
+  </div>
+</div>

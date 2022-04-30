@@ -1,0 +1,57 @@
+<% title 'Negotiation tools and services' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-l">Alternative ways to reach an agreement</span>
+    <h1 class="govuk-heading-xl">Negotiation tools and services</h1>
+
+    <p class="govuk-body">
+      If you still communicate with the other person, and there are no concerns about domestic or child abuse, the
+      cheapest and easiest way to make arrangements is to negotiate with each other.
+    </p>
+    <p class="govuk-body">
+      There are free tools and services such as
+      <a href="https://www.cafcass.gov.uk/grown-ups/parents-and-carers/divorce-and-separation/parenting-plan/" class="govuk-link" rel="external" target="_blank">parenting plans</a>
+      that can help you reach an agreement.
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://helpwithchildarrangements.service.justice.gov.uk/negotiating-between-parents" class="govuk-link" rel="external" target="_blank">
+        Find out more about negotiation tools and services
+      </a>
+    </p>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <div class="app-sidebar-blue-bar"></div>
+    <div class="app-sidebar-grey govuk-!-padding-3">
+      <h2 class="govuk-heading-m">Pros</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--pros">cheapest and quickest option</li>
+        <li class="app-list--item--pros">you and the other parent are in control</li>
+        <li class="app-list--item--pros">helps children continue family relationships</li>
+        <li class="app-list--item--pros">agreements are flexible</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">Cons</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--cons">you’ll need a consent order to make agreement legally binding</li>
+        <li class="app-list--item--cons">process heavily relies on parent co-operation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :alternative_negotiation_tools, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

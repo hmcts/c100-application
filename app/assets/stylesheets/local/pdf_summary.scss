@@ -1,0 +1,250 @@
+body:not(.status-completed) {
+  background-image: asset-data-url('draft-watermark.png');
+  background-repeat: repeat-y;
+}
+
+#application-details-pdf {
+  $light-grey: #cccccc;
+  $very-light-grey: #eeeeee;
+  $dark-grey: #6f777b;
+
+  $heading-font-size: 16px;
+  $sub-heading-font-size: 14px;
+  $group-separator-font-size: 13px;
+  $questions-font-size: 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  width: 95%;
+  margin: 0 auto;
+
+  p, ul {
+    font-size: $questions-font-size;
+  }
+  ul.list:last-child {
+    margin-bottom: 10px;
+  }
+
+  .form-header {
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .details {
+      font-size: 18px;
+    }
+  }
+
+  div.blank-page {
+    min-height: 300px;
+  }
+
+  tr.blank-space {
+    td {
+      border: none;
+    }
+  }
+
+  tr.answer-box {
+    td {
+      border-bottom: none;
+      vertical-align: middle;
+      height: 20px;
+    }
+
+    .box-to-fill {
+      border: 1px solid $dark-grey;
+      background-color: #fff;
+      color: $dark-grey;
+      padding: 3px;
+      width: 100%;
+    }
+    .date-box {
+      display: inline-block;
+      margin-right: -4px;
+      width: 14px;
+    }
+    .text-area-box {
+      overflow: hidden;
+      resize: none;
+    }
+
+    span.separator {
+      margin-right: 10px;
+    }
+  }
+
+  h2.main-section-header {
+    font-size: $heading-font-size;
+    font-weight: bold;
+    background-color: $very-light-grey;
+    border-bottom: 1px solid $dark-grey;
+    padding: 5px;
+  }
+
+  h3.section-header {
+    font-size: $sub-heading-font-size;
+    font-weight: bold;
+    border-bottom: 1px solid $dark-grey;
+    padding: 2px 0 0 0;
+  }
+
+  table {
+    border-spacing: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  table.no-borders {
+    td {
+      border: none;
+    }
+  }
+
+  td {
+    vertical-align: top;
+    font-size: $questions-font-size;
+    border-bottom: 1px solid $light-grey;
+    margin: 0;
+  }
+
+  td.question,
+  td.answer,
+  td.separator {
+    width: 50%;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    font-size: $questions-font-size;
+  }
+
+  td.separator {
+    font-weight: bold;
+  }
+
+  table.subtable {
+    td {
+      padding: 0 0 5px;
+    }
+    td.question {
+      font-size: $questions-font-size;
+      width: 100%;
+    }
+    td.answer {
+      text-align: right;
+    }
+  }
+
+  td.answer-value {
+    p.user-free-text {
+      margin-top: 0;
+    }
+    p.user-free-text:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .answer-contact-details {
+    p {
+      margin: 0;
+    }
+
+    p:last-child {
+      margin-top: 10px;
+    }
+  }
+
+  div.page-break {
+    page-break-before: always;
+  }
+
+  #risk_concerns {
+    td.description {
+      width: 50%;
+      padding-right: 10px;
+    }
+  }
+
+  #c1a_abuse_type {
+    td.question {
+      font-weight: bold;
+    }
+  }
+
+  // These sections are heavy on long questions with short answers (Yes/No)
+  // so we give more space to the question (90%) and less to the answer (10%)
+  //
+  #additional_information,
+  #permission_questions {
+    td {
+      border: none;
+      padding: 5px 0 0 0;
+    }
+    td.question {
+      width: 90%;
+    }
+    td.answer {
+      width: 10%;
+      text-align: right;
+    }
+  }
+
+  // Reasons for application usually takes up a lot of space as applicants
+  // write a lot of text, so it makes sense to give more space to answers.
+  #application_reasons {
+    td.question {
+      width: 35%;
+    }
+    td.answer {
+      width: 65%;
+    }
+  }
+
+  // Processing details can also be resized so it fits better and is not
+  // disrupting for the user (these details are just for scanning processes).
+  #processing_details {
+    td.question {
+      width: 10%;
+    }
+    td.answer {
+      width: 90%;
+    }
+  }
+
+  #children_known_to_authorities {
+    td {
+      padding-top: 15px;
+    }
+  }
+
+  #attending_court {
+    #sign_language_interpreter td,
+    #welsh_language td {
+      padding-top: 8px;
+    }
+
+    td.separator {
+      font-size: $group-separator-font-size;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      border: none;
+    }
+
+    tr:first-child td:first-child {
+      padding-top: 0;
+    }
+  }
+
+  #c100_court_details,
+  #c1a_court_details,
+  #c8_court_details {
+    background-color: $very-light-grey;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    td {
+      border-bottom: none;
+    }
+  }
+}

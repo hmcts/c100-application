@@ -1,0 +1,11 @@
+<div class="govuk-summary-list__row" id="<%= row.question %>">
+  <dt class="govuk-summary-list__key govuk-!-width-one-third">
+    <%=t "check_answers_html.#{row.question}.question", row.i18n_opts %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <%=t "check_answers_html.#{row.question}.answers.#{row.value}" %>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <%= render partial: 'steps/completion/shared/change_link', locals: { question: row } %>
+  </dd>
+</div>

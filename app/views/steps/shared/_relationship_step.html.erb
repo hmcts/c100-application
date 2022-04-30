@@ -1,0 +1,16 @@
+<% heading = t('.heading', person_name: form_object.record.person.full_name, child_name:  form_object.record.minor.full_name) %>
+
+<%= step_form form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+  <%= f.govuk_radio_buttons_fieldset :relation, legend: { text: heading } do %>
+    <%= f.govuk_radio_button :relation, Relation::MOTHER, link_errors: true %>
+    <%= f.govuk_radio_button :relation, Relation::FATHER %>
+    <%= f.govuk_radio_button :relation, Relation::GUARDIAN %>
+    <%= f.govuk_radio_button :relation, Relation::SPECIAL_GUARDIAN %>
+    <%= f.govuk_radio_button :relation, Relation::GRAND_PARENT %>
+    <%= f.govuk_radio_button :relation, Relation::OTHER do %>
+      <%= f.govuk_text_field :relation_other_value, label: { size: 's'} %>
+    <% end %>
+  <% end %>
+
+  <%= f.continue_button %>
+<% end %>

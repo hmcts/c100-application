@@ -1,0 +1,7 @@
+<% if c100_application.payment_type.eql?(PaymentType::SELF_PAYMENT_CHEQUE.to_s) %>
+  <p class="govuk-body">Post all 3 printed copies of your application (and cheque, if that’s how you choose to pay) to:</p>
+<% else %>
+  <p class="govuk-body">Post all 3 printed copies of your application to:</p>
+<% end %>
+
+<%= simple_format(court.full_address.join("\n"), { class: 'govuk-inset-text' }, { wrapper_tag: :div }) %>

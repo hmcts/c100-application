@@ -1,0 +1,9 @@
+<tr id="<%= date_row.question %>">
+  <td class="question">
+    <%=t "check_answers.#{date_row.question}.question" %>
+  </td>
+
+  <td class="answer answer-value">
+    <%= date_row.value.present? ? l(date_row.value, format: :text_month) : t("check_answers_html.#{date_row.question}.absence_answer") %>
+  </td>
+</tr>

@@ -1,0 +1,9 @@
+<% if section.show_header? %>
+  <h2 class="govuk-heading-m">
+    <%=t "check_answers_html.sections.#{section.name}" %>
+  </h2>
+<% end %>
+
+<dl class="govuk-summary-list" id="<%= section.name %>">
+  <%= render section.answers %>
+</dl>

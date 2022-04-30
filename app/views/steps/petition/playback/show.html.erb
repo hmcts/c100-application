@@ -1,0 +1,68 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <% if @petition.child_arrangements_orders.any? %>
+      <h2 class="govuk-heading-m">
+        <%=t '.petition_header', count: 0 %>
+      </h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <% @petition.child_arrangements_orders.each do |order| %>
+          <%= content_tag :li, t(".orders.#{order}") %>
+        <% end %>
+      </ul>
+      <p class="govuk-body"><%= t('.aka.child_arrangements_order') %></p>
+    <% end %>
+
+    <% if @petition.prohibited_steps_orders.any? %>
+      <h2 class="govuk-heading-m">
+        <%=t '.petition_header_stop', count: @petition.count_for(
+          :child_arrangements_orders
+        ) %>
+      </h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <% @petition.prohibited_steps_orders.each do |order| %>
+          <%= content_tag :li, t(".orders.#{order}") %>
+        <% end %>
+      </ul>
+      <p class="govuk-body"><%= t('.aka.prohibited_steps_order') %></p>
+    <% end %>
+
+    <% if @petition.specific_issues_orders.any? %>
+      <h2 class="govuk-heading-m">
+        <%=t '.petition_header_issues', count: @petition.count_for(
+          :child_arrangements_orders, :prohibited_steps_orders
+        ) %>
+      </h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <% @petition.specific_issues_orders.each do |order| %>
+            <%= content_tag :li, t(".orders.#{order}") %>
+        <% end %>
+      </ul>
+      <p class="govuk-body"><%= t('.aka.specific_issues_order') %></p>
+    <% end %>
+
+    <% if @petition.formalise_arrangements.any? %>
+      <h2 class="govuk-heading-m">
+        <%=t '.petition_header_formalise_arrangements' %>
+      </h2>
+      <p class="govuk-body"><%= t('.aka.consent_order') %></p>
+    <% end %>
+
+    <% if @petition.other_issue? %>
+      <h2 class="govuk-heading-m">
+        <%=t '.petition_header_other', count: @petition.count_for(
+          :child_arrangements_orders, :prohibited_steps_orders, :specific_issues_orders, :formalise_arrangements
+        ) %>
+      </h2>
+      <div class="govuk-inset-text">
+        <%= simple_format(@petition.other_issue_details, { class: 'govuk-body' }) %>
+      </div>
+    <% end %>
+
+    <%= link_button t('.continue'), @next_step_path %>
+  </div>
+</div>

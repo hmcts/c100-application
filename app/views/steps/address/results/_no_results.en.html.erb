@@ -1,0 +1,18 @@
+<p class="govuk-body-l">
+  <% if successful_lookup %>
+    Although the postcode you entered looks like it’s in the right format, no addresses were found. This can happen
+    sometimes if it’s a very new or old postcode.
+  <% else %>
+    We’re having some trouble connecting to our postcode lookup at the moment - this could be a temporary problem, and
+    it might work if you try again.
+  <% end %>
+</p>
+
+<h3 class="govuk-heading-m">What to do now</h3>
+
+<p class="govuk-body govuk-!-margin-bottom-6">
+  You can go back and try again, change the postcode, or continue to enter the address manually.
+</p>
+
+<%= link_button 'Continue', person_url_for(record, step: :address_details), class: 'ga-pageLink', data: { module: 'govuk-button', ga_category: 'address lookup', ga_label: 'no results continue' } %>
+<%= link_button 'Go back and try again', edit_steps_address_lookup_path(record), class: 'govuk-button--secondary ga-pageLink', data: { module: 'govuk-button', ga_category: 'address lookup', ga_label: 'no results retry' } %>

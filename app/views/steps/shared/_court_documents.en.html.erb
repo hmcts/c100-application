@@ -1,0 +1,11 @@
+<h2 class="govuk-heading-l">If you’re sending documents</h2>
+
+<p class="govuk-body">
+  Remember to include your application reference code. Send documents (and cheque if that’s how you choose to pay) to:
+</p>
+
+<p class="govuk-body">
+  <%= mail_to court.documents_email, court.documents_email, class: 'ga-pageLink govuk-link', data: { ga_category: 'completion', ga_label: 'documents email court' } %>
+</p>
+
+<%= simple_format(court.full_address.join("\n"), { class: 'govuk-inset-text' }, { wrapper_tag: :div }) %>

@@ -1,0 +1,62 @@
+<% title 'Professional mediation' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-l">Alternative ways to reach an agreement</span>
+    <h1 class="govuk-heading-xl">Professional mediation</h1>
+
+    <p class="govuk-body">Mediation sessions are run by professionals who help you try to reach an agreement without going to court.</p>
+    <p class="govuk-body">Mediation isn’t relationship counselling and you don’t have to be in the same room as the other parent.</p>
+    <p class="govuk-body">Mediation is suitable for people who want to reach an agreement but need help from someone who is independent.</p>
+
+    <p class="govuk-body">
+      <a href="https://helpwithchildarrangements.service.justice.gov.uk/professional-mediation" class="govuk-link" rel="external" target="_blank">
+        Find out more about professional mediation
+      </a>
+    </p>
+
+    <div class="govuk-inset-text">
+      <p class="govuk-body govuk-!-font-weight-bold">You could get up to £500 towards family mediation</p>
+
+      <p class="govuk-body">
+        This is a new scheme available for a short time only. Find out more about the
+        <a href="https://www.gov.uk/guidance/family-mediation-voucher-scheme?utm_source=C100&utm_campaign=mediation_vouchers" class="govuk-link" rel="external" target="_blank">family
+          mediation voucher scheme</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <div class="app-sidebar-blue-bar"></div>
+    <div class="app-sidebar-grey govuk-!-padding-3">
+      <h2 class="govuk-heading-m">Pros</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--pros">it’s quicker than court in most cases</li>
+        <li class="app-list--item--pros">can be cheaper than using a lawyer</li>
+        <li class="app-list--item--pros">less conflict between parents</li>
+        <li class="app-list--item--pros">helps children continue family relationships</li>
+        <li class="app-list--item--pros">agreements are flexible</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">Cons</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--cons">you’ll need a consent order to make agreement legally binding</li>
+        <li class="app-list--item--cons">process won’t work unless parents can co-operate</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :alternative_mediation, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

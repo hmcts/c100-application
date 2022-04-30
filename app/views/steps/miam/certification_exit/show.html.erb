@@ -1,0 +1,14 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%=t '.body_text_html' %>
+
+    <%= link_button t('helpers.submit.save_and_come_back_later'), new_user_registration_path, class: 'ga-pageLink',
+                    data: { module: 'govuk-button', ga_category: 'miam', ga_label: 'save application' } %>
+  </div>
+</div>

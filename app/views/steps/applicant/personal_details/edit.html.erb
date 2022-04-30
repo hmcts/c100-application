@@ -1,0 +1,27 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :has_previous_name, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_radio_button :has_previous_name, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_text_field :previous_name %>
+        <% end %>
+        <%= f.govuk_radio_button :has_previous_name, GenericYesNo::NO %>
+      <% end %>
+
+      <%= f.govuk_collection_radio_buttons :gender, Gender.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+
+      <%= render partial: 'steps/shared/dob_form_element', locals: { form_object: f, text: "Your date of birth" } %>
+
+      <%= f.govuk_text_field :birthplace, width: 'two-thirds', label: { text: t('.birthplace'), size: 'm' } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

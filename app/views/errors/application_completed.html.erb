@@ -1,0 +1,21 @@
+<% title t('.page_title') %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%= t '.heading' %></h1>
+
+    <% if current_c100_application.online_submission? %>
+
+      <p class="govuk-body-l"><%=t '.lead_text_online' %></p>
+      <p class="govuk-body"><%= link_to t('.application_submitted'), steps_completion_confirmation_path, class: 'govuk-link' %></p>
+
+    <% else %>
+
+      <p class="govuk-body-l"><%=t '.lead_text_print' %></p>
+      <p class="govuk-body"><%= link_to t('.how_to_submit'), steps_completion_how_to_submit_path, class: 'govuk-link' %></p>
+
+    <% end %>
+
+    <%= render partial: 'errors/shared/continue_button' %>
+  </div>
+</div>

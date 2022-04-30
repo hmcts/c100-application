@@ -1,0 +1,13 @@
+<% title t('.page_title') %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%= t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%=t '.lead_text', session_timeout: session_expire_in_minutes %></p>
+
+    <p class="govuk-body"><%=t '.more_text' %></p>
+
+    <%= render partial: 'errors/shared/continue_button' %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{
+  "name": "c100-application",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "govuk-frontend": "^3.12.0"
+  },
+  "devDependencies": {
+    "pa11y-ci": "2.4.1"
+  },
+  "scripts": {
+    "test-pa11y": "./node_modules/.bin/pa11y-ci --config ./pa11y/tests/.pa11yci.json"
+  }
+}

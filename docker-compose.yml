@@ -1,0 +1,42 @@
+# Simplify running the application inside a container locally.
+# Usage: `docker-compose up`
+#
+# Do not use docker-compose in production environments.
+#
+version: '3.4'
+
+x-common-variables: &common-variables
+  DATABASE_URL: postgresql://postgres@db/c100-application
+  REDIS_URL: redis://cache:6379
+  EXTERNAL_URL: http://localhost:3000
+  DATABASE_SSLMODE: disable
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  cache:
+    image: redis
+
+  web:
+    build: .
+    environment:
+      <<: *common-variables
+      DISABLE_HTTPS: 1
+      RAILS_SERVE_STATIC_FILES: 1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - cache
+
+  sidekiq:
+    build: .
+    environment:
+      <<: *common-variables
+    entrypoint: ["./sidekiq.sh", "start"]
+    depends_on:
+      - db
+      - cache

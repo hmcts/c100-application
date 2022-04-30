@@ -1,0 +1,27 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l">
+      <%- if @courtfinder_ok %>
+        <%= t '.lead_text.courtfinder_ok' %>
+      <%- else %>
+        <%= t '.lead_text.courtfinder_not_ok' %>
+      <%- end %>
+    </p>
+
+    <h2 class="govuk-heading-l"><%= t '.what_to_do_now.heading' %></h2>
+
+    <p class="govuk-body"><%= t '.what_to_do_now.copy' %></p>
+
+    <div class="govuk-button-group govuk-!-margin-top-6">
+      <%= link_button t('.download_c100_link'), 'https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf', class: 'ga-pageLink',
+                      data: { module: 'govuk-button', ga_category: 'postcode error', ga_label: 'paper form' } %>
+
+      <%= link_button t('.go_back'), edit_steps_opening_postcode_path, class: 'govuk-button--secondary' %>
+    </div>
+  </div>
+</div>

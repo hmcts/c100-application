@@ -1,0 +1,33 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_check_boxes_fieldset :misc, legend: { tag: 'span', size: 'm' } do %>
+
+        <%= f.govuk_check_box :misc, MiscExemptions::NO_RESPONDENT_ADDRESS.to_s, link_errors: true %>
+        <%= f.govuk_check_box :misc, MiscExemptions::WITHOUT_NOTICE.to_s %>
+
+        <%= f.govuk_check_box :misc, MiscExemptions::GROUP_MIAM_ACCESS.to_s do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, MiscExemptions::MIAM_ACCESS, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :misc, MiscExemptions::ACCESS_PROHIBITED.to_s %>
+        <%= f.govuk_check_box :misc, MiscExemptions::NON_RESIDENT.to_s %>
+        <%= f.govuk_check_box :misc, MiscExemptions::APPLICANT_UNDER_AGE.to_s %>
+
+        <%= f.govuk_radio_divider %>
+
+        <%= f.govuk_check_box :misc, MiscExemptions::MISC_NONE.to_s %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

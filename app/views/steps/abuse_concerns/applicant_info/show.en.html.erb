@@ -1,0 +1,35 @@
+<% title 'Your safety' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl">Safety concerns</span>
+    <h1 class="govuk-heading-xl">Your safety</h1>
+
+    <p class="govuk-body">
+      The court needs to know if you have suffered, or are at risk of suffering, any form of domestic violence or abuse.
+    </p>
+
+    <p class="govuk-body">
+      The following questions will ask whether you have suffered, or are at risk of suffering, any form of harm.
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://www.refuge.org.uk/get-help-now/help-for-women/recognising-abuse/" class="govuk-link" rel="external" target="_blank">Find
+        out about the signs of domestic violence or abuse</a>
+    </p>
+
+    <%= link_button 'Continue', edit_steps_abuse_concerns_question_path(subject: AbuseSubject::APPLICANT) %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="applicant abuse info">
+          <%=t 'shared.cafcass.safety_title' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t 'shared.cafcass.safety_content_html' %>
+      </div>
+    </details>
+  </div>
+</div>

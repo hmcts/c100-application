@@ -1,0 +1,27 @@
+<% if @c100_application.consent_order? %>
+
+  <h3 class="govuk-heading-m">
+    Print your application and proposed agreement for the consent order
+  </h3>
+
+  <p class="govuk-body">
+    Print 3 copies of your whole application on A4 paper, single sided. The court will send one copy to the other
+    person, keep one copy, and return one copy to you.
+  </p>
+
+  <p class="govuk-body">
+    You must also send 3 copies of your proposed agreement for the consent order.
+  </p>
+
+<% else %>
+
+  <h3 class="govuk-heading-m">
+    Print your application
+  </h3>
+
+  <p class="govuk-body">
+    Print 3 copies of your whole application on A4 paper, single sided. The court will send one copy to the other
+    person, keep one copy, and return one copy to you.
+  </p>
+
+<% end %>

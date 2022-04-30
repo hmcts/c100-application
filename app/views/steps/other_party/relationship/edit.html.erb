@@ -1,0 +1,10 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= render partial: 'steps/shared/relationship_step', locals: { form_object: @form_object } %>
+  </div>
+</div>

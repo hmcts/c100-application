@@ -1,0 +1,13 @@
+<p class="govuk-body">
+  If you cannot open the PDF file after downloading, download and install
+  <a href="https://get.adobe.com/uk/reader/" class="govuk-link" rel="external" target="_blank">Adobe Acrobat Reader</a> to try again.
+</p>
+
+<% unless user_signed_in? %>
+  <div class="govuk-inset-text">
+    <%= callout %>
+  </div>
+<% end %>
+
+<%= link_button 'Download your application', steps_completion_summary_path(format: :pdf), class: 'ga-pageLink', download: '',
+                data: { module: 'govuk-button', ga_category: 'completion', ga_label: 'download application' } %>

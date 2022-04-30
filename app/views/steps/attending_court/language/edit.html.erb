@@ -1,0 +1,24 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_check_boxes_fieldset :language_options do %>
+        <%= f.govuk_check_box :language_options, LanguageHelp::LANGUAGE_INTERPRETER.to_s do
+          f.govuk_text_area :language_interpreter_details
+        end %>
+        <%= f.govuk_check_box :language_options, LanguageHelp::SIGN_LANGUAGE_INTERPRETER.to_s do
+          f.govuk_text_area :sign_language_interpreter_details
+        end %>
+        <%= f.govuk_check_box :language_options, LanguageHelp::WELSH_LANGUAGE.to_s do
+          f.govuk_text_area :welsh_language_details
+        end %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

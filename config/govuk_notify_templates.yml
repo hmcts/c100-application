@@ -1,0 +1,31 @@
+# We use 2 different GOV.UK Notify services, one for development/integration
+# purposes and another one for production. This is so we can test changes
+# to the templates in a controlled environment, before these changes make their
+# way to production (and real users can see them).
+#
+# As these are 2 separate services in GOV.UK Notify, the template IDs are also
+# different, so we declare them in this file. We use the value of the variable
+# ENV['GOVUK_NOTIFY_ENV'] if defined to know which group to load, otherwise
+# we default to 'integration' group.
+#
+integration:
+  reset_password: '73d0804a-2302-4307-a431-e4a0fd7087ec'
+  change_password: '97ea3c24-0b40-4b8e-8fc6-a54f7f1718e9'
+  application_saved: '1252b250-541c-456a-b98b-c568aef05e5f'
+  application_submitted_to_court: '0350031e-df36-42e1-8b97-510795dd9ac9'
+  application_submitted_to_user: 'e10806dd-55ae-47ad-a231-757dbb3c9a7e'
+  draft_first_reminder: 'fcd87b1c-a3a0-4a2a-9b4e-524857e3bf8c'
+  draft_last_reminder: '8e622f55-4be8-49cc-8a94-0ab3fd868067'
+  failed_emails_report: 'aa4409f8-7232-4052-bdad-e99e26186a79'
+  payment_types_report: '3d3ac076-6d15-4f3d-b37a-c888d8a027aa'
+
+production:
+  reset_password: '0f55e48a-ae27-464c-b30f-272fd3850296'
+  change_password: 'c6be1e37-feee-4d18-9552-ed4e4772ad16'
+  application_saved: '267ace56-230f-4b07-902f-b993dfc69143'
+  application_submitted_to_court: 'b75f1fec-03a4-436a-838a-349d190b3259'
+  application_submitted_to_user: '76e930f4-6403-4c36-9c5b-754d315cf67b'
+  draft_first_reminder: 'bf271379-6158-407d-b09a-cc6d8b275f1e'
+  draft_last_reminder: '30dedd21-e7da-4794-b66c-94729cfa3180'
+  failed_emails_report: 'ed7616f7-6d33-40b5-b6cc-95765c4e37e5'
+  payment_types_report: '8079f7af-cdb8-46a3-931a-f3a44c7dd8d7'

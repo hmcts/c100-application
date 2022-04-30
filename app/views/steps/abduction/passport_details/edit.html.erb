@@ -1,0 +1,25 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :children_multiple_passports, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+
+      <%= f.govuk_check_boxes_fieldset :passport_possession, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_check_box :passport_possession, Relation::MOTHER.to_s %>
+        <%= f.govuk_check_box :passport_possession, Relation::FATHER.to_s %>
+        <%= f.govuk_check_box :passport_possession, Relation::OTHER.to_s do
+          f.govuk_text_area :passport_possession_other_details
+        end %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

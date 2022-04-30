@@ -1,0 +1,93 @@
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell app-util--no-wrap">
+    <%= l(completion.completed_at, format: :short) %>
+  </td>
+  <td class="govuk-table__cell app-util--no-wrap">
+    <%= t(completion.submission_type, scope: 'backoffice.submission', default: 'N/A') %>
+  </td>
+  <td class="govuk-table__cell app-util--no-wrap">
+    <%= t(completion.metadata['payment_type'], scope: 'backoffice.payment', default: 'N/A') %>
+  </td>
+  <td class="govuk-table__cell">
+    <%= completion.court %>
+  </td>
+</tr>
+
+<%# Only show extra details when a specific reference code is searched %>
+<% if controller.action_name == 'lookup' %>
+  <% c100 = completion.c100_application %>
+
+  <tr class="govuk-table__row">
+    <td colspan="4" class="no-border govuk-table__cell">
+      <div class="govuk-inset-text backoffice-extra-details">
+        <table class="govuk-table">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell no-border">
+                <dl class="app-description-list">
+                  <dt>Application started at</dt>
+                  <dd><%= completion.started_at %> (v:<%= completion.metadata['v'] || '1-3' %>)</dd>
+                  <dt>Saved for later?</dt>
+                  <dd><%= completion.metadata['saved_for_later'] %></dd>
+                  <dt>Any applicant under 18?</dt>
+                  <dd><%= completion.metadata['under_age'] || false %></dd>
+                  <dt>Any children with SGO?</dt>
+                  <dd><%= completion.metadata['children_sgo'] || false %></dd>
+                  <dt>Urgent hearing</dt>
+                  <dd><%= completion.metadata['urgent_hearing'] || 'N/A' %></dd>
+                  <dt>Without notice hearing</dt>
+                  <dd><%= completion.metadata['without_notice'] || 'N/A' %></dd>
+                  <dt>Permission to make application</dt>
+                  <dd><%= t(completion.metadata['permission_sought'] || AuditHelper::PERMISSION_NOT_REQUIRED,
+                            scope: 'backoffice.permission_sought') %></dd>
+
+                  <% if completion.metadata['payment_details'].present? %>
+                    <dt>GBS code</dt>
+                    <dd><%= completion.metadata.dig('payment_details', 'gbs_code') %></dd>
+                    <dt>GOV.UK payment ID</dt>
+                    <dd><%= completion.metadata.dig('payment_details', 'payment_id') %></dd>
+                    <dt>GOV.UK payment reference</dt>
+                    <dd><%= completion.reference_code %></dd>
+                  <% end %>
+                </dl>
+            </td>
+            <td class="govuk-table__cell no-border">
+              <dl class="app-description-list">
+                <dt>Postcode</dt>
+                <dd><%= completion.metadata['postcode'] %></dd>
+                <dt>Consent order</dt>
+                <dd><%= completion.metadata['consent_order'] || 'no' %></dd>
+                <dt>C1A form?</dt>
+                <dd><%= completion.metadata['c1a_form'] %></dd>
+                <dt>C8 form?</dt>
+                <dd><%= completion.metadata['c8_form'] %></dd>
+                <dt>Legal representation</dt>
+                <dd><%= completion.metadata['legal_representation'] || 'N/A' %></dd>
+                <dt>Signee capacity</dt>
+                <dd><%= completion.metadata['signee_capacity'] %></dd>
+
+                <% if c100 %>
+                  <% if c100.online_submission? %>
+                    <dt>Court receipt email address</dt>
+                    <dd><%= c100.email_submission.to_address %> | <%= link_to 'web', c100.court.url, rel: 'external', target: '_blank', class: 'govuk-link govuk-link--no-visited-state' %></dd>
+                    <dt>Applicant receipt email address</dt>
+                    <dd><%= c100.email_submission.email_copy_to.presence || 'none' %></dd>
+                  <% else %>
+                    <dt>Court receipt email address</dt>
+                    <dd>(none - print & post application)</dd>
+                    <dt>Applicant receipt email address</dt>
+                    <dd>(none - print & post application)</dd>
+                  <% end %>
+                <% else %>
+                  <dt>Court receipt email address</dt>
+                  <dd>(purged from database)</dd>
+                  <dt>Applicant receipt email address</dt>
+                  <dd>(purged from database)</dd>
+                <% end %>
+              </dl>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+<% end %>

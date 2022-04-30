@@ -1,0 +1,28 @@
+<% if c100_application.payment_type.eql?(PaymentType::HELP_WITH_FEES.to_s) %>
+
+  <p class="govuk-body">You may not need to pay the full amount if you have a
+    <a href="https://www.gov.uk/get-help-with-court-fees" class="govuk-link" rel="external" target="_blank">‘Help with fees’</a> reference.
+    The court will phone you (it may come from a ‘private number’) if they require payment.</p>
+
+<% elsif c100_application.payment_type.eql?(PaymentType::SOLICITOR.to_s) %>
+
+  <p class="govuk-body">Your solicitor will pay the court fee by direct debit, through their fee account. The court will not be able to
+    process your application until payment has been received.</p>
+
+<% elsif c100_application.payment_type.eql?(PaymentType::SELF_PAYMENT_CHEQUE.to_s) %>
+
+  <p class="govuk-body">You need to pay the <%= fee_amount %> court fee. Post a cheque made out to ‘HM Courts and Tribunals Service’. Write your
+    reference code (<%= c100_application.reference_code -%>), last name and ‘C100’ on the back of your cheque.</p>
+  <p class="govuk-body">You may also pay in person at the court by cheque or cash.</p>
+  <p class="govuk-body">Send your cheque or pay in person within 3 working days. The court will not be able to process your application
+    until payment has been received.</p>
+
+<% elsif c100_application.payment_type.eql?(PaymentType::SELF_PAYMENT_CARD.to_s) %>
+
+  <p class="govuk-body">You need to pay the <%= fee_amount %> court fee. The court will phone you (it may come from a ‘private number’) within 3 working
+    days of receiving your application to take payment using a credit or debit card.</p>
+  <p class="govuk-body">If you did not enter a telephone number or you do not get a call, please contact the court to pay. You may also pay
+    in person at the court.</p>
+  <p class="govuk-body">The court will not be able to process your application until payment has been received.</p>
+
+<% end %>

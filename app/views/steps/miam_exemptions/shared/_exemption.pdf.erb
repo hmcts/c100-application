@@ -1,0 +1,10 @@
+<!-- This partial is used when rendering the PDF content -->
+<p>
+  <strong><%=t "playback.exemptions_claimed.#{exemption.group_name}.header" %></strong>
+</p>
+
+<ul>
+  <% exemption.collection.each do |name| %>
+    <li><%=t "playback.exemptions_claimed.#{exemption.group_name}.exemptions.#{name}" %></li>
+  <% end %>
+</ul>

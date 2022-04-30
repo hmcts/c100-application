@@ -1,0 +1,21 @@
+<% title 'Back office: dashboard' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Back office: applications</h1>
+
+    <%= render partial: 'lookup_form' %>
+
+    <% if @application %>
+      <% if @application.is_a?(C100Application) %>
+        <%# This is an incomplete application and we show different details/actions %>
+        <%= render partial: 'incomplete_table', locals: { application: @application } %>
+      <% else %>
+        <%# This is a completed application so behave the same as the report of last 50 %>
+        <%= render partial: 'results_table', locals: { report: Array(@application) } %>
+      <% end %>
+    <% else %>
+      <%= render partial: 'results_table', locals: { report: @report } %>
+    <% end %>
+  </div>
+</div>

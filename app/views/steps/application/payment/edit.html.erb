@@ -1,0 +1,43 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :payment_type do %>
+        <p class="govuk-body-l"><%=t '.lead_text', fee: fee_amount %></p>
+
+        <%# Ugly but we need to set `link_errors: true` only in the first visible radio %>
+        <% online_choice = @form_object.choices.include?(PaymentType::ONLINE) %>
+
+        <% if @form_object.choices.include?(PaymentType::ONLINE) %>
+          <%= f.govuk_radio_button :payment_type, PaymentType::ONLINE, link_errors: online_choice %>
+        <% end %>
+
+        <% if @form_object.choices.include?(PaymentType::SELF_PAYMENT_CARD) %>
+          <%= f.govuk_radio_button :payment_type, PaymentType::SELF_PAYMENT_CARD, link_errors: !online_choice %>
+        <% end %>
+
+        <% if @form_object.choices.include?(PaymentType::SELF_PAYMENT_CHEQUE) %>
+          <%= f.govuk_radio_button :payment_type, PaymentType::SELF_PAYMENT_CHEQUE %>
+        <% end %>
+
+        <% if @form_object.choices.include?(PaymentType::HELP_WITH_FEES) %>
+          <%= f.govuk_radio_button :payment_type, PaymentType::HELP_WITH_FEES do %>
+            <%= f.govuk_text_field :hwf_reference_number, width: 'one-half', label: { size: 's' } %>
+          <% end %>
+        <% end %>
+
+        <% if @form_object.choices.include?(PaymentType::SOLICITOR) %>
+          <%= f.govuk_radio_button :payment_type, PaymentType::SOLICITOR do %>
+            <%= f.govuk_text_field :solicitor_account_number, width: 'one-half', label: { size: 's' } %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

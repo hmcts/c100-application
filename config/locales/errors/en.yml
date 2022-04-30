@@ -1,0 +1,653 @@
+en:
+  dictionary:
+    invalid_email_error: &invalid_email_error "Enter an email address in the correct format, like name@example.com"
+    blank_email_error: &blank_email_error "Enter an email address"
+    email_typo_error: &email_typo_error "The email address seems to have a typing error"
+    yes_no_error: &yes_no_error "Select yes or no"
+    blank_details_error: &blank_details_error "Enter details"
+    blank_exemptions_error: &blank_exemptions_error "Select at least one exemption or ‘None of these’"
+
+    # Errors shared in all the split first/last name forms
+    NAMES_FORM_ERRORS: &NAMES_FORM_ERRORS
+      new_first_name:
+        blank: Enter the first name
+      new_last_name:
+        blank: Enter the last name
+
+    # This is a compilation of all possible errors shared between different parties
+    # Please note some errors refer to "you" (applicant) and others to "they" (respondent, etc)
+    # To customise these, overwrite them in their corresponding locale sections
+    #
+    PERSONAL_DETAILS_ERRORS: &PERSONAL_DETAILS_ERRORS
+      has_previous_name:
+        inclusion: Select if they’ve changed their name
+      previous_name:
+        blank: Enter their previous name
+      dob:
+        blank: Enter the date of birth
+        invalid: Date of birth is not valid
+        future: Date of birth must be in the past
+      dob_estimate:
+        invalid: Approximate date of birth is not valid
+        future: Approximate date of birth must be in the past
+      gender:
+        inclusion: Select the sex
+      birthplace:
+        blank: Enter their place of birth
+      address_line_1:
+        blank: Enter the first line of the address or select if you don’t know where they live
+      town:
+        blank: Enter the town or city or select if you don’t know where they live
+      country:
+        blank: Enter the country
+      residence_requirement_met:
+        inclusion: Select yes if they’ve lived at the address for more than 5 years
+      residence_history:
+        blank: Enter details and dates of previous addresses
+
+  errors:
+    format: "%{message}"
+    attributes:
+      email:
+        invalid: *invalid_email_error
+        blank: *blank_email_error
+        typo: *email_typo_error
+      email_address:
+        invalid: *invalid_email_error
+        blank: *blank_email_error
+        typo: *email_typo_error
+      children_postcode:
+        invalid: Enter a valid full postcode, with or without a space
+        blank: Enter a full postcode, with or without a space
+    # fallback error messages in case no specific one is found
+    messages:
+      blank: Enter an answer
+      present: Leave empty
+      inclusion: Select an option
+    error_summary:
+      heading: There is a problem on this page
+    page_title_prefix: 'Error: '
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: Enter your email address
+              invalid: Enter a valid email address
+              taken: You already have a draft saved with this email address. Try signing in.
+            password:
+              blank: Enter a password
+              too_short: Your password must be at least %{count} characters
+              too_long: Your password must be no longer than %{count} characters
+            password_confirmation:
+              blank: Enter the password again
+              too_short: Your password must be at least %{count} characters
+              too_long: Your password must be no longer than %{count} characters
+              confirmation: The password confirmation doesn’t match
+            current_password:
+              blank: Enter your current password
+              invalid: The password is not valid
+        # Fulfillment validation errors
+        c100_application:
+          attributes:
+            children:
+              blank: You must add at least one child
+            applicants:
+              blank: You must add at least one applicant
+            respondents:
+              blank: You must add at least one respondent
+            payment_type:
+              blank: You must select a payment method
+            submission_type:
+              blank: You must select a submission method
+
+  activemodel:
+    errors:
+      models:
+        # Back office
+        backoffice/lookup_form:
+          attributes:
+            reference_code:
+              blank: Enter a reference code
+              invalid: The reference code format is invalid
+
+        # Opening
+        steps/opening/consent_order_form:
+          attributes:
+            consent_order:
+              inclusion: Select what kind of application you want to make
+        steps/opening/research_consent_form:
+          attributes:
+            research_consent:
+              inclusion: Select yes if you’re willing to be contacted about using this service
+            research_consent_email:
+              invalid: *invalid_email_error
+              blank: *blank_email_error
+              typo: *email_typo_error
+        steps/opening/child_protection_cases_form:
+          attributes:
+            child_protection_cases:
+              inclusion: *yes_no_error
+
+        steps/shared/under_age_form:
+          attributes:
+            under_age:
+              blank: You must confirm you understand
+        steps/miam/acknowledgement_form:
+          attributes:
+            miam_acknowledgement:
+              blank: Confirm you understand MIAM attendance requirements
+            mediation_voucher_scheme:
+              inclusion: Select if you have previously been to mediation through the mediation voucher scheme
+        steps/miam/exemption_claim_form:
+          attributes:
+            miam_exemption_claim:
+              inclusion: Select yes if you have a valid reason not to attend a MIAM
+        steps/miam/attended_form:
+          attributes:
+            miam_attended:
+              inclusion: Select yes if you’ve attended a MIAM
+        steps/miam/mediator_exemption_form:
+          attributes:
+            miam_mediator_exemption:
+              inclusion: Select yes if you have an exemption from a mediator
+        steps/miam/certification_form:
+          attributes:
+            miam_certification:
+              inclusion: Select yes if you have a signed document
+        steps/miam/certification_date_form:
+          attributes:
+            miam_certification_date:
+              blank: Enter the date you attended a MIAM
+              invalid: Date of MIAM attendance is not valid
+              future: Date of MIAM attendance must be in the past
+        steps/miam/certification_details_form:
+          attributes:
+            miam_certification_number:
+              blank: Enter a mediator registration number (URN)
+            miam_certification_service_name:
+              blank: Enter a family mediation service name
+        steps/safety_questions/address_confidentiality_form:
+          attributes:
+            address_confidentiality:
+              inclusion: Select yes if you want to keep your contact details private
+        steps/safety_questions/risk_of_abduction_form:
+          attributes:
+            risk_of_abduction:
+              inclusion: Select yes if the children are at risk of being abducted
+        steps/abduction/international_form:
+          attributes:
+            passport_office_notified:
+              inclusion: Select yes if the police have been notified
+        steps/abduction/children_have_passport_form:
+          attributes:
+            children_have_passport:
+              inclusion: Select yes if the children have a passport
+        steps/abduction/passport_details_form:
+          attributes:
+            children_multiple_passports:
+              inclusion: Select yes if they have more than one passport
+            passport_possession_other_details:
+              blank: *blank_details_error
+        steps/abduction/previous_attempt_form:
+          attributes:
+            previous_attempt:
+              inclusion: Select yes if the children have been abducted before
+        steps/abduction/previous_attempt_details_form:
+          attributes:
+            previous_attempt_agency_involved:
+              inclusion: Select yes if police or others were involved
+            previous_attempt_agency_details:
+              blank: *blank_details_error
+            previous_attempt_details:
+              blank: Describe previous abduction attempts
+        steps/abduction/risk_details_form:
+          attributes:
+            risk_details:
+              blank: Enter details of your concerns
+            current_location:
+              blank: Enter where the children are now
+        steps/safety_questions/substance_abuse_form:
+          attributes:
+            substance_abuse:
+              inclusion: Select yes if you have concerns about drug, alcohol or substance abuse
+            substance_abuse_details:
+              blank: Enter details of the abuse
+        steps/safety_questions/children_abuse_form:
+          attributes:
+            children_abuse:
+              inclusion: Select yes if the children are at risk of abuse
+        steps/safety_questions/domestic_abuse_form:
+          attributes:
+            domestic_abuse:
+              inclusion: Select yes if you are at risk of abuse
+        steps/safety_questions/other_abuse_form:
+          attributes:
+            other_abuse:
+              inclusion: Select yes if you have any other safety concerns
+        steps/abuse_concerns/question_form:
+          attributes:
+            answer:
+              inclusion: Select yes if this safety concern applies
+
+        steps/court_orders/has_orders_form:
+          attributes:
+            has_court_orders:
+              inclusion: Select yes if you have a court order
+        steps/court_orders/details_form:
+          attributes:
+            # non-molestation order
+            non_molestation:
+              inclusion: Select yes if you have a non-molestation order
+            non_molestation_case_number:
+              blank: Enter the case number of the non-molestation order
+            non_molestation_issue_date:
+              blank: Enter the date the non-molestation order was made
+              invalid: Enter a valid non-molestation order date
+              future: The non-molestation order date must be in the past
+            non_molestation_length:
+              blank: Enter how long the non-molestation order was for
+            non_molestation_is_current:
+              inclusion: Select yes if the non-molestation order is current
+            non_molestation_court_name:
+              blank: Enter which court issued the non-molestation order
+            # occupation order
+            occupation:
+              inclusion: Select yes if you have an occupation order
+            occupation_case_number:
+              blank: Enter the case number of the occupation order
+            occupation_issue_date:
+              blank: Enter the date the occupation order was made
+              invalid: Enter a valid occupation order date
+              future: The occupation order date must be in the past
+            occupation_length:
+              blank: Enter how long the occupation order was for
+            occupation_is_current:
+              inclusion: Select yes if the occupation order is current
+            occupation_court_name:
+              blank: Enter which court issued the occupation order
+            # forced marriage protection order
+            forced_marriage_protection:
+              inclusion: Select yes if you have a forced marriage protection order
+            forced_marriage_protection_case_number:
+              blank: Enter the case number of the forced marriage protection order
+            forced_marriage_protection_issue_date:
+              blank: Enter the date the forced marriage protection order was made
+              invalid: Enter a valid forced marriage protection order date
+              future: The forced marriage protection order date must be in the past
+            forced_marriage_protection_length:
+              blank: Enter how long the forced marriage protection order was for
+            forced_marriage_protection_is_current:
+              inclusion: Select yes if the forced marriage protection order is current
+            forced_marriage_protection_court_name:
+              blank: Enter which court issued the forced marriage protection order
+            # restraining order
+            restraining:
+              inclusion: Select yes if you have a restraining order
+            restraining_case_number:
+              blank: Enter the case number of the restraining order
+            restraining_issue_date:
+              blank: Enter the date the restraining order was made
+              invalid: Enter a valid restraining order date
+              future: The restraining order date must be in the past
+            restraining_length:
+              blank: Enter how long the restraining order was for
+            restraining_is_current:
+              inclusion: Select yes if the restraining order is current
+            restraining_court_name:
+              blank: Enter which court issued the restraining order
+            # another injunctive order
+            injunctive:
+              inclusion: Select yes if you have another injunctive order
+            injunctive_case_number:
+              blank: Enter the case number of the injunctive order
+            injunctive_issue_date:
+              blank: Enter the date the injunctive order was made
+              invalid: Enter a valid injunctive order date
+              future: The injunctive order date must be in the past
+            injunctive_length:
+              blank: Enter how long the injunctive order was for
+            injunctive_is_current:
+              inclusion: Select yes if the injunctive order is current
+            injunctive_court_name:
+              blank: Enter which court issued the injunctive order
+            # undertaking in place of an order
+            undertaking:
+              inclusion: Select yes if you have an undertaking in place of an order
+            undertaking_case_number:
+              blank: Enter the case number of the undertaking in place of an order
+            undertaking_issue_date:
+              blank: Enter the date the undertaking in place of an order was made
+              invalid: Enter a valid undertaking in place of an order date
+              future: The undertaking in place of an order date must be in the past
+            undertaking_length:
+              blank: Enter how long the undertaking in place of an order was for
+            undertaking_is_current:
+              inclusion: Select yes if the undertaking in place of an order is current
+            undertaking_court_name:
+              blank: Enter which court issued the undertaking in place of an order
+
+        steps/abuse_concerns/contact_form:
+          attributes:
+            concerns_contact_type:
+              inclusion: Select if you agree to the children spending time with the other person
+            concerns_contact_other:
+              inclusion: Select yes if you agree to the other person being in touch with the children
+
+        steps/petition/orders_form:
+          attributes:
+            orders:
+              blank: Select what you’re asking the court to decide
+            orders_additional_details:
+              blank: *blank_details_error
+        steps/children/orders_form:
+          attributes:
+            orders:
+              blank: Select at least a decision
+        steps/petition/protection_form:
+          attributes:
+            protection_orders:
+              inclusion: Select yes if you’re asking for an order for protection
+            protection_orders_details:
+              blank: *blank_details_error
+        steps/children/additional_details_form:
+          attributes:
+            children_known_to_authorities:
+              inclusion: Select if any of the children are known to social services
+            children_known_to_authorities_details:
+              blank: *blank_details_error
+            children_protection_plan:
+              inclusion: Select if any of the children are the subject of a child protection plan
+        steps/children/has_other_children_form:
+          attributes:
+            has_other_children:
+              inclusion: Select yes if you have other children
+        steps/respondent/has_other_parties_form:
+          attributes:
+            has_other_parties:
+              inclusion: Select yes if anyone else should know about application
+
+        steps/alternatives/court_form:
+          attributes:
+            court_acknowledgement:
+              blank: Confirm you understand
+        steps/alternatives/negotiation_tools_form:
+          attributes:
+            alternative_negotiation_tools:
+              inclusion: *yes_no_error
+        steps/alternatives/mediation_form:
+          attributes:
+            alternative_mediation:
+              inclusion: *yes_no_error
+        steps/alternatives/lawyer_negotiation_form:
+          attributes:
+            alternative_lawyer_negotiation:
+              inclusion: *yes_no_error
+        steps/alternatives/collaborative_law_form:
+          attributes:
+            alternative_collaborative_law:
+              inclusion: *yes_no_error
+
+        steps/applicant/has_solicitor_form:
+          attributes:
+            has_solicitor:
+              inclusion: *yes_no_error
+        steps/applicant/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+            has_previous_name:
+              inclusion: Select if you’ve changed your name
+            previous_name:
+              blank: Enter your previous name
+            birthplace:
+              blank: Enter your place of birth
+        steps/applicant/address_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+            residence_requirement_met:
+              inclusion: Select yes if you’ve lived at the address for more than 5 years
+            address_line_1:
+              blank: Enter the first line of the address
+            town:
+              blank: Enter the town or city
+        steps/applicant/contact_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+            mobile_phone:
+              blank: Enter a mobile number or tell us why the court cannot phone you
+            email:
+              blank: Enter an email address or tell us why the court cannot email you
+            voicemail_consent:
+              inclusion: Select yes if the court can leave you a voicemail
+            email_keep_private:
+              inclusion: *yes_no_error
+            phone_keep_private:
+              inclusion: *yes_no_error
+            mobile_keep_private:
+              inclusion: *yes_no_error
+        steps/respondent/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/respondent/contact_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/respondent/address_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/children/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_children/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_party/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_party/address_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/solicitor/personal_details_form:
+          attributes:
+            full_name:
+              blank: Enter the full name
+            firm_name:
+              blank: Enter the name of the firm
+        steps/solicitor/address_details_form:
+          attributes:
+            address_line_1:
+              blank: Enter the first line of the address
+            town:
+              blank: Enter the town or city
+            country:
+              blank: Enter the country
+            postcode:
+              blank: Enter the postcode
+        steps/solicitor/contact_details_form:
+          attributes:
+            phone_number:
+              blank: Enter the phone number
+        steps/applicant/names_split_form:
+          attributes:
+            <<: *NAMES_FORM_ERRORS
+        steps/respondent/names_split_form:
+          attributes:
+            <<: *NAMES_FORM_ERRORS
+        steps/children/names_split_form:
+          attributes:
+            <<: *NAMES_FORM_ERRORS
+        steps/other_children/names_split_form:
+          attributes:
+            <<: *NAMES_FORM_ERRORS
+        steps/other_party/names_split_form:
+          attributes:
+            <<: *NAMES_FORM_ERRORS
+
+        steps/address/lookup_form:
+          attributes:
+            postcode:
+              invalid: Enter a valid postcode
+              blank: Enter the postcode
+        steps/address/results_form:
+          attributes:
+            selected_address:
+              blank: Select an address from the list
+
+        steps/children/special_guardianship_order_form:
+          attributes:
+            special_guardianship_order:
+              inclusion: *yes_no_error
+        steps/children/residence_form:
+          attributes:
+            person_ids:
+              blank: You must select at least one person
+        steps/shared/relationship_form:
+          attributes:
+            relation:
+              inclusion: Select the relationship
+            relation_other_value:
+              blank: Enter the relationship
+
+        # This error will apply to all questions in the permission journey
+        # No need to declare the individual errors unless we really want them different
+        steps/permission/question_form:
+          inclusion: *yes_no_error
+
+        steps/miam_exemptions/domestic_form:
+          attributes:
+            domestic:
+              blank: *blank_exemptions_error
+        steps/miam_exemptions/protection_form:
+          attributes:
+            protection:
+              blank: *blank_exemptions_error
+        steps/miam_exemptions/urgency_form:
+          attributes:
+            urgency:
+              blank: *blank_exemptions_error
+        steps/miam_exemptions/adr_form:
+          attributes:
+            adr:
+              blank: *blank_exemptions_error
+        steps/miam_exemptions/misc_form:
+          attributes:
+            misc:
+              blank: *blank_exemptions_error
+
+        steps/application/previous_proceedings_form:
+          attributes:
+            children_previous_proceedings:
+              inclusion: Select yes if the children have been involved in other proceedings
+        steps/application/court_proceedings_form:
+          attributes:
+            children_names:
+              blank: Enter names of children
+            court_name:
+              blank: Enter name of court
+            order_types:
+              blank: Enter type of proceedings
+        steps/application/urgent_hearing_form:
+          attributes:
+            urgent_hearing:
+              inclusion: Select yes if you need an urgent hearing
+        steps/application/urgent_hearing_details_form:
+          attributes:
+            urgent_hearing_details:
+              blank: *blank_details_error
+            urgent_hearing_when:
+              blank: Enter how soon you need a hearing
+            urgent_hearing_short_notice:
+              inclusion: Select yes if you need a hearing in the next 48 hours
+            urgent_hearing_short_notice_details:
+              blank: Enter what you’ve done
+        steps/application/without_notice_form:
+          attributes:
+            without_notice:
+              inclusion: Select yes if you’re asking for a without notice hearing
+        steps/application/without_notice_details_form:
+          attributes:
+            without_notice_details:
+              blank: *blank_details_error
+            without_notice_frustrate:
+              inclusion: Select yes if the other person may obstruct
+            without_notice_frustrate_details:
+              blank: *blank_details_error
+            without_notice_impossible:
+              inclusion: Select yes if there’s no time to give notice
+            without_notice_impossible_details:
+              blank: *blank_details_error
+        steps/international/resident_form:
+          attributes:
+            international_resident:
+              inclusion: *yes_no_error
+            international_resident_details:
+              blank: *blank_details_error
+        steps/international/jurisdiction_form:
+          attributes:
+            international_jurisdiction:
+              inclusion: *yes_no_error
+            international_jurisdiction_details:
+              blank: *blank_details_error
+        steps/international/request_form:
+          attributes:
+            international_request:
+              inclusion: *yes_no_error
+            international_request_details:
+              blank: *blank_details_error
+        steps/application/permission_sought_form:
+          attributes:
+            permission_sought:
+              inclusion: *yes_no_error
+        steps/application/permission_details_form:
+          attributes:
+            permission_details:
+              blank: Enter details to ask for permission to apply
+        steps/application/details_form:
+          attributes:
+            application_details:
+              blank: Enter why are you making this application
+        steps/application/litigation_capacity_form:
+          attributes:
+            reduced_litigation_capacity:
+              inclusion: *yes_no_error
+        steps/attending_court/language_form:
+          attributes:
+            language_interpreter_details:
+              blank: You must give interpreter requirements
+            sign_language_interpreter_details:
+              blank: You must give sign language requirements
+            welsh_language_details:
+              blank: You must give Welsh language requirements
+        steps/attending_court/intermediary_form:
+          attributes:
+            intermediary_help:
+              inclusion: Select yes if an intermediary is needed in court
+            intermediary_help_details:
+              blank: You must give details of who needs help in court
+        steps/application/payment_form:
+          attributes:
+            payment_type:
+              inclusion: Select how you’ll pay
+            solicitor_account_number:
+              blank: Enter your solicitor’s fee account number
+            hwf_reference_number:
+              invalid: Enter a valid ‘Help with fees’ reference number
+              blank: Enter your ‘Help with fees’ reference number
+        steps/application/submission_form:
+          attributes:
+            submission_type:
+              inclusion: Select how you’ll submit your application
+            receipt_email:
+              invalid: *invalid_email_error
+              typo: *email_typo_error
+        steps/application/declaration_form:
+          attributes:
+            declaration_signee:
+              blank: Enter your full name
+            declaration_signee_capacity:
+              inclusion: Select who is making this declaration
+            declaration_confirmation:
+              inclusion: Select the statement that applies to confirm the Statement of Truth
+            c100_application:
+              invalid: Some information is missing # fulfilment validation error

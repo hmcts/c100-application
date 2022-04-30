@@ -1,0 +1,46 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :email_provided, legend: nil do %>
+        <%= f.govuk_radio_button :email_provided, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_email_field :email %>
+          <%- if display_private_option? %>
+            <%= f.govuk_radio_buttons_fieldset :email_keep_private, legend: { tag: 'span', size: 'm' } do %>
+              <%= f.govuk_radio_button :email_keep_private, GenericYesNo::YES, link_errors: true %>
+              <%= f.govuk_radio_button :email_keep_private, GenericYesNo::NO %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= f.govuk_radio_button :email_provided, GenericYesNo::NO %>
+      <% end %>
+
+      <%= f.govuk_phone_field :home_phone, width: 'one-half' %>
+      <%- if display_private_option? %>
+        <%= f.govuk_radio_buttons_fieldset :phone_keep_private, legend: { tag: 'span', size: 'm' } do %>
+          <%= f.govuk_radio_button :phone_keep_private, GenericYesNo::YES, link_errors: true %>
+          <%= f.govuk_radio_button :phone_keep_private, GenericYesNo::NO %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_phone_field :mobile_phone, width: 'one-half' %>
+
+      <%- if display_private_option? %>
+        <%= f.govuk_radio_buttons_fieldset :mobile_keep_private, legend: { tag: 'span', size: 'm' } do %>
+          <%= f.govuk_radio_button :mobile_keep_private, GenericYesNo::YES, link_errors: true %>
+          <%= f.govuk_radio_button :mobile_keep_private, GenericYesNo::NO %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_collection_radio_buttons :voicemail_consent, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

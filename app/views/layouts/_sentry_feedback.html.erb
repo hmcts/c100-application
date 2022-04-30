@@ -1,0 +1,16 @@
+<% content_for(:head) do %>
+  <script src="https://browser.sentry-cdn.com/5.20.1/bundle.min.js" integrity="O8HdAJg1h8RARFowXd2J/r5fIWuinSBtjhwQoPesfVILeXzGpJxvyY/77OaPPXUo" crossorigin="anonymous"></script>
+<% end %>
+
+<% content_for(:body_end) do %>
+  <script>
+    // Use only the public DSN here!
+    Sentry.init({
+      dsn: '<%= "https://#{Raven.configuration.public_key}@#{Raven.configuration.host}/#{Raven.configuration.project_id}" %>'
+    });
+
+    Sentry.showReportDialog({
+      eventId: '<%= Raven.last_event_id %>'
+    });
+  </script>
+<% end %>

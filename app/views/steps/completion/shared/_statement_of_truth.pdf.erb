@@ -1,0 +1,17 @@
+<%
+  signee_name = statement_of_truth.ivar[:signee_name]
+  signee_capacity = statement_of_truth.ivar[:signee_capacity]
+  is_draft = statement_of_truth.ivar[:is_draft]
+%>
+
+<% if is_draft %>
+  <p>
+    <strong><%=t 'shared.statement_of_truth.not_completed' %></strong>
+  </p>
+<% else %>
+  <%=t "#{signee_capacity}_html", signee_name: signee_name, scope: 'shared.statement_of_truth' %>
+
+  <p>
+    <strong><%=t 'shared.statement_of_truth.completed' %></strong>
+  </p>
+<% end %>

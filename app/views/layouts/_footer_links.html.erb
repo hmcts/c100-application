@@ -1,0 +1,22 @@
+<h2 class="govuk-visually-hidden"><%=t('.header') %></h2>
+
+<ul class="govuk-footer__inline-list">
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.help'), 'https://www.gov.uk/help', class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'help'} %>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.accessibility'), about_accessibility_path, class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'accessibility'} %>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.contact'), about_contact_path, class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'contact'} %>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.cookies'), edit_cookies_path, class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'cookies'} %>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.privacy'), about_privacy_path, class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'privacy'} %>
+  </li>
+  <li class="govuk-footer__inline-list-item">
+    <%= link_to t('.terms_and_conditions'), about_terms_and_conditions_path, class: 'govuk-footer__link ga-pageLink', data: {ga_category: 'footer', ga_label: 'terms and conditions'} %>
+  </li>
+</ul>

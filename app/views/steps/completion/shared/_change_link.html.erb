@@ -1,0 +1,21 @@
+<% if question.show_change_link? %>
+  <%
+    link_ga_label = question.is_a?(Summary::AnswersGroup) ? question.name : question.question
+
+    a11y_question = if question.is_a?(Summary::AnswersGroup)
+                      t("check_answers_html.groups.#{question.name}")
+                    else
+                      i18n_opts = question.i18n_opts || {}
+
+                      t(
+                        "check_answers_html.#{question.question}.question_a11y", {
+                          default: t("check_answers_html.#{question.question}.question", i18n_opts)
+                        }.merge(i18n_opts)
+                      )
+                    end
+  %>
+
+  <%= link_to question.change_path, class: 'govuk-link govuk-link--no-visited-state ga-pageLink', data: { ga_category: 'check your answers', ga_label: "change link: #{link_ga_label}" } do %>
+    <%= t('check_answers_html.change_link_html', a11y_question: a11y_question) %>
+  <% end %>
+<% end %>

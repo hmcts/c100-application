@@ -1,0 +1,42 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Information Disclosure",
+      "warning_code": 61,
+      "fingerprint": "081f5d87a244b41d3cf1d5994cb792d2cec639cd70e4e306ffe1eb8abf0f32f7",
+      "check_name": "DetailedExceptions",
+      "message": "Detailed exceptions are enabled in production",
+      "file": "config/environments/production.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/information_disclosure/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "note": "TEMPORARY JAN 24 2021 - REMOVE BEFORE RELEASE TO PROD"
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "77bd79b7fd28a18a63e5bad7a646d1af1609fba0ff4a9675bd2dd83ab255222c",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/cookies_controller.rb",
+      "line": 14,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(path_only(params.dig(:cookie, :return_path)), :flash => ({ :cookie_banner_confirmation => t(\"cookie_banner.confirmation_message.#{cookie_form.usage}\") }))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "CookiesController",
+        "method": "create"
+      },
+      "user_input": "params.dig(:cookie, :return_path)",
+      "confidence": "Weak",
+      "note": ""
+    }
+  ],
+  "updated": "2022-01-24 15:19:50 +0000",
+  "brakeman_version": "5.0.0"
+}

@@ -1,0 +1,198 @@
+@mixin app-button-reset {
+  padding: 0;
+  margin: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-sizing: unset;
+  background-color: transparent;
+}
+
+.app-sidebar-grey {
+  background: govuk-colour("light-grey");
+  margin-bottom: govuk-spacing(5);
+}
+
+.app-sidebar-blue-bar {
+  background-color: govuk-colour("blue");
+  padding: 3px;
+}
+
+.app-header__logout-link {
+  // 1. Remove any button styling
+  @include app-button-reset;
+
+  // 2. Apply header link styling
+  @include govuk-font($size: 16, $weight: bold);
+  white-space: nowrap;
+}
+
+.app-error-summary--alert {
+  @include govuk-typography-weight-bold;
+  color: $govuk-error-colour;
+}
+
+.app-list--lower-roman {
+  @extend %govuk-list--number;
+  list-style-type: lower-roman;
+}
+
+.app-list--lower-alpha {
+  @extend %govuk-list--number;
+  list-style-type: lower-alpha;
+}
+
+ol.app-list--icon-steps {
+  padding-left: 0;
+  list-style-type: none;
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  @include govuk-if-ie8 {
+    list-style-type: decimal;
+    padding-left: 1em;
+  }
+
+  & > li {
+    background-position: 0 0.8em;
+    background-repeat: no-repeat;
+    padding: 0.87em 0 0.75em 2.2em;
+
+    @include govuk-media-query($from: tablet) {
+      background-position: 0 1em;
+    }
+
+    &:nth-child(1) {
+      background-image: image-url('icon-step-1.png');
+    }
+    &:nth-child(2) {
+      background-image: image-url('icon-step-2.png');
+    }
+    &:nth-child(3) {
+      background-image: image-url('icon-step-3.png');
+    }
+    &:nth-child(4) {
+      background-image: image-url('icon-step-4.png');
+    }
+    &:nth-child(5) {
+      background-image: image-url('icon-step-5.png');
+    }
+  }
+}
+
+ul.app-list--pros-cons {
+  @extend .govuk-\!-font-size-16;
+
+  @include govuk-if-ie8 {
+    list-style-type: disc;
+    padding-left: 1em;
+  }
+
+  @include govuk-not-ie8 {
+    & > li {
+      padding-left: 1.4em;
+      padding-bottom: 0.3em;
+      background-repeat: no-repeat;
+    }
+  }
+
+  & > li.app-list--item--pros {
+    background-image: image-url('icon-tick.svg');
+    background-position: 0 0.22em;
+
+    @include govuk-media-query($from: tablet) {
+      background-position: 0 0.26em;
+    }
+  }
+
+  & > li.app-list--item--cons {
+    background-image: image-url('icon-cross.svg');
+    background-position: 0 0.32em;
+
+    @include govuk-media-query($from: tablet) {
+      background-position: 0 0.36em;
+    }
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.app-fieldset--compact {
+  .govuk-form-group {
+    margin-bottom: 0.8em;
+  }
+}
+
+// Used in `javascripts/modules/password-toggle.js`
+.app-js--toggle-password {
+  @extend .govuk-\!-font-size-19;
+  margin-top: 5px;
+}
+
+// Used in `javascripts/modules/check-email-address.js`
+.app-js--email-confirmation-panel {
+  @extend .govuk-inset-text;
+
+  margin-top: govuk-spacing(2);
+
+  p.govuk-hint {
+    margin-bottom: govuk-spacing(2);
+  }
+
+  p.govuk-body {
+    font-weight: $govuk-font-weight-bold;
+  }
+}
+
+table.app-saved-drafts {
+  .govuk-button {
+    margin-top: govuk-spacing(1);
+    margin-bottom: govuk-spacing(1);
+  }
+
+  td {
+    vertical-align: middle;
+    font-weight: normal;
+  }
+
+  tr {
+    vertical-align: middle;
+
+    &.expires-today, &.expires-soon {
+      td.timeliness {
+        color: govuk-colour("red");
+
+        padding-left: 30px;
+        background: image-url('alert-red.png') no-repeat left center;
+
+        @media only screen and (-webkit-min-device-pixel-ratio: 2), not all, not all, not all, only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+          background: image-url('alert-red-2x.png') no-repeat left center;
+          background-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+dl.app-description-list {
+  @extend .govuk-summary-list;
+
+  dt {
+    font-weight: $govuk-font-weight-bold;
+  }
+
+  dd {
+    margin-bottom: govuk-spacing(3);
+    margin-left: govuk-spacing(3);
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
