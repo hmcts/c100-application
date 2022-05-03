@@ -37,7 +37,7 @@ steps:
   displayName: 'DB load'
 
 - script: |
-    bundle exec rake parallel:setup
+    bundle exec rake parallel:setup --trace
   displayName: 'Parallel DB load'
 
 - script: |
