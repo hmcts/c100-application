@@ -13,8 +13,8 @@ steps:
   displayName: 'install bundler'
 
 - script: |
-    bundle update --retry=3 --jobs=4
-  displayName: 'bundle update'
+    bundle install --retry=3 --jobs=4
+  displayName: 'bundle install'
 
 - script: |
     npm install --production
