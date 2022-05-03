@@ -1,0 +1,18 @@
+# Note: in production we are forcing SSL and certificate verification.
+# The RDS certificates bundle is downloaded in the Dockerfile.
+#
+# Refer to https://www.postgresql.org/docs/current/libpq-ssl.html for more information.
+#
+default: &default
+  adapter: postgresql
+
+development:
+  <<: *default
+  database: 'c100-development'
+test:
+  <<: *default
+  database: 'c100-test'
+production:
+  <<: *default
+  sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'verify-full') %>
+  sslrootcert: <%= ENV['RDS_COMBINED_CA_BUNDLE'] %>

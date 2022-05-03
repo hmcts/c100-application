@@ -1,18 +1,25 @@
-# Note: in production we are forcing SSL and certificate verification.
-# The RDS certificates bundle is downloaded in the Dockerfile.
-#
-# Refer to https://www.postgresql.org/docs/current/libpq-ssl.html for more information.
-#
 default: &default
   adapter: postgresql
+  encoding: unicode
+  user: <%= ENV.fetch('DB_USERNAME', nil) %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+  pool: 10
 
 development:
   <<: *default
-  database: 'c100-development'
-test:
+  database: <%= ENV.fetch('DB_NAME', 'fr-staffapp_development') %>
+
+test: &test
   <<: *default
-  database: 'c100-test'
+  database: <%= ENV.fetch('DB_NAME', 'fr-staffapp_test') %><%= ENV['TEST_ENV_NUMBER'] %>
+
 production:
   <<: *default
-  sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'verify-full') %>
-  sslrootcert: <%= ENV['RDS_COMBINED_CA_BUNDLE'] %>
+  host: <%= ENV['DB_HOST'] || 'localhost' %>
+  port: <%= ENV['DB_PORT'] || '5432' %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: '<%= ENV['DB_PASSWORD'] %>'
+  database: <%= ENV['DB_NAME'] || 'fr-staffapp' %>
+  pool: 15
+cucumber:
+  <<: *test
