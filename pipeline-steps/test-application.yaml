@@ -33,7 +33,7 @@ steps:
   displayName: 'brakeman'
 
 - script: |
-    bundle exec rake db:create db:schema:load
+    bundle exec rake db:create db:schema:load --trace
   displayName: 'DB load'
 
 # - script: |
