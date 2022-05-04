@@ -1,0 +1,8 @@
+<%= names_form.govuk_fieldset legend: { text: legend, tag: 'span', size: 'm' } do %>
+  <%= person.hidden_field :id %>
+  <%= person.govuk_text_field :first_name, width: 'one-half' %>
+  <%= person.govuk_text_field :last_name, width: 'one-half' %>
+
+  <%= person.button t('.remove_name', legend: legend.downcase), type: :submit, name: :remove_name, value: person.object.id,
+                    class: %w(govuk-button govuk-button--warning), data: { module: 'govuk-button' } %>
+<% end %>

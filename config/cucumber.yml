@@ -1,0 +1,7 @@
+default: >
+  --format pretty
+  --tags 'not @smoke'
+
+smoke: >
+  --format pretty
+  --tags '@smoke'

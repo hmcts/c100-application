@@ -1,0 +1,7 @@
+<% if email_address %>
+  <p class="govuk-body-l"><%= t '.lead_text_html', email_address: email_address %></p>
+<% end %>
+
+<p class="govuk-body"><%=t('.expire_warning_html', expire_in_days: Rails.configuration.x.drafts.expire_in_days) %></p>
+
+<p class="govuk-body"><%=t '.return_info' %></p>

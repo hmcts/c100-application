@@ -1,0 +1,15 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_check_boxes :orders, @petition.all_selected_orders, :to_s, :to_s,
+                                         legend: { text: t('.heading', name: @form_object.record.full_name) } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+class OtherParty < Person
+end

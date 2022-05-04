@@ -1,0 +1,72 @@
+#cya-fulfilment-errors {
+  @include govuk-media-query($from: tablet) {
+    .govuk-grid-column-one-third {
+      text-align: right;
+    }
+  }
+}
+
+#cya-declaration-box {
+  padding: govuk-spacing(4);
+  margin-top: govuk-spacing(8);
+  background-color: #ddd;
+}
+
+// Custom styles for groups of question-answer, partial `_answers_group.html.erb`
+//
+.app-cya--answers-group {
+  dl {
+    // This is the secondary (embedded) definition list
+    dt, dd {
+      width: unset !important;
+      padding-right: unset;
+      display: unset;
+      border: none;
+    }
+
+    .govuk-summary-list__row {
+      border: none;
+      width: 100%;
+    }
+
+    .govuk-summary-list__key {
+      width: 100%;
+    }
+
+    .govuk-summary-list__value {
+      display: block;
+      width: 100%;
+    }
+
+    // Give a sense of hierarchy by adding a bit of inset to sub-questions (only on mobile)
+    @include govuk-media-query($until: tablet) {
+      margin-left: govuk-spacing(4);
+    }
+  }
+
+  @include govuk-media-query($until: tablet) {
+    .app-cya--answers-group__key {
+      margin-bottom: govuk-spacing(3);
+    }
+  }
+}
+
+// Give a bit more space between parties
+#applicants_details, #respondents_details, #other_parties_details,
+#children_details, #other_children_details {
+  h3 {
+    margin-top: govuk-spacing(3);
+  }
+}
+
+// BEGIN -- Overrides for design system styles. Use with caution.
+//
+.govuk-summary-list {
+  table-layout: unset;
+}
+
+.govuk-summary-list__actions {
+  // Reduce the column width of the 'Change' link in CYA to give more space to the answers
+  width: 10%;
+}
+// END -- Overrides for design system.

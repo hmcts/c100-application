@@ -1,0 +1,32 @@
+<% title 'Back office: dashboard' %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-xl">Back office: applications</h1>
+
+    <%= render partial: 'lookup_form' %>
+
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">Lists</h2>
+
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#recent-applications">Recent applications</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#recent-payments">Recent payments</a>
+        </li>
+      </ul>
+
+      <div class="govuk-tabs__panel" id="recent-applications">
+        <h3 class="govuk-heading-m">Last 50 completed applications</h3>
+        <%= render partial: 'results_table', locals: { report: @report } %>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="recent-payments">
+        <h3 class="govuk-heading-m">Last 50 online payments</h3>
+        <%= render partial: 'payments_table', locals: { report: @payments_report } %>
+      </div>
+    </div>
+  </div>
+</div>

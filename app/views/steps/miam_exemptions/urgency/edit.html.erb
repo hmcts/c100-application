@@ -1,0 +1,30 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_check_boxes_fieldset :urgency, legend: { tag: 'span', size: 'm' } do %>
+
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::RISK_APPLICANT.to_s, link_errors: true %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::UNREASONABLE_HARDSHIP.to_s %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::RISK_CHILDREN.to_s %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::RISK_UNLAWFUL_REMOVAL_RETENTION.to_s %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::MISCARRIAGE_JUSTICE.to_s %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::IRRETRIEVABLE_PROBLEMS.to_s %>
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::INTERNATIONAL_PROCEEDINGS.to_s %>
+
+        <%= f.govuk_radio_divider %>
+
+        <%= f.govuk_check_box :urgency, UrgencyExemptions::URGENCY_NONE.to_s %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

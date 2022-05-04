@@ -1,0 +1,63 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%=t '.lead_text' %></p>
+
+    <%= render @presenter.sections %>
+
+    <%= render partial: 'fulfilment_errors',
+               locals: { errors: @presenter.errors } if @presenter.errors.any? %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder, html: { class: 'ga-submitForm' },
+                  data: { ga_category: 'application completed', ga_label: 'declaration' } do |f| %>
+
+      <div id="cya-declaration-box">
+        <h2 class="govuk-heading-l"><%=t '.statement_heading' %></h2>
+
+        <% unless current_c100_application.has_solicitor? %>
+          <p class="govuk-body-l"><%= t '.statement_lead_text' %></p>
+        <% end %>
+
+        <%= f.govuk_collection_radio_buttons :declaration_confirmation, UserType.values, :value, nil, legend: { text: '', tag: 'span', size: 's', hidden: true }  %>
+        <%= f.govuk_text_field :declaration_signee, width: 'one-half' %>
+
+        <% if current_c100_application.has_solicitor? %>
+          <%= f.govuk_collection_radio_buttons :declaration_signee_capacity, UserType.values, :value, nil, legend: { tag: 'span', size: 'm', hidden: true } %>
+        <% else %>
+          <%# No need to ask the capacity if the applicant does not have a solicitor, so we default to `applicant` %>
+          <%= f.hidden_field :declaration_signee_capacity, value: UserType::APPLICANT %>
+        <% end %>
+      </div>
+
+      <div class="govuk-inset-text">
+        <%=t @presenter.before_submit_warning, fee: fee_amount %>
+      </div>
+
+      <%= f.continue_button(
+        continue: @presenter.submit_button_label,
+        save_and_continue: @presenter.submit_button_label
+      ) %>
+    <% end %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="cya download draft">
+          <%=t '.details.summary' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t '.details.text_html' %>
+        <%= link_button t('.details.download_draft_button'), steps_completion_summary_path(format: :pdf),
+                        class: 'ga-pageLink govuk-button--secondary', download: '',
+                        data: { module: 'govuk-button', ga_category: 'check your answers', ga_label: 'download draft' } %>
+
+      </div>
+    </details>
+  </div>
+</div>

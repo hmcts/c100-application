@@ -1,0 +1,20 @@
+<% title t(".page_title.#{@form_object.question_name}") %>
+<% step_header %>
+
+<% heading = t(".heading.#{@form_object.question_name}",
+               applicant_name: @form_object.record.person.full_name,
+               child_name: @form_object.record.minor.full_name) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object do |f| %>
+      <%= f.govuk_collection_radio_buttons @form_object.question_name, GenericYesNo.values, :value, nil, legend: { text: heading } do %>
+        <%=t ".body_text.#{@form_object.question_name}_html" %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

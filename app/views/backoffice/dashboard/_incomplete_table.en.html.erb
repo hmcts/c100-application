@@ -1,0 +1,98 @@
+<table class="backoffice-table govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Created at</th>
+      <th class="govuk-table__header">Updated at</th>
+      <th class="govuk-table__header">Submission</th>
+      <th class="govuk-table__header">Payment</th>
+      <th class="govuk-table__header">Status</th>
+    </tr>
+  </thead>
+
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        <%= application.created_at %>
+      </td>
+      <td class="govuk-table__cell">
+        <%= application.updated_at %>
+      </td>
+      <td class="govuk-table__cell app-util--no-wrap">
+        <%= t(application.submission_type, scope: 'backoffice.submission', default: 'N/A') %>
+      </td>
+      <td class="govuk-table__cell app-util--no-wrap">
+        <%= t(application.payment_type, scope: 'backoffice.payment', default: 'N/A') %>
+      </td>
+      <td class="govuk-table__cell app-util--no-wrap">
+        <strong class="govuk-tag govuk-tag--orange">
+          <%= application.status %>
+        </strong>
+      </td>
+    </tr>
+
+    <tr class="govuk-table__row">
+      <td colspan="5" class="no-border govuk-table__cell">
+        <div class="govuk-inset-text backoffice-extra-details">
+          <table class="govuk-table">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell no-border" width="50%">
+                <dl class="app-description-list">
+                  <dt>Saved for later?</dt>
+                  <dd><%= application.user_id? %></dd>
+                  <dt>Last submitted step</dt>
+                  <dd><%= application.navigation_stack.last %></dd>
+                  <dt>Applicant receipt email address</dt>
+                  <dd><%= application.receipt_email.presence || 'none' %></dd>
+
+                  <% if (payment_intent = application.payment_intent) %>
+                    <dt>GOV.UK payment created at</dt>
+                    <dd><%= payment_intent.created_at %></dd>
+                    <dt>GOV.UK payment updated at</dt>
+                    <dd><%= payment_intent.updated_at %></dd>
+                    <dt>GOV.UK payment reference</dt>
+                    <dd><%= application.reference_code %></dd>
+                    <dt>GOV.UK payment ID</dt>
+                    <dd>
+                      <%= payment_intent.payment_id %>
+                      (<%= link_to 'details', "https://selfservice.payments.service.gov.uk/transactions/#{payment_intent.payment_id}",
+                                   target: '_blank', rel: 'external', class: 'govuk-link govuk-link--no-visited-state' %>)
+                    </dd>
+                    <dt>GOV.UK payment state</dt>
+                    <dd>
+                      <strong class="govuk-tag app-tag--<%= payment_intent.state['status'] %>">
+                        <%= payment_intent.state['status'] %>
+                      </strong>
+                      <%= payment_intent.state['message'] %>
+                    </dd>
+                  <% end %>
+                </dl>
+              </td>
+              <td class="govuk-table__cell no-border">
+                <% if application.online_payment? && payment_intent %>
+                  <div class="govuk-warning-text govuk-!-margin-bottom-0">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                      <span class="govuk-warning-text__assistive">Warning</span>
+                      <% if payment_intent.in_progress? %>
+                        Online payment still in progress. Online payments, if not completed, will time out after 90 minutes of being created.
+                      <% else %>
+                        Online payment has failed. If the applicant is unable to resume their application, it can be completed manually.
+
+                        <p class="govuk-body govuk-body govuk-!-margin-top-3">
+                          Note: in order to proceed, the payment method will be reassigned as <strong>phone</strong>.
+                        </p>
+
+                        <%= button_to 'Complete this application', backoffice_dashboard_complete_application_path(application),
+                                      method: :put, data: { confirm: 'Are you sure?' }, class: 'govuk-button' %>
+                      <% end %>
+                    </strong>
+                  </div>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+<% title t('.page_title') %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= render partial: 'users/shared/application_saved', locals: {email_address: @email_address} %>
+
+    <%= link_button t('.sign_in'), user_session_path %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<% content_for?(:page_title) ? yield(:page_title) : fallback_title %>
+
+<% content_for(:head) do %>
+  <%= csrf_meta_tags %>
+<% end %>
+
+<% content_for(:service_name) do %>
+  <%= link_to service_name, '/', class: 'govuk-header__link govuk-header__link--service-name' %>
+<% end %>
+
+<% content_for(:header_navigation) do %>
+  <%= render partial: 'backoffice/shared/menu' %>
+<% end %>
+
+<% content_for(:flash_alert) do %>
+  <%= render partial: 'backoffice/shared/flash_alert' if flash[:alert].present? %>
+<% end %>
+
+<% content_for(:content) do %>
+  <%= yield %>
+<% end %>
+
+<% content_for(:footer_links) do %>
+  <% render partial: 'layouts/footer_links' %>
+<% end %>
+
+<%= render file: 'layouts/govuk_template' %>

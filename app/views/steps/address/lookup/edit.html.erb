@@ -1,0 +1,14 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl">
+      <%=t '.heading', name: @form_object.record.full_name %>
+    </h1>
+
+    <%= render partial: @form_object, locals: { form_object: @form_object } %>
+  </div>
+</div>

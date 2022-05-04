@@ -1,0 +1,20 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%=t '.lead_text' %></p>
+
+    <%=t '.more_info_html' %>
+
+    <h2 class="govuk-heading-l"><%= t '.what_to_do_now.heading' %></h2>
+
+    <p class="govuk-body govuk-!-margin-bottom-6"><%= t '.what_to_do_now.copy' %></p>
+
+    <%= link_button t('.download_c100_link'), 'https://formfinder.hmctsformfinder.justice.gov.uk/c100-eng.pdf', class: 'ga-pageLink', data: { module: 'govuk-button', ga_category: 'postcode kickout', ga_label: 'paper form' } %>
+
+    <p class="govuk-body"><%=t '.cait_info_html' %></p>
+  </div>
+</div>

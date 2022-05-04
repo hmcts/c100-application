@@ -1,0 +1,31 @@
+<h3 class="section-header"><%= t "check_answers.sections.#{risk_concerns.name}" %></h3>
+
+<table id="<%= risk_concerns.name %>">
+  <tr>
+    <td class="description">
+      <%= t "check_answers.descriptions.#{risk_concerns.name}" %>
+    </td>
+
+    <td>
+      <table class="no-borders subtable">
+        <%= render risk_concerns.answers %>
+
+        <% if risk_concerns.c1a_triggered? %>
+          <tr>
+            <td class="question">
+              <%=t "check_answers.descriptions.c1a_attached_html" %>
+            </td>
+          </tr>
+        <% end %>
+
+        <% if risk_concerns.confidentiality_enabled? %>
+          <tr>
+            <td class="question">
+              <%=t "check_answers.descriptions.c8_attached_html" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>

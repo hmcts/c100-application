@@ -1,0 +1,26 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <div class="govuk-inset-text">
+      <%=t '.body_info' %>
+    </div>
+
+    <%= step_form @form_object, html: { class: 'app-fieldset--compact' }, data: { 'disable-enter': 1 }, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <% @existing_records.each.with_index do |respondent, index| %>
+        <%= f.fields_for :names_attributes, respondent, index: index do |c| %>
+          <%= render partial: 'steps/shared/existing_names', locals: { names_form: f, person: c, legend: t('.record_index', index: index + 1) } %>
+        <% end %>
+      <% end %>
+
+      <%= render partial: 'steps/shared/new_name', locals: { names_form: f, button_text: t('.btn_add_another') } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

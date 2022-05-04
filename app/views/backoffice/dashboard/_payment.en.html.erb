@@ -1,0 +1,28 @@
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell app-util--no-wrap"><%= l(payment.created_at, format: :short) %></td>
+  <td class="govuk-table__cell app-util--no-wrap"><%= l(payment.updated_at, format: :short) %></td>
+  <td class="govuk-table__cell">
+    <strong class="govuk-tag app-tag--<%= payment.state['status'] %>">
+      <%= payment.state['status'] %>
+    </strong>
+  </td>
+  <td class="govuk-table__cell">
+    <% if payment.state.key?('code') %>
+      <% c100_application = payment.c100_application %>
+
+      <strong>
+        <%= format("%<message>s (%<code>s)", payment.state.symbolize_keys) %>
+      </strong>
+
+      <div class="app-util--disabled-color">
+        <% if c100_application.completed? %>
+          Final payment method: <%= t(c100_application.payment_type, scope: 'backoffice.payment') %>
+        <% else %>
+          Application pending completion
+        <% end %>
+      </div>
+
+      <div class="app-util--disabled-color">Ref. <%= c100_application.reference_code %></div>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,93 @@
+# Add court slugs to the block list if they do not want to take part in
+# the online service or to temporarily stop them from receiving applications.
+#
+blocklist:
+  - blocklisted-slug-example
+
+# Add court slugs to the centralisation list.
+# Currently centralisation is disabled for any court not in this list.
+#
+centralisation:
+  # First rollout - 02/03/2021
+  - brighton-county-court
+  - chelmsford-county-and-family-court
+  - leeds-combined-court-centre
+  - medway-county-court-and-family-court
+  - west-london-family-court
+  # Second rollout - 11/03/2021
+  - manchester-civil-justice-centre-civil-and-family-courts
+  # Third rollout - 23/03/2021
+  - slough-county-court-and-family-court
+  - norwich-combined-court-centre
+  - milton-keynes-county-court-and-family-court
+  - milton-keynes-magistrates-court-and-family-court
+  - peterborough-combined-court-centre
+  - staines-county-court-and-family-court
+  - watford-county-court-and-family-court
+  - guildford-county-court-and-family-court
+  - reading-county-court-and-family-court
+  - oxford-combined-court-centre
+  - oxford-and-southern-oxfordshire-magistrates-court
+  - luton-justice-centre
+  # 4th rollout - 22/04/2021
+  - carlisle-combined-court
+  - carlisle-magistrates-court
+  - barrow-in-furness-county-court-and-family-court
+  - preston-crown-court-and-family-court-sessions-house
+  # 5th rollout - 27/04/21
+  - central-family-court
+  # 6th rollout - 04/05/21
+  - kingston-upon-hull-combined-court-centre
+  - newcastle-civil-family-courts-and-tribunals-centre
+  - sheffield-combined-court-centre
+  - teesside-combined-court-centre
+  - middlesbrough-county-court-at-teesside-combined-court
+  - york-county-court-and-family-court
+  # 7th rollout - 11/05/21
+  - birmingham-civil-and-family-justice-centre
+  - coventry-combined-court-centre
+  - derby-combined-court-centre
+  - dudley-county-court-and-family-court
+  - east-london-family-court
+  - leicester-county-court-and-family-court
+  - lincoln-county-court-and-family-court
+  - northampton-crown-county-and-family-court
+  - nottingham-county-court-and-family-court
+  - stoke-on-trent-combined-court
+  - wolverhampton-combined-court-centre
+  - worcester-combined-court
+  - clerkenwell-and-shoreditch-county-court-and-family-court
+  # 8th rollout - 18/05/21
+  - barnstaple-magistrates-county-and-family-court
+  - basingstoke-county-court-and-family-court
+  - bournemouth-and-poole-county-court-and-family-court
+  - bristol-civil-and-family-justice-centre
+  - exeter-combined-court-centre
+  - exeter-law-courts
+  - gloucester-and-cheltenham-county-and-family-court
+  - plymouth-combined-court
+  - portsmouth-combined-court-centre
+  - southampton-combined-court-centre
+  - swindon-combined-court
+  - taunton-crown-county-and-family-court
+  - torquay-and-newton-abbot-county-court-and-family-court
+  - truro-county-court-and-family-court
+  - yeovil-county-family-and-magistrates-court
+  - liverpool-civil-and-family-court
+  - weymouth-combined-court
+  - isle-of-wight-combined-court
+  - northampton-magistrates-court
+  # 9th rollout - 25/05/21
+  - caernarfon-justice-centre
+  - caernarfon--justice-centre
+  - cardiff-civil-and-family-justice-centre
+  - carmarthen-county-court-and-family-court
+  - haverfordwest-county-court-and-family-court
+  - newport-south-wales-county-court-and-family-court
+  - swansea-civil-justice-centre
+  - wrexham-county-and-family-court
+  - wrexham-county-and-family--court
+  - bedford-county-court-and-family-court
+  - canterbury-combined-court-centre
+  - hertford-county-court-and-family-court
+  - high-wycombe-magistrates-court-and-family-court

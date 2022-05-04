@@ -1,0 +1,35 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: @form_object.record.full_name %></h1>
+
+    <div class="govuk-inset-text"><p><%=t '.body_info' %></p></div>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_email_field :email,
+                              form_group: { classes: ['app-util--compact-form-group'] } %>
+      
+      <%= f.govuk_check_boxes_fieldset :email_unknown, multiple: false, small: true, legend: { tag: 'span', size: 's', hidden: true } do %>
+        <%= f.govuk_check_box :email_unknown, true, false, multiple: false %>
+      <% end %>
+
+      <%= f.govuk_phone_field :home_phone, width: 'one-half',
+                              form_group: { classes: ['app-util--compact-form-group'] } %>
+      <%= f.govuk_check_boxes_fieldset :home_phone_unknown, multiple: false, small: true, legend: { tag: 'span', size: 's', hidden: true } do %>
+        <%= f.govuk_check_box :home_phone_unknown, true, false, multiple: false %>
+      <% end %>
+
+      <%= f.govuk_phone_field :mobile_phone, width: 'one-half',
+                              form_group: { classes: ['app-util--compact-form-group'] } %>
+      <%= f.govuk_check_boxes_fieldset :mobile_phone_unknown, multiple: false, small: true, legend: { tag: 'span', size: 's', hidden: true } do %>
+        <%= f.govuk_check_box :mobile_phone_unknown, true, false, multiple: false %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

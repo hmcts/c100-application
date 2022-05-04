@@ -1,0 +1,7 @@
+<% if section.show_header? %>
+  <h3 class="section-header"><%=t "check_answers.sections.#{section.name}" %></h3>
+<% end %>
+
+<table id="<%= section.name %>">
+  <%= render section.answers %>
+</table>

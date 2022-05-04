@@ -1,0 +1,52 @@
+<% title 'Collaborative law' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-l">Alternative ways to reach an agreement</span>
+    <h1 class="govuk-heading-xl">Collaborative law</h1>
+
+    <p class="govuk-body">Collaborative lawyers work with you and the other parent to resolve your issues out of court. You each hire a lawyer then all meet to negotiate face-to-face.</p>
+    <p class="govuk-body">The collaborative process involves several steps but is usually quicker and cheaper than going to court.</p>
+    <p class="govuk-body">Collaborative law is suitable for people who can still communicate with each other but may have complex legal issues to resolve.</p>
+
+    <p class="govuk-body">
+      <a href="https://helpwithchildarrangements.service.justice.gov.uk/collaborative-law" class="govuk-link" rel="external" target="_blank">
+        Find out more about collaborative law
+      </a>
+    </p>
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <div class="app-sidebar-blue-bar"></div>
+    <div class="app-sidebar-grey govuk-!-padding-3">
+      <h2 class="govuk-heading-m">Pros</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--pros">everyone is committed to not going to court</li>
+        <li class="app-list--item--pros">quicker and less stressful than court</li>
+        <li class="app-list--item--pros">you and the other parent set the agenda</li>
+        <li class="app-list--item--pros">lawyers are present throughout</li>
+        <li class="app-list--item--pros">good for the children to see their parents working together</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">Cons</h2>
+
+      <ul class="govuk-list app-list--pros-cons">
+        <li class="app-list--item--cons">can be an expensive process</li>
+        <li class="app-list--item--cons">won’t work unless you can trust the other parent and co-operate with them</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :alternative_collaborative_law, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

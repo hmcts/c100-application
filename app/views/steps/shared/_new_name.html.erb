@@ -1,0 +1,8 @@
+<%= names_form.govuk_fieldset legend: { text: t('.fieldset_legend'), tag: 'span', size: 'm' } do %>
+  <%= names_form.govuk_text_field :new_first_name, width: 'one-half', autocomplete: 'off' %>
+  <%= names_form.govuk_text_field :new_last_name, width: 'one-half', autocomplete: 'off' %>
+
+  <%= names_form.button button_text, type: :submit, value: :add_another_name,
+                        class: %w(govuk-button govuk-button--secondary govuk-!-margin-bottom-8),
+                        data: { module: 'govuk-button' } %>
+<% end %>

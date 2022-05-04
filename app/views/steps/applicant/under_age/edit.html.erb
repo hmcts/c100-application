@@ -1,0 +1,43 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l">
+      <%
+        litigation_url = link_to(
+          'litigation friend',
+          'https://www.gov.uk/litigation-friend',
+          target: :_blank,
+          rel: :external,
+          class: 'govuk-link'
+        )
+      %>
+      <%= t('.lead_text_html', litigation_url: litigation_url) %>
+    </p>
+
+    <p class="govuk-body">
+      <%
+        court_and_tribunal_finder_url = link_to(
+          'Court and tribunal finder',
+          @court.url,
+          target: :_blank,
+          rel: :external,
+          class: 'govuk-link'
+        )
+      %>
+      <%= t('.court_and_tribunal_html', court_name: @court.name, court_and_tribunal_finder_url: court_and_tribunal_finder_url) %>
+   </p>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_check_boxes_fieldset :under_age, multiple: false, legend: { tag: 'span', size: 's', hidden: true } do %>
+        <%= f.govuk_check_box :under_age, true, false, multiple: false, link_errors: true %>
+      <% end %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

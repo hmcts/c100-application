@@ -1,0 +1,89 @@
+<% title 'MIAM Requirement' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl">Attending a Mediation Information and Assessment Meeting (MIAM)</h1>
+
+    <p class="govuk-body-l">
+      Before completing this application you’re legally required to attend a Mediation Information and Assessment
+      Meeting (<abbr title="Mediation Information and Assessment Meeting">MIAM</abbr>), unless
+      <a href="/about/miam_exemptions" class="govuk-link" target="_blank">you’re exempt</a>.
+    </p>
+
+    <p class="govuk-body">
+      A <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> is an initial meeting where you'll be
+      given information about
+      <a href="https://helpwithchildarrangements.service.justice.gov.uk/professional-mediation" class="govuk-link" rel="external" target="_blank">mediation</a>
+      and alternative ways of reaching an agreement without going to court. A mediator will consider with you whether
+      these other ways are suitable in your case.
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://www.gov.uk/check-legal-aid" class="govuk-link" rel="external" target="_blank">Check if you’re
+        eligible for legal aid during mediation</a>
+    </p>
+
+    <div class="govuk-inset-text">
+      A <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> is a one-off meeting and not the same as
+      mediation.
+    </div>
+
+    <h2 class="govuk-heading-l">
+      What happens at a <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr>
+    </h2>
+
+    <p class="govuk-body">
+      At the <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> a mediator will explain:
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>how mediation works</li>
+      <li>the benefits of mediation</li>
+      <li>whether mediation is right for you</li>
+      <li>the likely costs</li>
+      <li>if you may qualify for help with the costs of mediation and legal advice</li>
+      <li>other options you could use to help you reach an agreement</li>
+    </ul>
+
+    <p class="govuk-body">
+      <a href="https://www.familymediationcouncil.org.uk/find-local-mediator/" class="govuk-link" rel="external" target="_blank">Find
+        a mediator to book a <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr></a>
+    </p>
+
+    <h2 class="govuk-heading-l">
+      If you’ve already attended a <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr>
+    </h2>
+
+    <p class="govuk-body">
+      You should have a document signed by the mediator confirming this. You need to bring this document to your first hearing.
+    </p>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :mediation_voucher_scheme, GenericYesNo.values, :value, nil, legend: { text: 'Have you previously been to mediation through the mediation voucher scheme?', size: 'm' } %>
+
+      <h2 class="govuk-heading-l">
+        When you don’t have to attend a <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr>
+      </h2>
+
+      <p class="govuk-body">
+        You don’t have to attend a <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> if you have a
+        valid reason. For example you or the children are at risk of harm.
+      </p>
+
+      <p class="govuk-body govuk-!-margin-bottom-8">
+        <a href="/about/miam_exemptions" class="govuk-link" target="_blank">List of valid reasons for not attending a
+          <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr></a>
+      </p>
+
+      <%=
+        f.govuk_check_boxes_fieldset :miam_acknowledgement, multiple: false, legend: { tag: 'span', size: 's' } do
+          f.govuk_check_box(:miam_acknowledgement, true, false, multiple: false, link_errors: true)
+        end
+      %>
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

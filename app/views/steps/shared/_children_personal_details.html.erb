@@ -1,0 +1,17 @@
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading', name: form_object.record.full_name %></h1>
+
+    <%= step_form form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= render partial: 'steps/shared/dob_form_element', locals: { form_object: f } %>
+
+      <%= f.govuk_collection_radio_buttons :gender, Gender.values, :value, nil, legend: { tag: 'span', size: 'm' } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

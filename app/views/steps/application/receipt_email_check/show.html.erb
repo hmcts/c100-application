@@ -1,0 +1,23 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <div class="govuk-inset-text">
+      <span class="govuk-!-font-size-27 govuk-!-font-weight-bold">
+        <%= current_c100_application.receipt_email %>
+      </span>
+    </div>
+
+    <p class="govuk-body govuk-!-margin-bottom-6"><%=t '.email_info' %></p>
+
+    <div class="govuk-button-group govuk-!-margin-top-6">
+      <%= link_button t('.continue'), edit_steps_application_payment_path %>
+
+      <%= link_to t('.go_back'), edit_steps_application_submission_path, class: 'govuk-link govuk-link--no-visited-state govuk-!-font-size-19 ga-pageLink',
+                  data: { ga_category: 'receipt email address', ga_label: 'change email' } %>
+    </div>
+  </div>
+</div>

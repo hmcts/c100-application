@@ -1,0 +1,17 @@
+<% if failure.address %>
+  <tr class="govuk-table__row">
+    <td colspan="5" class="govuk-table__cell govuk-!-padding-bottom-0 govuk-!-padding-top-4 no-border">
+      <strong>Recipient:</strong> <%= failure.address %>
+    </td>
+  </tr>
+<% end %>
+
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell"><%= failure.sent_at %></td>
+  <td class="govuk-table__cell"><%= failure.reference %></td>
+  <td class="govuk-table__cell"><%= failure.type %></td>
+  <td class="govuk-table__cell"><%= failure.error %></td>
+  <td class="govuk-table__cell govuk-!-padding-top-1">
+    <%= button_to 'Resend email', backoffice_email_resend_path(failure.record, type: failure.type), method: :put, data: { confirm: 'Are you sure?' }, class: 'govuk-button' %>
+  </td>
+</tr>

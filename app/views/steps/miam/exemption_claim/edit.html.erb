@@ -1,0 +1,22 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :miam_exemption_claim, GenericYesNo.values, :value, nil do %>
+        <p class="govuk-body-l">
+          <%=t '.lead_text_html' %>
+        </p>
+
+        <div class="govuk-inset-text">
+          <%=t '.info_notice' %>
+        </div>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

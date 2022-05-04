@@ -1,0 +1,33 @@
+<% title t('.page_title') %>
+<% step_header(path: url_for(:back)) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <!-- Not using `govuk_error_summary` here. This view uses flash[:alert] from Devise -->
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l">
+      <%=t '.account_purge_info', expire_in_days: Rails.configuration.x.users.expire_in_days %>
+    </p>
+
+    <%#
+      Using `as: 'user_signin'` so we can customise the i18n labels (and password hint),
+      to be different in this form. Because of this, we also need to specify the `name`,
+      otherwise it would become `user_signin[email] and user_signin[password]`
+    %>
+    <%= form_for(resource, as: 'user_signin', url: user_session_path,
+                 html: { class: 'ga-submitForm', data: { ga_category: 'save and return', ga_label: 'login' } },
+                 builder: GOVUKDesignSystemFormBuilder::FormBuilder) do |f| %>
+
+      <%= f.govuk_email_field :email, name: 'user[email]', width: 'two-thirds', autocomplete: 'email', spellcheck: 'false', autofocus: true %>
+      <%= f.govuk_password_field :password, name: 'user[password]', width: 'two-thirds', autocomplete: 'current-password', spellcheck: 'false' %>
+
+      <%= f.govuk_submit t('helpers.submit.sign_in') %>
+    <% end %>
+
+    <p class="govuk-body">
+      <%= link_to t('.forgot_password'), new_user_password_path, class: 'govuk-link' %>
+    </p>
+  </div>
+</div>

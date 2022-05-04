@@ -1,0 +1,21 @@
+<% if form_object.object.respond_to?(:dob_unknown) %>
+
+  <%= form_object.govuk_date_field :dob, legend: { tag: 'span', size: 'm' },
+                                   form_group: { classes: ['app-util--compact-form-group dob'] } %>
+
+  <%= form_object.govuk_check_boxes_fieldset :dob_unknown, multiple: false, small: true, legend: { tag: 'span', size: 's', hidden: true } do %>
+    <%= form_object.govuk_check_box :dob_unknown, true, false, multiple: false do
+      form_object.govuk_date_field :dob_estimate, class: 'govuk-form-group dob',
+        legend: { size: 's', text: 'Approximate date of birth', class: 'govuk-fieldset__legend govuk-fieldset__legend--s approx-dob-label' }
+    end %>
+  <% end %>
+
+<% else %>
+
+  <!-- Add custom label text if one is provided -->
+  <% legend = { tag: 'span', size: 'm' } %>
+  <% legend[:text] = text if local_assigns[:text] && text.present? %>
+
+  <%= form_object.govuk_date_field :dob, legend: legend %>
+
+<% end %>

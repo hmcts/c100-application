@@ -1,0 +1,30 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :research_consent do %>
+        <%= f.govuk_radio_button :research_consent, GenericYesNo::YES, link_errors: true do %>
+          <%= f.govuk_email_field :research_consent_email, width: 'three-quarters', autocomplete: 'email', spellcheck: 'false' %>
+        <% end  %>
+        <%= f.govuk_radio_button :research_consent, GenericYesNo::NO %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="research consent">
+          <%=t '.details.summary' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t '.details.text_html' %>
+      </div>
+    </details>
+  </div>
+</div>

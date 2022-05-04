@@ -1,0 +1,49 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<% record = @form_object.record %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl">
+      <%=t '.heading', name: record.full_name %>
+    </h1>
+
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+      <%=t '.current_postcode' %>
+    </h2>
+
+    <p class="govuk-body">
+      <strong><%= record.postcode %></strong>
+      <%= link_to t('.change_postcode'), edit_steps_address_lookup_path(record), class: 'govuk-link govuk-!-margin-left-6' %>
+    </p>
+
+    <% if @addresses.any? %>
+      <%
+        # Add the number of results as the first element of the collection. This forces the user
+        # to select something instead of just clicking continue with the first address preselected.
+        @addresses.unshift(
+          C100App::AddressLookupService.results_select_option(@addresses)
+        )
+      %>
+
+      <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+        <%= f.govuk_collection_select :selected_address, @addresses, :tokenized_value, :address_lines %>
+
+        <p class="govuk-body govuk-!-margin-bottom-8">
+          <%= link_to t('.address_not_listed'), person_url_for(record, step: :address_details),
+                      class: 'govuk-link ga-pageLink', data: { ga_category: 'address lookup', ga_label: 'address not listed' } %>
+        </p>
+
+        <%= f.continue_button %>
+      <% end %>
+
+    <% else %>
+      <%= render partial: 'steps/address/results/no_results', locals: {
+        successful_lookup: @successful_lookup, record: record
+      } %>
+    <% end %>
+  </div>
+</div>

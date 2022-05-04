@@ -1,0 +1,26 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_radio_buttons_fieldset :children_known_to_authorities, legend: { tag: 'span', size: 'm' } do %>
+        <%= f.govuk_radio_button :children_known_to_authorities, GenericYesNoUnknown::YES, link_errors: true do
+          f.govuk_text_area :children_known_to_authorities_details
+        end %>
+
+        <%= f.govuk_radio_button :children_known_to_authorities, GenericYesNoUnknown::NO %>
+        <%= f.govuk_radio_button :children_known_to_authorities, GenericYesNoUnknown::UNKNOWN %>
+      <% end %>
+
+      <%= f.govuk_collection_radio_buttons :children_protection_plan, GenericYesNoUnknown.values, :value, nil,
+                                           legend: { tag: 'span', size: 'm' } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

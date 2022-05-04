@@ -1,0 +1,15 @@
+en:
+  backoffice:
+    permission_sought:
+      'yes': Already applied
+      'no': Seeking permission
+      not_required: Not required
+    submission:
+      online: Online
+      print_and_post: Print & Post
+    payment:
+      online: Online
+      help_with_fees: HWF
+      solicitor: Fee account
+      self_payment_card: Phone
+      self_payment_cheque: Cheque/cash

@@ -1,0 +1,7 @@
+// https://frontend.design-system.service.gov.uk/supporting-ie8
+//
+// HTML5 shiv in `vendor/assets/javascripts/html5shiv-printshiv.js`
+// https://github.com/aFarkas/html5shiv
+
+$govuk-is-ie8: true;
+@import "application";

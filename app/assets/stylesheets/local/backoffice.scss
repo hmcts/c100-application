@@ -1,0 +1,47 @@
+table.backoffice-table {
+  margin-top: 30px;
+
+  td {
+    font-size: 90%;
+  }
+  div.govuk-details__text {
+    font-size: 85%;
+  }
+  td.no-border {
+    border: 0;
+  }
+}
+
+div.backoffice-extra-details {
+  margin-top: 0;
+
+  dl {
+    margin-bottom: 0;
+  }
+  dt {
+    font-size: 1rem;
+  }
+  dd {
+    font-size: 1rem;
+  }
+}
+
+// Used to tag with colors the different payment statuses
+.app-tag--created,
+.app-tag--started {
+  @extend .govuk-tag--grey;
+}
+
+.app-tag--submitted {
+  @extend .govuk-tag--yellow;
+}
+
+.app-tag--success {
+  @extend .govuk-tag--green;
+}
+
+.app-tag--failed,
+.app-tag--cancelled,
+.app-tag--error {
+  @extend .govuk-tag--red;
+}

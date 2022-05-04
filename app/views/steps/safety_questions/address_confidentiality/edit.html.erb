@@ -1,0 +1,19 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%=t '.lead_text_html' %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :address_confidentiality, GenericYesNo.values, :value, nil, legend: { tag: 'span', size: 's' } %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

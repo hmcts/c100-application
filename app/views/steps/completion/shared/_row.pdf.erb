@@ -1,0 +1,9 @@
+<tr id="<%= row.question %>">
+  <td class="question">
+    <%=t "check_answers.#{row.question}.question", row.i18n_opts %>
+  </td>
+
+  <td class="answer answer-value">
+    <%=t "check_answers.#{row.question}.answers.#{row.value}" %>
+  </td>
+</tr>

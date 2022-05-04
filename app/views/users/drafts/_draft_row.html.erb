@@ -1,0 +1,31 @@
+<tr class="govuk-table__row <%= draft.expires_in_class %>">
+  <td class="govuk-table__header timeliness app-util--no-wrap">
+    <%= draft.expires_in %>
+  </td>
+
+  <td class="govuk-table__cell">
+    <% if draft.applicant_name.present? %>
+      <%= draft.applicant_name %>
+    <% else %>
+      <span class="app-util--disabled-color"><%=t '.name_not_entered' %></span>
+    <% end %>
+  </td>
+
+  <td class="govuk-table__cell govuk-table__cell--numeric app-util--inline-buttons">
+    <% if draft.completed? %>
+      <% if draft.online_submission? %>
+        <%= link_to t('.application_submitted'), resume_users_draft_path(draft), class: 'govuk-link ga-pageLink', data: { ga_category: 'save and return', ga_label: 'confirmation' } %>
+      <% else %>
+        <%= link_to t('.how_to_submit'), resume_users_draft_path(draft), class: 'govuk-link ga-pageLink', data: { ga_category: 'save and return', ga_label: 'how to submit' } %>
+      <% end %>
+    <% else %>
+      <%= link_button t('.resume'), resume_users_draft_path(draft),
+                      class: 'ga-pageLink',
+                      data: { module: 'govuk-button', ga_category: 'save and return', ga_label: 'resume application' } %>
+
+      <%= button_to t('.delete'), users_draft_path(draft), method: :delete,
+                    class: 'govuk-button govuk-button--warning',
+                    data: { module: 'govuk-button', confirm: t('.delete_confirmation') } %>
+    <% end %>
+  </td>
+</tr>

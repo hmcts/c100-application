@@ -1,0 +1,47 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%= t '.lead_text' %></p>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_check_boxes_fieldset :domestic, legend: { tag: 'span', size: 'm' } do %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_POLICE.to_s, link_errors: true do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::POLICE, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_COURT.to_s do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::COURT, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_SPECIALIST.to_s do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::SPECIALIST, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_LOCAL_AUTHORITY.to_s do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::LOCAL_AUTHORITY, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::GROUP_DA_SERVICE.to_s do %>
+          <%= f.govuk_collection_check_boxes :exemptions_collection, DomesticExemptions::DA_SERVICE, :to_s, :to_s, legend: nil %>
+        <% end %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::RIGHT_TO_REMAIN.to_s %>
+        <%= f.govuk_check_box :domestic, DomesticExemptions::FINANCIAL_ABUSE.to_s %>
+
+        <%= f.govuk_radio_divider %>
+
+        <%= f.govuk_check_box :domestic, DomesticExemptions::DOMESTIC_NONE.to_s %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

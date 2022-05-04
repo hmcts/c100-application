@@ -1,0 +1,37 @@
+<% title 'The children’s safety' %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl">Safety concerns</span>
+    <h1 class="govuk-heading-xl">The children’s safety</h1>
+
+    <p class="govuk-body">
+      The court needs to know if any of the other people in this application, or anyone connected to them who has
+      contact with the children, poses a risk to the safety of the children.
+    </p>
+
+    <p class="govuk-body">
+      The following questions will ask whether the children have experienced, or are at risk of experiencing, any form
+      of harm.
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://www.nspcc.org.uk/preventing-abuse/child-abuse-and-neglect/" class="govuk-link" rel="external" target="_blank">Find
+        out about the signs of child abuse</a>
+    </p>
+
+    <%= link_button 'Continue', edit_steps_abuse_concerns_question_path %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="children abuse info">
+          <%=t 'shared.cafcass.safety_title' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t 'shared.cafcass.safety_content_html' %>
+      </div>
+    </details>
+  </div>
+</div>

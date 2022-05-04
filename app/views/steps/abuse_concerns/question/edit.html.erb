@@ -1,0 +1,19 @@
+<% title t(".page_title.#{@form_object.i18n_key}") %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.hidden_field :subject %>
+      <%= f.hidden_field :kind %>
+
+      <%= f.govuk_collection_radio_buttons :answer, GenericYesNo.values, :value, nil, legend: { text: t(".heading.#{@form_object.i18n_key}") } do %>
+        <%=t ".lead_text.#{@form_object.i18n_key}_html" %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

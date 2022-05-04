@@ -1,0 +1,783 @@
+en:
+  dictionary:
+    to_be_completed: &to_be_completed "To be completed by the court"
+    not_applicable: &not_applicable "[Not applicable in this case]"
+    not_required: &not_required "[Not required]"
+    c8_attached: &c8_attached "[See C8]"
+    none_selected: &none_selected "[None selected]"
+    not_needed: &not_needed "Not needed"
+    unknown: &unknown "Don't know"
+    details: &details "Details:"
+
+    YESNO: &YESNO
+      'yes': 'Yes'
+      'no': 'No'
+      unknown: *unknown
+
+    SEX_OPTIONS: &SEX_OPTIONS
+      female: Female
+      male: Male
+      unspecified: Unspecified
+
+    RELATIONS: &RELATIONS
+      mother: Mother
+      father: Father
+      guardian: Guardian
+      special_guardian: Special Guardian
+      grand_parent: Grandparent
+      other: Other
+
+    # Important: maintain these orders in sync with the rest of locale files
+    ARRANGEMENT_ORDERS: &ARRANGEMENT_ORDERS
+      child_arrangements_home: Decide who they live with and when
+      child_arrangements_time: Decide how much time they spend with each person
+    PROHIBITED_STEPS_ORDERS: &PROHIBITED_STEPS_ORDERS
+      prohibited_steps_moving: Relocating the children to a different area in England and Wales
+      prohibited_steps_moving_abroad: Relocating the children outside of England and Wales (including Scotland and Northern Ireland)
+      prohibited_steps_names: Changing their names or surname
+      prohibited_steps_medical: Allowing medical treatment to be carried out on them
+      prohibited_steps_holiday: Taking them on holiday
+    SPECIFIC_ISSUE_ORDERS: &SPECIFIC_ISSUE_ORDERS
+      specific_issues_holiday: A specific holiday or arrangement
+      specific_issues_school: What school they’ll go to
+      specific_issues_religion: A religious issue
+      specific_issues_names: Changing their names or surname
+      specific_issues_medical: Medical treatment
+      specific_issues_moving: Relocating the children to a different area in England and Wales
+      specific_issues_moving_abroad: Relocating the children outside of England and Wales (including Scotland and Northern Ireland)
+      specific_issues_child_return: Returning the children to your care
+    FORMALISE_ARRANGEMENTS: &FORMALISE_ARRANGEMENTS
+      consent_order: Consent order
+
+    PETITION_ORDER_TYPES: &PETITION_ORDER_TYPES
+      child_arrangements: Child Arrangements Order
+      prohibited_steps: Prohibited Steps Order
+      specific_issues: Specific Issue Order
+      consent_order: Consent order
+      other_issue: Other issue
+
+    # Note: this is duplicated in `locales/en.yml`, due to the way locales work
+    # (they don't see each other when they are in different files). If you change copy here,
+    # remember to also update it in `locales/en.yml`
+    COURT_ORDER_TYPES: &COURT_ORDER_TYPES
+      non_molestation: Non-molestation order
+      occupation: Occupation order
+      forced_marriage_protection: Forced marriage protection order
+      restraining: Restraining order
+      injunctive: Other injunctive order
+      undertaking: Undertaking in place of an order
+
+  shared:
+    admin_family_court: The family court sitting at
+    admin_case_number: Case number
+    admin_date_issued: Date issued (DD MM YYYY)
+    admin_orders_applied_for: Order(s) applied for
+    intentional_blank_page: This page intentionally left blank
+    c8_confidential_answer: *c8_attached
+    miam_exemptions_info: "The applicant has not attended a MIAM because the following exemption(s) applies:"
+    relationship_to_child:
+      show_person_html: "%{person_name} - %{relation} to %{child_name}"
+      hide_person_html: "%{relation} to %{child_name}"
+    statement_of_truth:
+      applicant_html: |
+        <p>%{signee_name} (applicant) believes that the facts stated in this application are true.</p>
+      representative_html: |
+        <p>The applicant believes that the facts stated in this application are true.</p>
+        <p>%{signee_name} (solicitor) has been given the authority to make this declaration.</p>
+      completed: Statement of truth has been completed electronically - no signature required
+      not_completed: Statement of truth to be completed - draft application
+
+  check_answers:
+    headers:
+      c100_form:
+        title: C100
+        details: Application under section 8 of the Children Act 1989 for a child arrangements, prohibited steps, specific issue order or to vary or discharge or ask permission to make a section 8 order
+      c1a_form:
+        title: C1A
+        details: Allegations of harm and domestic violence (Supplemental information form)
+      c8_form:
+        title: C8
+        details: Confidential contact details - Family Procedure Rules 2010 Rule 29.1
+    section_headers:
+      children: 1. The Child(ren)
+      miam_requirement: 2. Requirement to attend a Mediation, Information and Assessment Meeting (MIAM)
+      miam_exemptions: 3. Applicant claims exemption(s) from attendance at a Mediation, Information and Assessment Meeting (MIAM)
+      mediator_certification: 4. Mediator certifies that the prospective applicant is exempt from attendance at Mediation Information and Assessment Meeting (MIAM) or confirms MIAM attendance
+      application_reasons: 5. Why are you making this application?
+      urgent_and_without_notice: 6. Urgent and without notice hearings
+      other_court_cases: 7. Other court cases which concern the child(ren) listed in Section 1
+      international_element: 8. Cases with an international element
+      litigation_capacity: 9. Factors affecting ability to participate in proceedings
+      attending_court: 10. Attending the court
+      applicants_details: 11. About you (the applicant(s))
+      respondents_details: 12. The respondent(s)
+      other_parties_details: 13. Others who should be given notice
+      solicitor_details: 14. Solicitor’s details
+      statement_of_truth: 16. Statement of truth
+      ### C1A ###
+      c1a_applicants_details: Section 1 - About you (the person completing this form)
+      c1a_abuse_details: Section 2 - Details of domestic violence / abuse
+      c1a_abduction: Section 3 - Abduction
+      c1a_children_other_abuse: Section 4 - Other concerns about the child(ren)
+      c1a_protection_orders: Section 5 - Steps or orders required to protect the safety and wellbeing
+      c1a_statement_of_truth: Section 6 - Statement of truth
+      c1a_attending_court: Section 7 - Attending the court
+    sections:
+      ### C100 ###
+      c100_court_details: *to_be_completed
+      processing_details: Processing details (for court use only)
+      help_with_fees: Help with fees
+      applicant_respondent: Applicant and respondent
+      nature_of_application: Nature of application
+      risk_concerns: Concerns about risk of harm
+      additional_information: Additional information
+      children_details: Summary of children’s details
+      children_relationships: Children’s relationship with parties
+      permission_questions: Permission for non-parents to apply
+      urgent_hearing: Urgent hearing
+      without_notice_hearing: Without notice hearing
+      other_children_details: Other children not part of the application
+      court_fee: Court fee
+      ### C1A ###
+      c1a_court_details: *to_be_completed
+      c1a_children_details: Summary of children’s details
+      c1a_solicitor_details: Your solicitor’s details
+      c1a_applicant_abuse_summary: Abuse experienced by applicant
+      c1a_children_abuse_summary: Abuse experienced by children
+      c1a_court_orders: Previous or current orders
+      c1a_concerns_details: Short description of concerns and any relevant information
+      ### C8 ###
+      c8_court_details: *to_be_completed
+      c8_applicants_details: Applicant contact details to be kept private
+      c8_other_parties_details: Other parties contact details to be kept private
+    descriptions:
+      risk_concerns: Are you alleging that the applicant(s) or the child(ren) named in Section 1 of this form have experienced, or are at risk of experiencing, harm from any of the following by any person who has had contact with the child(ren)?
+      c1a_attached_html: <strong>C1A is attached at the end of this form</strong>
+      c8_attached_html: <strong>C8 has been generated separately</strong>
+    separators:
+      c8_attached: *c8_attached
+      not_applicable: *not_applicable
+      contact_details: Contact details
+      language_assistance: Language assistance
+      intermediary: Intermediary
+      special_arrangements: Special safety arrangements
+      special_assistance: Special assistance or facilities
+      child_index_title: Child %{index}
+      other_child_index_title: Other child %{index}
+      applicants_details_index_title: Applicant %{index}
+      respondents_details_index_title: Respondent %{index}
+      other_parties_details_index_title: Person %{index}
+      hmcts_instructions: "[Document to be provided at first court hearing]"
+      ### C8 ###
+      c8_applicants_details_index_title: Applicant %{index}
+      c8_other_parties_details_index_title: Person %{index}
+    court_name_and_code:
+      question: Court
+    completion_date:
+      question: Date
+    hwf_reference_number:
+      question: Reference number
+      absence_answer: *not_applicable
+    applicants_full_name:
+      question: Full name of applicant(s)
+    respondents_full_name:
+      question: Full name of respondent(s)
+    child_arrangements_orders:
+      question: 'Child arrangement order(s):'
+      answers:
+        <<: *ARRANGEMENT_ORDERS
+    specific_issues_orders:
+      question: 'Specific issue order(s):'
+      answers:
+        <<: *SPECIFIC_ISSUE_ORDERS
+    prohibited_steps_orders:
+      question: 'Prohibited steps order(s):'
+      answers:
+        <<: *PROHIBITED_STEPS_ORDERS
+    formalise_arrangements:
+      question: 'Formalise an agreement:'
+      answers:
+        <<: *FORMALISE_ARRANGEMENTS
+    other_issue_details:
+      question: 'Other issue:'
+    domestic_abuse:
+      question: Any form of domestic violence or abuse?
+      answers:
+        <<: *YESNO
+    children_abduction:
+      question: Child abduction?
+      answers:
+        <<: *YESNO
+    children_abuse:
+      question: Child abuse?
+      answers:
+        <<: *YESNO
+    substance_abuse:
+      question: Drugs, alcohol or substance abuse?
+      answers:
+        <<: *YESNO
+    other_concerns:
+      question: Other safety or welfare concerns?
+      answers:
+        <<: *YESNO
+
+    asking_for_permission:
+      question: Asking for permission to make this application, where that is required?
+      answers:
+        # Note: the stored yes-no values here correspond to the question:
+        # `Have you already applied to the court for permission to make this application?`
+        # so a `no` = `permission now sought`, and a `yes` or `nil` = `not required`
+        not_required: 'No'
+        'yes': 'No'
+        'no': 'Yes'
+    urgent_or_without_notice:
+      question: An urgent hearing or without notice hearing required?
+      answers:
+        <<: *YESNO
+    children_previous_proceedings:
+      question: Previous or ongoing proceedings for the child(ren)?
+      answers:
+        <<: *YESNO
+    consent_order:
+      question: Applying for an order to formalise an agreement (consent order)?
+      answers:
+        <<: *YESNO
+    international_element_case:
+      question: Case with an international element?
+      answers:
+        <<: *YESNO
+    litigation_capacity_case:
+      question: Case with factors affecting litigation capacity?
+      answers:
+        <<: *YESNO
+    language_assistance:
+      question: Child or people involved need language assistance during the course of the proceedings?
+      answers:
+        <<: *YESNO
+
+    international_resident:
+      question: Do you have any reason to believe that any child, parent or potentially significant adult in the child’s life may be habitually resident in another state?
+      answers:
+        <<: *YESNO
+    international_resident_details:
+      question: *details
+    international_jurisdiction:
+      question: Do you have any reason to believe that there may be an issue as to jurisdiction in this case?
+      answers:
+        <<: *YESNO
+    international_jurisdiction_details:
+      question: *details
+    international_request:
+      question: Has a request been made or should a request be made to a Central Authority or other competent authority in a foreign state or a consular authority in England and Wales?
+      answers:
+        <<: *YESNO
+    international_request_details:
+      question: *details
+
+    child_full_name:
+      question: Full name
+    child_dob:
+      question: Date of birth
+    child_age_estimate:
+      question: Approximate age or year born
+    child_dob_estimate:
+      question: Approximate date of birth
+    child_sex:
+      question: Sex
+      answers:
+        <<: *SEX_OPTIONS
+    child_applicants_relationship:
+      question: Applicant(s) relationship to child
+      answers:
+        <<: *RELATIONS
+    child_respondents_relationship:
+      question: Respondent(s) relationship to child
+      answers:
+        <<: *RELATIONS
+    child_orders:
+      question: Order(s) applied for
+      answers:
+        <<: *PETITION_ORDER_TYPES
+    children_known_to_authorities:
+      question: Are any of the children known to the local authority children’s services?
+      answers:
+        <<: *YESNO
+    children_known_to_authorities_details:
+      question: Child name and local authority worker
+    children_protection_plan:
+      question: Are any of the children the subject of a child protection plan?
+      answers:
+        <<: *YESNO
+    special_guardianship_order:
+      question: Special Guardianship Order in force?
+      answers:
+        <<: *YESNO
+    applicants_relationships:
+      question: Applicant %{index}
+      absence_answer: ''
+    respondents_relationships:
+      question: Respondent %{index}
+      absence_answer: ''
+    other_parties_relationships:
+      question: Other party %{index}
+      absence_answer: ''
+
+    # BEGIN - Non-parents permission questions
+    # NOTE: these should match the heading locales in the `en.yml` file
+    child_permission_parental_responsibility:
+      question: "Has %{applicant_name} ever been married to or in a civil partnership with %{child_name}’s parent and do they have parental responsibility?"
+      answers:
+        <<: *YESNO
+    child_permission_living_order:
+      question: "Is %{applicant_name} named in a current child arrangements order as someone who %{child_name} should live with?"
+      answers:
+        <<: *YESNO
+    child_permission_amendment:
+      question: "Is %{applicant_name} applying to change or end (discharge) an existing court order?"
+      answers:
+        <<: *YESNO
+    child_permission_time_order:
+      question: "Was %{applicant_name} named in an order about who %{child_name} should spend time with or when that should happen?"
+      answers:
+        <<: *YESNO
+    child_permission_living_arrangement:
+      question: "Has %{child_name} lived with %{applicant_name} for at least 3 years?"
+      answers:
+        <<: *YESNO
+    child_permission_consent:
+      question: "Does %{applicant_name} have everyone’s consent to make this application?"
+      answers:
+        <<: *YESNO
+    child_permission_family:
+      question: "Is %{applicant_name} married or in a civil partnership with %{child_name}’s parent and is the child treated as part of their family?"
+      answers:
+        <<: *YESNO
+    child_permission_local_authority:
+      question: "If %{child_name} is being cared for by the Local Authority, does %{applicant_name} have the Local Authority’s consent to make this application?"
+      answers:
+        <<: *YESNO
+    child_permission_relative:
+      question: "Is %{applicant_name} a foster parent or relative of %{child_name}, and has %{child_name} been living with them for at least one year?"
+      answers:
+        <<: *YESNO
+    # END - Non-parents permission questions
+
+    children_residence:
+      question: Who do the children currently live with?
+      answers:
+        Applicant: Applicant
+        Respondent: Respondent
+        OtherParty: Other
+    miam_consent_order:
+      question: Are you applying for a consent order?
+      answers:
+        'yes': Yes - MIAM not required
+        'no': 'No'
+    miam_child_protection:
+      question: "Current or previous proceedings: are/were any of those cases about an emergency protection, care or supervision order?"
+      answers:
+        'yes': Yes - MIAM not required
+        'no': 'No'
+    miam_exemption_claim:
+      question: Are you claiming exemption from the requirement to attend a MIAM?
+      answers:
+        <<: *YESNO
+        not_applicable: *not_applicable
+    miam_certificate_received:
+      question: Have you got a signed document from the mediator?
+      answers:
+        <<: *YESNO
+        not_applicable: *not_applicable
+    miam_mediator_exemption:
+      question: Has a family mediator informed you that a mediator’s exemption applies, and you do not need to attend a MIAM?
+      answers:
+        <<: *YESNO
+        not_applicable: *not_applicable
+    miam_attended:
+      question: Have you attended a MIAM?
+      answers:
+        <<: *YESNO
+        not_applicable: *not_applicable
+    miam_certification_number:
+      question: FMC registration no
+    miam_certification_service_name:
+      question: Family mediation service name
+    miam_certification_sole_trader_name:
+      question: Sole trader name
+    miam_certification_date:
+      question: Date
+    permission_sought:
+      question: Have you applied to the court for permission to make this application?
+      answers:
+        'yes': 'Yes'
+        'no': No - permission now sought
+        not_required: No - permission not required
+    permission_details:
+      question: Reasons for permission
+    application_details:
+      question: Reasons for application
+
+    urgent_hearing:
+      question: *details
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    urgent_hearing_details:
+      question: Give details of why you’re asking for an urgent hearing
+    urgent_hearing_when:
+      question: How soon do you need an urgent hearing?
+    urgent_hearing_short_notice:
+      question: Do you need a hearing within the next 48 hours?
+      answers:
+        <<: *YESNO
+    urgent_hearing_short_notice_details:
+      question: What have you done to tell each respondent of this application?
+
+    without_notice_hearing_details:
+      question: *details
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    without_notice_details:
+      question: Reasons for the application to be considered without notice
+    without_notice_impossible:
+      question: Are you asking for a without notice hearing because there is literally no time to give notice of the application to the other person or people?
+      answers:
+        <<: *YESNO
+    without_notice_impossible_details:
+      question: ''
+    without_notice_frustrate:
+      question: Are you asking for a without notice hearing because the other person may do something that obstructs this application if they knew about it?
+      answers:
+        <<: *YESNO
+    without_notice_frustrate_details:
+      question: ''
+
+    reduced_litigation_capacity:
+      question: *details
+      answers:
+        'yes': ''
+        'no': *not_applicable
+    participation_capacity_details:
+      question: Details of any adult in this application who lacks the mental capacity to conduct these court proceedings
+    participation_other_factors_details:
+      question: Details of anything else that could affect any adult in this application taking part in these court proceedings
+    participation_referral_or_assessment_details:
+      question: Details of anyone in this application who has been referred to or assessed by an Adult Learning Disability team or any adult health service and what the outcome was
+
+    intermediary_help:
+      question: Are you aware of whether an intermediary will be required?
+      answers:
+        <<: *YESNO
+    intermediary_help_details:
+      question: *details
+
+    language_interpreter:
+      question: Interpreter
+      answers:
+        'true': 'Yes'
+        'false': *not_needed
+    sign_language_interpreter:
+      question: Sign language interpreter
+      answers:
+        'true': 'Yes'
+        'false': *not_needed
+    welsh_language:
+      question: Welsh language
+      answers:
+        'true': 'Yes'
+        'false': *not_needed
+    language_interpreter_details:
+      question: *details
+    sign_language_interpreter_details:
+      question: *details
+    welsh_language_details:
+      question: *details
+
+    special_arrangements:
+      question: Special arrangements for applicant or relevant children to attend court
+      absence_answer: *not_needed
+      answers:
+        separate_waiting_rooms: Separate waiting rooms
+        separate_entrance_exit: Separate exits and entrances
+        protective_screens: Protective screens
+        video_link: Video links
+    special_arrangements_details:
+      question: *details
+
+    special_assistance:
+      question: Assistance or special facilities required for applicant or any of the parties
+      absence_answer: *not_needed
+      answers:
+        hearing_loop: A hearing loop
+        braille_documents: Documents in Braille
+        advance_court_viewing: Advance viewing of the court
+        other_assistance: Other assistance or facilities
+    special_assistance_details:
+      question: *details
+
+    person_full_name:
+      question: Full name
+    person_previous_name:
+      question: Previous name
+      answers:
+        <<: *YESNO
+    person_sex:
+      question: Sex
+      answers:
+        <<: *SEX_OPTIONS
+    person_dob:
+      question: Date of birth
+    person_age_estimate:
+      question: Approximate age or year born
+    person_dob_estimate:
+      question: Approximate date of birth
+    person_birthplace:
+      question: Place of birth
+      absence_answer: I don't know their place of birth
+    person_address:
+      question: Address
+      absence_answer: *unknown
+    person_residence_requirement_met:
+      question: Lived at this address for more than 5 years?
+      answers:
+        <<: *YESNO
+    residence_keep_private:
+      question: Keep the address private?
+      answers:
+        <<: *YESNO
+    person_residence_history:
+      question: Previous addresses
+    person_home_phone:
+      question: Home telephone number
+      absence_answer: I don't know their home phone number
+    person_mobile_phone:
+      question: Mobile telephone number
+      absence_answer: I don't know their mobile number
+    person_email:
+      question: Email address
+      absence_answer: I don't know their email
+    email_keep_private:
+      question: Keep the email address private
+      answers:
+        <<: *YESNO
+    phone_keep_private:
+      question: Keep the home phone number private
+      answers:
+        <<: *YESNO
+    mobile_keep_private:
+      question: Keep the mobile phone number private
+      answers:
+        <<: *YESNO
+    person_voicemail_consent:
+      question: Allow voicemail?
+      answers:
+        'yes': Yes, the court can leave a voicemail
+        'no': No, the court cannot leave a voicemail
+    person_relationship_to_children:
+      question: Relationship to children listed in this application
+
+    # Note: the solicitor i18n is shared among the C100 and C1A forms.
+    has_solicitor:
+      question: Is a solicitor acting for you?
+      answers:
+        <<: *YESNO
+    solicitor_full_name:
+      question: Solicitor’s name
+    solicitor_firm_name:
+      question: Name of firm
+    solicitor_address:
+      question: Address
+    solicitor_phone_number:
+      question: Telephone number
+    solicitor_fax_number:
+      question: Fax number
+    solicitor_dx_number:
+      question: DX number
+    solicitor_reference:
+      question: Solicitor’s reference
+    solicitor_fee_account:
+      question: Fee account number
+      absence_answer: *not_applicable
+    solicitor_email:
+      question: Email address
+
+    court_proceeding_children_names:
+      question: Name of child(ren)
+    court_proceeding_court_name:
+      question: Name of court where proceedings were heard
+    court_proceeding_case_number:
+      question: Case number
+    court_proceeding_proceedings_date:
+      question: Date/year
+    court_proceeding_cafcass_details:
+      question: Name and office of Cafcass/Cafcass Cymru officer
+    court_proceeding_order_types:
+      question: Type of proceedings - if known
+    court_proceeding_previous_details:
+      question: Details of any other previous family case
+    payment_type:
+      question: Payment option selected
+      answers:
+        online: Online payment
+        help_with_fees: Help with fees
+        solicitor: Through solicitor
+        self_payment_card: Over the phone - contact the applicant within 3 working days of receiving the application to take payment
+        self_payment_cheque: Cheque or cash
+    solicitor_account_number:
+      question: Fee account number
+
+    ### C1A questions/answers ###
+    #
+    c1a_full_name:
+      question: Your full name
+    c1a_person_type:
+      question: Are you the
+      answers:
+        applicant: Applicant
+    c1a_address_confidentiality:
+      question: C8 form completed?
+      answers:
+        'yes': 'Yes'
+        'no': *not_applicable
+    c1a_has_solicitor:
+      question: Is a solicitor acting for you?
+      answers:
+        <<: *YESNO
+    c1a_abuse_physical:
+      question: Physical
+      answers:
+        <<: *YESNO
+    c1a_abuse_emotional:
+      question: Emotional
+      answers:
+        <<: *YESNO
+    c1a_abuse_psychological:
+      question: Psychological
+      answers:
+        <<: *YESNO
+    c1a_abuse_sexual:
+      question: Sexual
+      answers:
+        <<: *YESNO
+    c1a_abuse_financial:
+      question: Financial
+      answers:
+        <<: *YESNO
+
+    c1a_abuse_type:
+      question: Abuse type
+      answers:
+        substance_abuse: Drug, alcohol or substance abuse
+        children:
+          physical: Children - Physical
+          emotional: Children - Emotional
+          psychological: Children - Psychological
+          sexual: Children - Sexual
+          financial: Children - Financial
+          other: Children - Other
+        applicant:
+          physical: Applicant - Physical
+          emotional: Applicant - Emotional
+          psychological: Applicant - Psychological
+          sexual: Applicant - Sexual
+          financial: Applicant - Financial
+          other: Applicant - Other
+    c1a_abuse_details:
+      question: Details
+    c1a_abuse_behaviour_description:
+      question: Nature of behaviour / what happened
+      absence_answer: '[No details entered]'
+    c1a_abuse_behaviour_start:
+      question: When did behaviour start?
+    c1a_abuse_behaviour_ongoing:
+      question: Behaviour ongoing?
+      answers:
+        <<: *YESNO
+    c1a_abuse_behaviour_stop:
+      question: How long did it continue?
+    c1a_abuse_asked_for_help:
+      question: Did you seek help?
+      answers:
+        <<: *YESNO
+    c1a_abuse_help_party:
+      question: "Help from:"
+    c1a_abuse_help_provided:
+      question: Did they help you?
+      answers:
+        'yes': They helped me
+        'no': They did not help
+    c1a_abuse_help_description:
+      question: What did they do?
+
+    c1a_abduction_risk:
+      question: Do you believe that the children are at risk of being abducted?
+      answers:
+        <<: *YESNO
+    c1a_abduction_details:
+      question: Why do you believe the child(ren) may be abducted?
+    c1a_abduction_previous_attempt:
+      question: Have there been any previous threats, attempts to abduct or actual abduction of the child(ren)?
+      answers:
+        <<: *YESNO
+    c1a_abduction_previous_attempt_details:
+      question: *details
+    c1a_abduction_children_current_location:
+      question: Where is/are the child(ren) now?
+    c1a_abduction_passport_office_notified:
+      question: Have the police been notified?
+      answers:
+        <<: *YESNO
+    c1a_abduction_children_multiple_passports:
+      question: Do(es) the child(ren) have more than one passport?
+      answers:
+        <<: *YESNO
+    c1a_abduction_passport_possession:
+      question: Who is in possession of the child(ren)’s passport(s)?
+      answers:
+        <<: *RELATIONS
+    c1a_abduction_passport_possession_other:
+      question: 'Details of other:'
+    c1a_abduction_previous_attempt_agency_involved:
+      question: Were the police in this and/or another country or any organisation or agency including any private investigators involved in any previous incident of attempted abduction or abduction.
+      answers:
+        <<: *YESNO
+    c1a_abduction_previous_attempt_agency_details:
+      question: *details
+
+    c1a_order_name:
+      question: Order
+      answers:
+        <<: *COURT_ORDER_TYPES
+    c1a_order_case_number:
+      question: Case number
+    c1a_order_issue_date:
+      question: Date issued
+    c1a_order_length:
+      question: Length of order
+    c1a_order_is_current:
+      question: Current
+      answers:
+        <<: *YESNO
+    c1a_order_court_name:
+      question: Name of court
+    c1a_protection_orders:
+      question: Steps or orders requested to protect child(ren) and/or applicant
+      absence_answer: *not_required
+    c1a_contact_type:
+      question: Do you agree to the child(ren) spending time with the other person in this form?
+      answers:
+        unsupervised: 'Yes'
+        supervised: Yes, but it must be supervised
+        none: 'No'
+    c1a_contact_other:
+      question: Do you agree to the child having other forms of contact with the other person in receipt of this form?
+      answers:
+        <<: *YESNO
+
+    ### C8 questions/answers ###
+    #
+    c8_children_names:
+      question: Child(ren)’s names
+      answers:
+        c8_children_numbers: Child(ren)’s numbers

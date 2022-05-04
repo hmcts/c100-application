@@ -1,0 +1,31 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <% CourtOrderType.sym_values.each do |order_name| %>
+        <%= f.govuk_radio_buttons_fieldset order_name, legend: { tag: 'span', size: 'm' } do %>
+          <%= f.govuk_radio_button order_name, GenericYesNo::YES, link_errors: true do %>
+            <%= f.govuk_text_field :"#{order_name}_case_number", width: 'one-half', label: { size: 's' } %>
+            <%= f.govuk_date_field :"#{order_name}_issue_date",
+                  hint: { text: t('shared.form_elements.order_issue_hint') },
+                  legend: { tag: 'span', size: 's', text: t('shared.form_elements.order_issue') }
+            %>
+            <%= f.govuk_text_field :"#{order_name}_length", width: 'one-half', label: { size: 's' } %>
+            <%= f.govuk_collection_radio_buttons :"#{order_name}_is_current", GenericYesNo.values, :value, nil, inline: true, legend: { tag: 'span', size: 's' } %>
+            <%= f.govuk_text_field :"#{order_name}_court_name", label: { size: 's' } %>
+          <% end %>
+          <%= f.govuk_radio_button order_name, GenericYesNo::NO %>
+        <% end %>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>

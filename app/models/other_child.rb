@@ -1,0 +1,2 @@
+class OtherChild < Minor
+end

@@ -1,0 +1,27 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_collection_radio_buttons :child_protection_cases, GenericYesNo.values, :value, nil do %>
+        <p class="govuk-body-l"><%=t '.lead_text' %></p>
+      <% end %>
+
+      <%= f.continue_button %>
+    <% end %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="children term">
+          <%=t '.details.summary' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t '.details.text_html' %>
+      </div>
+    </details>
+  </div>
+</div>

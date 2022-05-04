@@ -1,0 +1,22 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body-l"><%=t '.lead_text' %></p>
+
+    <p class="govuk-body"><%=t '.you_told_us' %></p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <%= render @presenter.concerns %>
+    </ul>
+
+    <div class="govuk-inset-text">
+      <%=t '.info_notice' %>
+    </div>
+
+    <%= link_button t('.continue'), edit_steps_petition_orders_path %>
+  </div>
+</div>

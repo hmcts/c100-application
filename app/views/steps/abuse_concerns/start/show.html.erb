@@ -1,0 +1,32 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <p class="govuk-body">
+      <%=t '.you_told_us' %>
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <%= render @presenter.concerns %>
+    </ul>
+
+    <%=t '.further_questions_info_html' %>
+
+    <%= link_button t('.continue'), steps_abuse_concerns_children_info_path %>
+
+    <details class="govuk-details" data-module="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text" data-ga-category="explanations" data-ga-label="safety concerns">
+          <%=t 'shared.cafcass.safety_title' %>
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <%=t 'shared.cafcass.safety_content_html' %>
+      </div>
+    </details>
+  </div>
+</div>

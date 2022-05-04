@@ -1,0 +1,15 @@
+<div class="govuk-inset-text">
+  <%=t '.address_for_documents' %>
+</div>
+
+<%= step_form form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+  <%= f.govuk_text_field :postcode, width: 'one-third' %>
+
+  <p class="govuk-body govuk-!-margin-bottom-8">
+    <%= link_to t('.manual_address'), {
+      controller: '/steps/respondent/address_details', action: :edit, id: form_object.record
+    }, class: 'govuk-link ga-pageLink', data: { ga_category: 'address lookup', ga_label: 'respondent manual entry' } %>
+  </p>
+
+  <%= f.continue_button %>
+<% end %>

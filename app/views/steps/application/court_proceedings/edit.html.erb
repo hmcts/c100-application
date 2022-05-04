@@ -1,0 +1,28 @@
+<% title t('.page_title') %>
+<% step_header %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= govuk_error_summary %>
+
+    <span class="govuk-caption-xl"><%=t '.section' %></span>
+    <h1 class="govuk-heading-xl"><%=t '.heading' %></h1>
+
+    <%= step_form @form_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f| %>
+      <%= f.govuk_text_area :children_names %>
+      <%= f.govuk_text_field :court_name %>
+      <%= f.govuk_text_field :case_number %>
+
+      <div class="govuk-inset-text">
+        <%=t '.case_number_info' %>
+      </div>
+
+      <%= f.govuk_text_field :proceedings_date %>
+      <%= f.govuk_text_area :cafcass_details %>
+      <%= f.govuk_text_area :order_types %>
+      <%= f.govuk_text_area :previous_details %>
+
+      <%= f.continue_button %>
+    <% end %>
+  </div>
+</div>
