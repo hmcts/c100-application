@@ -1,4 +1,4 @@
-FROM ruby:2.7.5-slim-buster
+FROM ruby:2.7.6-slim-buster
 MAINTAINER HMCTS Reform Team
 
 # build dependencies:
