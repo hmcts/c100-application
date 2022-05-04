@@ -29,7 +29,8 @@ RUN apt-get -y install \
   curl \
   shared-mime-info \
   xz-utils \
-  nodejs
+  nodejs \
+  npm
 
 # Install Yarn
 RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null && \
