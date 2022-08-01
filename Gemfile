@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem 'mimemagic', '~> 0.3.7'
 gem 'pg', '~> 1.1'
 gem 'puma'
-gem 'rails', '6.0.4.8'
+gem 'rails', '~> 6.0.5'
 gem 'responders'
 gem 'sass-rails', '< 6.0.0'
 gem 'sentry-raven', '~> 3.0'
@@ -78,3 +78,5 @@ group :test do
   gem 'webdrivers'
   gem 'webmock'
 end
+
+gem "bundler-audit", "~> 0.9.1", :group => :development

@@ -35,7 +35,7 @@ jobs:
     parameters:
       test_command:
         type: string
-        default: bundle exec rake test:all_the_things
+        default: bundle exec rake test
     steps:
       - browser-tools/install-browser-tools
       - checkout
