@@ -76,3 +76,5 @@ group :test do
   gem 'webdrivers'
   gem 'webmock'
 end
+
+gem "bundler-audit", "~> 0.9.1", :group => :development
