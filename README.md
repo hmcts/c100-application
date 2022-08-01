@@ -37,7 +37,7 @@ environment (but will not send any emails as the GOV.UK Notify API key is not co
 * Copy `.env.example` to `.env` and replace with suitable values.  
 You don't need to configure Notify or Auth0 at this point.
 
-* `npm install` # will pull [GOV.UK Frontend](https://design-system.service.gov.uk)
+* `yarn install` # will pull [GOV.UK Frontend](https://design-system.service.gov.uk)
 * `bundle install`
 * `bundle exec rails db:setup`
 * `bundle exec rails db:migrate`
@@ -53,7 +53,7 @@ You can then run all the code linters and tests with:
 
 * `RAILS_ENV=test bundle exec rake`  
 or  
-* `RAILS_ENV=test bundle exec rake test:all_the_things`
+* `RAILS_ENV=test bundle exec rake test`
 
 Or you can run specific tests as follows (refer to *lib/tasks/all_tests.rake* for the complete list):
 
