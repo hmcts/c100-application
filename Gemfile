@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
+gem 'tzinfo', '~> 1.2.10'
 
 # Back office
 gem 'omniauth-auth0'
@@ -32,6 +33,7 @@ gem 'sidekiq', '~> 6.4'
 gem 'combine_pdf', '~> 1.0'
 gem 'wicked_pdf', '~> 2.1.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
+
 
 group :production do
   gem 'lograge'
