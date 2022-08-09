@@ -6,6 +6,8 @@ base:
     DATABASE_URL: 'postgres://{{ .Values.postgresql.auth.username}}:{{ .Values.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.auth.database}}'
     RAILS_ENV: 'test'
     REDIS_URL: "redis://${SERVICE_NAME}-redis-master:6379"
+    EXTERNAL_URL: ${SERVICE_FQDN}
+    KEYVAULT_NAME: 'c100-stg'
   redis:
     url: "redis://${SERVICE_NAME}-redis-master:6379"
   postgresql:

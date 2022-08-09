@@ -5,3 +5,5 @@ base:
   startupPath: /status
   image: 'sdshmctspublic.azurecr.io/c100/application:latest'
   ingressHost: c100-application.{{ .Values.global.environment }}.platform.hmcts.net
+  environment:
+    EXTERNAL_URL: ${SERVICE_FQDN}

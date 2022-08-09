@@ -21,6 +21,22 @@ Bundler.require(*Rails.groups)
 
 module Application
   class Application < Rails::Application
+    
+    ## Add environment variables
+    if(ENV['KEYVAULT_NAME'].present?)
+      filepath = "/mnt/secrets/#{ENV.fetch('KEYVAULT_NAME')}/key"
+      if File.file?(filepath)
+      # env = {}
+      # env_file = File.open(filepath)
+
+      # env_file.each do |line|
+      #   key, value = line.strip.split("=")
+      #   break if key[0] == '#'
+      #   ENV[key] = value
+      # end
+      end
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
@@ -92,4 +108,5 @@ module Application
     config.maintenance_enabled = ENV.fetch('MAINTENANCE_ENABLED', 'false').downcase == 'true'
     config.maintenance_allowed_ips = ENV.fetch('MAINTENANCE_ALLOWED_IPS', '').split(',').map(&:strip)
   end
+
 end

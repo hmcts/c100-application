@@ -2,5 +2,8 @@ base:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
+  environment:
+    EXTERNAL_URL: ${SERVICE_FQDN}
+    KEYVAULT_NAME: 'c100-stg'
   redis:
     url: "redis://${SERVICE_NAME}-redis-master:6379"
