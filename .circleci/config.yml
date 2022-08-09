@@ -17,7 +17,7 @@ references:
           DATABASE_URL: "postgres://postgres@localhost/c100-application-test"
           EXTERNAL_URL: mocked_in_tests
           GOVUK_NOTIFY_API_KEY: mocked_in_tests
-      - image: circleci/postgres:10.4
+      - image: circleci/postgres:13.5
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: c100-application-test
