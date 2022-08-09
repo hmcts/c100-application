@@ -19,6 +19,8 @@ withPipeline(type, product, component) {
     env.EXTERNAL_URL = 'mocked_in_tests'
     env.GOVUK_NOTIFY_API_KEY = 'mocked_in_tests'
 
+    enableDbMigration(product)
+
     before('build') {
         yarnBuilder.runYarn("--mutex network install --frozen-lockfile")
     }
