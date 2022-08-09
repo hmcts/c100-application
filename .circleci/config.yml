@@ -23,7 +23,7 @@ references:
           POSTGRES_DB: c100-application-test
   cloud_container: &cloud_container
     docker:
-      - image: ministryofjustice/cloud-platform-tools:1.24
+      - image: ministryofjustice/cloud-platform-tools:1.43
         environment:
           GITHUB_TEAM_NAME_SLUG: sustainingdevs
           REPO_NAME: c100-application
