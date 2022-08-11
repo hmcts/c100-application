@@ -37,6 +37,3 @@ base:
           alias: MAINTENANCE_ALLOWED_IPS
 redis:
   enabled: false
-
-global:
-  environment: dev

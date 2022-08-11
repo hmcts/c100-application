@@ -31,6 +31,3 @@ redis:
       enabled: false
   auth:
     enabled: false
-
-global:
-  environment: dev
