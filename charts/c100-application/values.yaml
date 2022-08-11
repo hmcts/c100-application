@@ -35,3 +35,5 @@ base:
           alias: MAINTENANCE_ENABLED
         - name: maintenance-allowed-ips
           alias: MAINTENANCE_ALLOWED_IPS
+redis:
+  enabled: false
