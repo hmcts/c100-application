@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@dtspo-9578-add-ruby-pipeline")
+@Library("Infrastructure")
 
 def type = "ruby"
 def product = "c100"
@@ -8,8 +8,6 @@ def component = "application"
 
 def rubyBuilder = new uk.gov.hmcts.contino.RubyBuilder(this)
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-
-env.KEEP_DIR_FOR_DEBUGGING = 'true'
 
 withPipeline(type, product, component) {
     env.RAILS_ENV = 'test'
