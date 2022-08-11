@@ -50,7 +50,7 @@ spec:
 {{/*          envFrom:*/}}
 {{/*            - configMapRef:*/}}
 {{/*                name: c100-application-configmap-production*/}}
-          environment:
+          env:
             # external secrets defined in `secrets.yml`
 {{/*            - name: GOVUK_NOTIFY_API_KEY*/}}
 {{/*              valueFrom:*/}}
@@ -85,7 +85,7 @@ spec:
 {{/*                secretKeyRef:*/}}
 {{/*                  name: rds-instance-c100-production*/}}
 {{/*                  key: url*/}}
-            {{ if eq .Values.global.environment "dev" }}
+            {{- if eq .Values.global.environment "dev" }}
             - name: DATABASE_URL
               value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
             - name: REDIS_URL
