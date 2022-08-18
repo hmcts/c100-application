@@ -19,7 +19,7 @@ gem 'uglifier'
 gem 'uk_postcode'
 gem 'virtus'
 gem 'parser', '~> 3.1', '>= 3.1.1.0'
-gem 'tzinfo', '~> 1.2.10'
+gem 'tzinfo', '~> 2.0.0'
 
 # Back office
 gem 'omniauth-auth0'
