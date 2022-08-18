@@ -1,40 +1,13 @@
 # Family Justice C100 Service
  
-[![CircleCI](https://circleci.com/gh/ministryofjustice/c100-application.svg?style=svg)](https://circleci.com/gh/ministryofjustice/c100-application)
-
 This is a Rails application to enable citizens to complete the C100 form. It will also produce a C1A form and a C8 form 
 under certain circumstances based on the answers the applicant gives (for example if there are safety concerns).
-
-It is based on software patterns developed for the [Appeal to the Tax Tribunal][taxtribs] application.
-
-## K8s live-1 cluster
-
-There is a staging environment running on [this url][k8s-staging]
-
-The staging env uses http basic auth to restrict access. The username and
-password should be available from the MoJ Rattic server, in the Family Justice group.
-
-This environment should be used for any test or demo purposes, user research, etc.  
-Do not use production for tests as this will have an impact on metrics and will trigger real emails
-
-There is a [deploy repo][deploy-repo] for this staging environment, and also for production environment.  
-It contains the k8s configuration files and also the required ENV variables.
-
-## Docker
-
-The application can be run inside a docker container. This will take care of the ruby environment, postgres database 
-and any other dependency for you, without having to configure anything in your machine.
-
-* `docker-compose up`
-
-The application will be run in "production" mode, so will be as accurate as possible to the real production 
-environment (but will not send any emails as the GOV.UK Notify API key is not configured by default).
 
 ## Getting Started
 
 * Run `brew install shared-mime-info` so MimeMagic works fine if you are on a Mac.
 
-* Copy `.env.example` to `.env` and replace with suitable values.  
+* Copy `.env.example` to `.env` and replace with suitable values. e.g. `cp .env.example .env`
 You don't need to configure Notify or Auth0 at this point.
 
 * `yarn install` # will pull [GOV.UK Frontend](https://design-system.service.gov.uk)
@@ -45,13 +18,13 @@ You don't need to configure Notify or Auth0 at this point.
 
 ### For running the tests:
 
-* Copy `.env.test.example` to `.env.test` and replace with suitable values if you expect to run the tests
+* Copy `.env.test.example` to `.env.test` e.g. `cp .env.test.example .env.test`
 * `RAILS_ENV=test bundle exec rails db:setup`
 * `RAILS_ENV=test bundle exec rails db:migrate`
 
 You can then run all the code linters and tests with:
 
-* `RAILS_ENV=test bundle exec rake`  
+* `RAILS_ENV=test bundle exec rake`
 or  
 * `RAILS_ENV=test bundle exec rake test`
 
@@ -129,19 +102,7 @@ env variable.
 
 Please refer to the [config/auth0](config/auth0) directory for more details.
 
-## CircleCI and continuous deployment
+## Links
 
-CircleCI is used for CI and CD and you can find the configuration in `.circleci/config.yml`  
-
-After a successful merge to master, a docker image will be created and pushed to an ECR repository.  
-It will also trigger an automatic deploy to [staging][k8s-staging].
-
-The build will then hold for approval to promote to production environment, at which point it will tag it 
-and push it to the ECR repository, and trigger a rolling update, creating new pods with the new image, and 
-scaling down old pods, as new ones become available.
-
-For more details on the ENV variables needed for CircleCI, refer to the [deploy repo][deploy-repo].
-
-[taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
-[deploy-repo]: https://github.com/ministryofjustice/c100-application-deploy
-[k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+[infrastructure-repo]: https://github.com/hmcts/c100-shared-infrastructure
+[staging]: https://c100-application.staging.platform.hmcts.net
