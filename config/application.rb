@@ -21,6 +21,28 @@ Bundler.require(*Rails.groups)
 
 module Application
   class Application < Rails::Application
+    # *** Add environment variables ***
+    #
+    # In SDS system, env vars are mounted to the filesystem.
+    #
+    # Must be done here and not an initializer as
+    # env vars are needed for boot.
+    #
+    # Note we don't overwrite env vars that are already set
+    # because in dev environment, we must set some env vars
+    # in the pipeline.
+    #
+    # :nocov:
+    if Dir.exist?("../../../mnt/secrets/c100")
+      Dir["../../../mnt/secrets/c100/*"].each do |filepath|
+        name = filepath.split('/')[-1]
+        value = File.open(filepath).read
+        ENV[name] ||= value
+        ENV[name] = value if ENV[name].eql? 'replace_this_at_build_time'
+      end
+    end
+    # :nocov:
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 

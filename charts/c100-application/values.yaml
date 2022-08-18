@@ -6,11 +6,21 @@ base:
   image: 'sdshmctspublic.azurecr.io/c100/application:latest'
   ingressHost: c100-application.{{ .Values.global.environment }}.platform.hmcts.net
   aadIdentityName: c100
+  environment:
+    RAILS_ENV: 'production'
   keyVaults:
     c100:
       secrets:
-        - name: c100-postgres-url
-          alias: DATABASE_URL
+        - name: c100-postgres-user-name
+          alias: DATABASE_USERNAME
+        - name: c100-postgres-password
+          alias: DATABASE_PASSWORD
+        - name: c100-postgres-host-name
+          alias: DATABASE_HOST
+        - name: c100-postgres-database
+          alias: DATABASE_NAME
+        - name: redis-url
+          alias: REDIS_URL
         - name: external-url
           alias: EXTERNAL_URL
         - name: session-expires-in-minutes
@@ -35,3 +45,5 @@ base:
           alias: MAINTENANCE_ENABLED
         - name: maintenance-allowed-ips
           alias: MAINTENANCE_ALLOWED_IPS
+redis:
+  enabled: false

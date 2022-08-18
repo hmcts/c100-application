@@ -49,6 +49,11 @@ wait_function(){
 
 # This is used in the kubernetes deployment readinessProbe and livenessProbe.
 probe_function(){
+
+  if test -f "/mnt/secrets/c100/REDIS_URL"; then
+    export REDIS_URL=$(cat "/mnt/secrets/c100/REDIS_URL")
+  fi
+
   MONITOR_OUTPUT=$(sidekiqmon processes) || exit 1
 
   # Check redis connection

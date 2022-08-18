@@ -3,12 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby File.read('.ruby-version')
 
-gem 'devise', '~> 4.7.1'
+gem 'devise', '~> 4.8.0'
 gem 'govuk_design_system_formbuilder'
 gem 'govuk_notify_rails', '~> 2.2.0'
 gem 'govuk-pay-ruby-client', '~> 1.0.2'
 gem 'jquery-rails'
-gem 'mimemagic', '~> 0.3.7'
+gem 'mimemagic', '~> 0.4.0'
 gem 'pg', '~> 1.1'
 gem 'puma'
 gem 'rails', '~> 6.0.5'
@@ -28,10 +28,11 @@ gem 'omniauth-rails_csrf_protection'
 # Caching and jobs processing
 gem 'redis'
 gem 'sidekiq', '~> 6.4'
+gem 'sidekiq_alive'
 
 # PDF generation
 gem 'combine_pdf', '~> 1.0'
-gem 'wicked_pdf', '~> 2.1.0'
+gem 'wicked_pdf', '~> 2.6.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 
@@ -57,7 +58,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'spring', '~> 2.0'
+  gem 'spring', '~> 4.0'
   gem 'spring-commands-rspec'
 end
 
@@ -65,7 +66,7 @@ group :test do
   gem 'brakeman'
   gem 'capybara'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.25'
-  gem 'cucumber', '< 4.0.0'
+  gem 'cucumber', '< 8.0.1'
   gem 'cucumber-rails', require: false
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'

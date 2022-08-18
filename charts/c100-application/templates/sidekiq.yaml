@@ -1,24 +1,49 @@
+{{- $globals := .Values.global | default dict -}}
+{{- $baseValues := dict "Values" .Values.base -}}
+{{- $noValues := omit . "Values" -}}
+{{- $base := merge $baseValues  $noValues }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "hmcts.releasename.v2" . }}-sidekiq
-{{- include "hmcts.labels.v2" . | indent 2 -}}
-{{- include "hmcts.annotations.v2" . | indent 2 }}
+  name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+  labels:
+    app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+    aadpodidbinding: {{ .Values.base.aadIdentityName }}
+{{- include "hmcts.annotations.v2" $base | indent 2 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+      app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" . }}-sidekiq
+        app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-sidekiq
         helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
-        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" . }}-sidekiq
-    {{- (include "hmcts.annotations.v2" .) | indent 6 }}
+        app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-sidekiq
+        aadpodidbinding: {{ .Values.base.aadIdentityName }}
+    {{- (include "hmcts.annotations.v2" $base) | indent 6 }}
     spec:
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      {{- include "hmcts.interpodantiaffinity.v2" $base | indent 6 }}
+      {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 6 }}
+      {{- if $globals.enableKeyVaults }}
+      volumes:
+        - name: vault-c100
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: {{ .Release.Name }}-base-c100
+      {{- end }}
       containers:
         - name: sidekiq
           image: {{ .Values.base.image }}
@@ -30,62 +55,40 @@ spec:
             limits:
               cpu: 250m
               memory: 4Gi
+          ports:
+            - containerPort: 7433
           readinessProbe:
-            exec:
-              command: ["./sidekiq.sh", "probe"]
-            initialDelaySeconds: 30
-            periodSeconds: 60
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 80
             timeoutSeconds: 5
           livenessProbe:
-            exec:
-              command: ["./sidekiq.sh", "probe"]
-            initialDelaySeconds: 45
-            periodSeconds: 60
+            httpGet:
+              path: /
+              port: 7433
+            initialDelaySeconds: 80 
             timeoutSeconds: 5
           lifecycle:
             preStop:
               exec:
                 command: ["./sidekiq.sh", "stop"]
-          # non-secret env vars defined in `config_map.yaml`
-{{/*          envFrom:*/}}
-{{/*            - configMapRef:*/}}
-{{/*                name: c100-application-configmap-production*/}}
+          securityContext:
+            allowPrivilegeEscalation: false
+          {{- ( include "hmcts.secretMounts.v2" $base ) | indent 10 }}
           env:
-            # external secrets defined in `secrets.yml`
-{{/*            - name: GOVUK_NOTIFY_API_KEY*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: govuk_notify_api_key*/}}
             - name: GOVUK_NOTIFY_API_KEY
               value: TBD
-
             - name: GOVUK_PAY_API_KEY
               value: TBD
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: govuk_pay_api_key*/}}
             - name: SECRET_KEY_BASE
               value: TBD
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: secret_key_base*/}}
-{{/*            - name: SENTRY_DSN*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: c100-application-secrets-production*/}}
-{{/*                  key: sentry_dsn*/}}
             #
             # secrets created by `terraform`
             #
-{{/*            - name: DATABASE_URL*/}}
-{{/*              valueFrom:*/}}
-{{/*                secretKeyRef:*/}}
-{{/*                  name: rds-instance-c100-production*/}}
-{{/*                  key: url*/}}
+            {{ if .Values.redis.url }}
             - name: DATABASE_URL
               value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
             - name: REDIS_URL
-              value: {{ .Values.base.redis.url }}
+              value: {{ .Values.redis.url }}
+            {{ end }}

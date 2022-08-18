@@ -2,5 +2,3 @@ base:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
-  redis:
-    url: "redis://${SERVICE_NAME}-redis-master:6379"

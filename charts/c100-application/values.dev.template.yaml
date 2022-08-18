@@ -6,8 +6,6 @@ base:
     DATABASE_URL: 'postgres://{{ .Values.postgresql.auth.username}}:{{ .Values.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.auth.database}}'
     RAILS_ENV: 'test'
     REDIS_URL: "redis://${SERVICE_NAME}-redis-master:6379"
-  redis:
-    url: "redis://${SERVICE_NAME}-redis-master:6379"
   postgresql:
     enabled: true
     debug: true
@@ -25,6 +23,7 @@ base:
 
 redis:
   enabled: true
+  url: "redis://${SERVICE_NAME}-redis-master:6379"
   architecture: standalone
   master:
     persistence:
