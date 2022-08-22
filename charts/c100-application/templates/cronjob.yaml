@@ -6,12 +6,13 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ template "hmcts.releasename.v2" . }}-cronjob
-  app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-cronjob
-  helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-  app.kubernetes.io/managed-by: {{ .Release.Service }}
-  app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-cronjob
-  aadpodidbinding: {{ .Values.base.aadIdentityName }}
+  labels:
+    name: {{ template "hmcts.releasename.v2" . }}-cronjob
+    app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-cronjob
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-cronjob
+    aadpodidbinding: {{ .Values.base.aadIdentityName }}
 {{- include "hmcts.annotations.v2" . | indent 2 }}
 spec:
   schedule: "*/1 * * * *" # for testing
