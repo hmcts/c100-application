@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "govuk-frontend": "3.14.0"
+    "govuk-frontend": "4.3.1"
   },
   "devDependencies": {
     "pa11y-ci": "3.0.1"
