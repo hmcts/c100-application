@@ -11,6 +11,7 @@ RSpec.describe ValueObject do
   let(:also_foo_one) { FooValue.new('one') }
   let(:foo_two)      { FooValue.new('two') }
   let(:bar_one)      { BarValue.new('one') }
+  let(:blank_one)    { BarValue.new('') }
 
   it 'is immutable' do
     expect(subject).to be_frozen
@@ -61,6 +62,13 @@ RSpec.describe ValueObject do
   describe '#to_sym' do
     it 'returns the value (which is already a symbol)' do
       expect(foo_one.to_sym).to eq(:one)
+    end
+  end
+
+  describe '#blank?' do
+    it 'returns whether value is blank' do
+      expect(foo_one.blank?).to eq(false)
+      expect(blank_one.blank?).to eq(true)
     end
   end
 end

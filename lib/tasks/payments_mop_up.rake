@@ -6,6 +6,8 @@
 task payments_mop_up: [:stdout_environment] do
   Rails.logger.info "Starting payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"
 
+  Rails.logger.info "TEST STARTS HERE #{ENV['DATABASE_NAME']} #{ENV['DATABASE_USERNAME']} #{ENV["DATABASE_PASSWORD"]}"
+
   PaymentsMopUpJob.run(mop_up_minutes_ago)
 
   Rails.logger.info "Finished payments mop-up for intents older than #{mop_up_minutes_ago.iso8601}"

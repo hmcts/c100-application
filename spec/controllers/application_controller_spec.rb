@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ApplicationController do
   controller do
-    def my_url; true; end
+    def my_url; render json: {}; end
     def invalid_session; raise Errors::InvalidSession; end
     def application_not_found; raise Errors::ApplicationNotFound; end
     def application_completed; raise Errors::ApplicationCompleted; end

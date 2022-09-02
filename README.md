@@ -1,40 +1,13 @@
 # Family Justice C100 Service
  
-[![CircleCI](https://circleci.com/gh/ministryofjustice/c100-application.svg?style=svg)](https://circleci.com/gh/ministryofjustice/c100-application)
-
 This is a Rails application to enable citizens to complete the C100 form. It will also produce a C1A form and a C8 form 
 under certain circumstances based on the answers the applicant gives (for example if there are safety concerns).
-
-It is based on software patterns developed for the [Appeal to the Tax Tribunal][taxtribs] application.
-
-## K8s live-1 cluster
-
-There is a staging environment running on [this url][k8s-staging]
-
-The staging env uses http basic auth to restrict access. The username and
-password should be available from the MoJ Rattic server, in the Family Justice group.
-
-This environment should be used for any test or demo purposes, user research, etc.  
-Do not use production for tests as this will have an impact on metrics and will trigger real emails
-
-There is a [deploy repo][deploy-repo] for this staging environment, and also for production environment.  
-It contains the k8s configuration files and also the required ENV variables.
-
-## Docker
-
-The application can be run inside a docker container. This will take care of the ruby environment, postgres database 
-and any other dependency for you, without having to configure anything in your machine.
-
-* `docker-compose up`
-
-The application will be run in "production" mode, so will be as accurate as possible to the real production 
-environment (but will not send any emails as the GOV.UK Notify API key is not configured by default).
 
 ## Getting Started
 
 * Run `brew install shared-mime-info` so MimeMagic works fine if you are on a Mac.
 
-* Copy `.env.example` to `.env` and replace with suitable values.  
+* Copy `.env.example` to `.env` and replace with suitable values. e.g. `cp .env.example .env`
 You don't need to configure Notify or Auth0 at this point.
 
 * `yarn install` # will pull [GOV.UK Frontend](https://design-system.service.gov.uk)
@@ -45,13 +18,13 @@ You don't need to configure Notify or Auth0 at this point.
 
 ### For running the tests:
 
-* Copy `.env.test.example` to `.env.test` and replace with suitable values if you expect to run the tests
+* Copy `.env.test.example` to `.env.test` e.g. `cp .env.test.example .env.test`
 * `RAILS_ENV=test bundle exec rails db:setup`
 * `RAILS_ENV=test bundle exec rails db:migrate`
 
 You can then run all the code linters and tests with:
 
-* `RAILS_ENV=test bundle exec rake`  
+* `RAILS_ENV=test bundle exec rake`
 or  
 * `RAILS_ENV=test bundle exec rake test`
 
@@ -129,19 +102,192 @@ env variable.
 
 Please refer to the [config/auth0](config/auth0) directory for more details.
 
-## CircleCI and continuous deployment
+## Charts
 
-CircleCI is used for CI and CD and you can find the configuration in `.circleci/config.yml`  
+Jenkins will only automatically update the chart repository if you make the change in your chart config file. If you update one of the templates, you must also bump the version number in `/charts/c100-application/Chart.yaml`.
 
-After a successful merge to master, a docker image will be created and pushed to an ECR repository.  
-It will also trigger an automatic deploy to [staging][k8s-staging].
+Test your charts using the CLI command `helm template c100 charts/c100-application`
 
-The build will then hold for approval to promote to production environment, at which point it will tag it 
-and push it to the ECR repository, and trigger a rolling update, creating new pods with the new image, and 
-scaling down old pods, as new ones become available.
+Delete existing charts using `kubectl delete hr [...]`
 
-For more details on the ENV variables needed for CircleCI, refer to the [deploy repo][deploy-repo].
 
-[taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
-[deploy-repo]: https://github.com/ministryofjustice/c100-application-deploy
-[k8s-staging]: https://c100-application-staging.apps.live-1.cloud-platform.service.justice.gov.uk
+## Links
+
+[infrastructure-repo]: https://github.com/hmcts/c100-shared-infrastructure
+[staging]: https://c100-application.staging.platform.hmcts.net
+
+
+# C100 Infrastructure
+
+C100 is deployed on the SDS platform. If the PET team cannot support with an infrastructure query, ask #sds-cloud-native on the hmcts-reform.slack.com Slack group. 
+
+## Development process
+
+All pull requests automatically get a unique deployment on the dev cluster. This is also where QA testing happens. DO NOT MERGE before the ticket has been tested and fully signed off.
+
+Merging a PR deploys it to production - as well as staging, ITHC and demo environments.
+
+### Getting the Pull Request unique URL
+
+On the pull request, hmcts-jenkins-cnp bot will automaticaly create a message saying, e.g. "hmcts-jenkins-cnp deployed to preview 5 minutes ago". Besides this is a button, view deployment. Click this to get to the unique URL for that PR.
+
+Alternatively, create the URL by hand. You can see the PR number in the url: "/pull/PR_NUMBER". The PR will be at https://c100-application-pr-PR_NUMBER.dev.platform.hmcts.net/
+
+## Environments
+
+- Dev:- deploys a unique build for each pull request. Unlike the other environments, does not have a permanent database or redis instance. Instead, it builds its own for each new build. Shortname: `dev`. Url: https://c100-application-pr-PR_NUMBER.dev.platform.hmcts.net/.
+- Staging:- a replica of the live environment. Not used as part of the development process. Can be used to interact with a replica of the live deployment without having to put test data in the production database. Shortname: `stg`. Url https://c100-application.staging.platform.hmcts.net/.
+- Demo:- used for doing demonstrations to external stakeholders. Shortname: `demo`. Url https://c100-application.demo.platform.hmcts.net/.
+- Production:- the live environment. Access to the console not available to developers. Shortname: `demo`. Urls https://c100-application.platform.hmcts.net/ or https://apply-to-court-about-child-arrangements.service.justice.gov.uk/.
+- ITHC:- IT Health Check - a replica of the live environment, access is given to penetration testers and security consultants to test the security of C100. Shortname: `demo`. Url https://c100-application.demo.platform.hmcts.net/.
+
+## Maintenance Page
+
+To turn ON:
+- az keyvault secret set `--vault-name 'c100-ENV_SHORTNAME' --name 'maintenance-enabled' --value 'true'`
+- Delete the pods, which will rebuild automatically, using `kubectl -n c100 delete pod $pod`
+- Ensure you've deleted pods on all clusters for that environment (staging and production have two clusters).
+
+To turn OFF:
+- az keyvault secret set `--vault-name 'c100-ENV_SHORTNAME' --name 'maintenance-enabled' --value 'false'`
+- Delete the pods
+
+## Environment Variables
+
+The keyvaults are available in the Azure portal under the name c100-ENV_SHORTNAME.
+
+Keys can be added there, or through the console using:
+
+`az keyvault secret show --vault-name 'c100-ENV_SHORTNAME' --name 'env-name'`
+`az keyvault secret set --vault-name 'c100-ENV_SHORTNAME' --name 'env-name' --value ''`
+
+### Non-secret environment variables
+
+If you don't need the environment variable to be a secret, you can hard code it into the list of env vars in `/charts/c100-application/values.yaml` in this repository.
+
+### Changing environment variables
+
+When a key is added or code or config is modified, the corresponding pod will eventually re-deploy. If you update a secret and don’t change the code or config, flux will eventually redeploy. It’s very infrequent, so rather than waiting for flux, it's faster to delete the pod using `kubectl -n c100 delete pod $pod` and allow the pod to rebuild. Ensure you've deleted pods on all clusters for that environment (staging and production have two clusters).
+
+
+## Useful commands to manage the pods
+
+Connect to the cluster you want to manage using the commands in the next section
+
+```
+kubectl get pods -n c100
+pod=
+kubectl exec -it $pod -n c100 -- /bin/sh
+kubectl logs -n c100 -f $pod
+kubectl get ingress -n c100
+kubectl get deployments --all-namespaces=true
+kubectl describe -n c100 pod/$pod
+kubectl delete pod $pod -n c100
+```
+
+## Connecting to clusters
+
+This can be done using the Azure portal or command line. For the portal, visit e.g. https://portal.azure.com/#@HMCTS.NET/resource/subscriptions/867a878b-cb68-4de5-9741-361ac9e178b6/resourceGroups/ss-dev-01-rg/providers/Microsoft.ContainerService/managedClusters/ss-dev-01-aks/overview
+
+Click on the connect tab and you'll be given the connection strings needed to connect.
+
+Here are the connection strings for the most commonly used clusters.
+
+### Dev
+
+Cluster name: `ss-dev-01-aks`
+
+``az account set --subscription 867a878b-cb68-4de5-9741-361ac9e178b6
+az aks get-credentials --resource-group ss-dev-01-rg --name ss-dev-01-aks``
+
+Once you have access once, you can switch to this using `kubectl config use-context ss-dev-01-aks`
+
+
+### Staging
+
+Cluster name: `ss-stg-00-aks`
+
+``az account set --subscription 74dacd4f-a248-45bb-a2f0-af700dc4cf68
+az aks get-credentials --resource-group ss-stg-00-rg --name ss-stg-00-aks``
+
+`kubectl config use-context ss-stg-00-aks`
+
+### Production
+
+SDS are only people who can access.
+
+
+## Troubleshooting the infrastructure
+
+First check https://hmcts.github.io/ways-of-working/troubleshooting, and the rest of the ways-of-working document. This is generally expected by the SDS team. Check the issue as thoroughly as possible using the command line and Azure Portal. If stuck, ask in #sds-cloud-native.
+
+
+### Flux issues
+
+https://hmcts.github.io/ways-of-working/troubleshooting/#flux-did-not-commit-latest-image-to-github
+
+A useful command for checking flux issues:
+`az aks get-credentials --resource-group ss-ptl-00-rg --name ss-ptl-00-aks --subscription DTS-SHAREDSERVICESPTL`
+
+
+## Database access
+
+Follow the instructions here: https://github.com/hmcts/cnp-module-postgres
+
+Cheatsheet:
+
+- request access: https://myaccess.microsoft.com/@CJSCommonPlatform.onmicrosoft.com#/access-packages
+  - ITHC, Staging and Production requires production bastion access
+- az login
+- az ssh config --ip \*.platform.hmcts.net --file ~/.ssh/config
+- Turn on F5 VPN
+
+- For e.g. Demo, run:
+  - ssh bastion-nonprod.platform.hmcts.net
+  - POSTGRES_HOST=c100-demo.postgres.database.azure.com
+  - DB_USER=c100_postgresql_user@c100-demo
+  - DB_NAME=c100
+  - psql "sslmode=require host=${POSTGRES_HOST} dbname=${DB_NAME} user=${DB_USER}"
+
+
+## Infrastructure Key documentation:
+
+- https://github.com/hmcts/cnp-jenkins-library
+Shows standard opinionated pipeline stages
+Shows the branch → environment relationships for both infra + app code pipelines.
+- https://hmcts.github.io/ways-of-working/new-component/secrets-management.html#secrets-management
+Environment variables
+- https://github.com/hmcts/cnp-module-postgres
+Database setup + access
+- https://github.com/hmcts/cnp-flux-config/blob/master/docs/app-deployment-v2.md
+To add deployment
+- https://hmcts.github.io/ways-of-working/troubleshooting/
+Learn this set of issues. When getting an issue, check this first.
+- https://user-guide.cloud-platform.service.justice.gov.uk/documentation/other-topics/aws-rds-migration.html#step-2-sequences
+Downloading data from RDS
+- https://hmcts.github.io/ways-of-working/new-component/helm-chart.html#helm-chart
+Information about helm
+- https://tools.hmcts.net/confluence/display/RSTR/Migration+-+Developer+Notes
+AWS to Azure developer migration notes
+
+
+### Infrastructure repositories used:
+
+- https://github.com/hmcts/c100-shared-infrastructure - to set up database, key vault, redis
+- https://github.com/hmcts/c100-application - code + deployment pipeline
+./charts/.. - used for deployment pipeline settings
+./Jenkinsfile_CNP - used for deployment pipeline settings
+- https://github.com/hmcts/sds-flux-config/tree/master/apps/c100
+Deployment pipeline configuration
+- https://github.com/hmcts/cnp-jenkins-library/ - contains code to allow Jenkins to deploy ruby projects
+Import into C100 using Jenkinsfile_CNP file
+- https://portal.azure.com/#@HMCTS.NET/resource/subscriptions/8999dec3-0104-4a27-94ee-6588559729d1/resourceGroups/rpe-acr-prod-rg/providers/Microsoft.ContainerRegistry/registries/hmctspublic/repository
+Container repository
+- https://github.com/hmcts/azure-public-dns
+Public DNS for prod
+- https://github.com/hmcts/azure-private-dns
+Private DNS for all envs
+- https://github.com/hmcts/sds-azure-platform/pull/261
+Platform config
+
+

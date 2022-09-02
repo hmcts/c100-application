@@ -19,5 +19,5 @@ production:
   port: 5432
   database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: '<%= ENV["DATABASE_PASSWORD"] %>'
   sslmode: <%= ENV.fetch('DATABASE_SSLMODE', 'require') %>

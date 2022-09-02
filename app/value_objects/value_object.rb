@@ -13,6 +13,10 @@ class ValueObject
   alias === ==
   alias eql? ==
 
+  def blank?
+    value.blank?
+  end
+
   def self.string_values
     values.map(&:to_s)
   end

@@ -1,5 +1,3 @@
 --color
 --require spec_helper
 --order rand
---format RspecJunitFormatter
---out tmp/test/rspec.xml

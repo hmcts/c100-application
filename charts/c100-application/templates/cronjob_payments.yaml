@@ -1,8 +1,18 @@
+{{- $globals := .Values.global | default dict -}}
+{{- $baseValues := dict "Values" .Values.base -}}
+{{- $noValues := omit . "Values" -}}
+{{- $base := merge $baseValues  $noValues }}
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ template "hmcts.releasename.v2" . }}-paymts
-{{- include "hmcts.labels.v2" . | indent 2 -}}
+  labels:
+    app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-paymts
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-paymts
+    aadpodidbinding: {{ .Values.base.aadIdentityName }}
 {{- include "hmcts.annotations.v2" . | indent 2 }}
 spec:
   schedule: "*/15 * * * *"
@@ -16,18 +26,37 @@ spec:
       template:
         metadata:
           labels:
-            tier: worker
+            name: {{ template "hmcts.releasename.v2" . }}-paymts
+            app.kubernetes.io/name: {{ template "hmcts.releasename.v2" $base }}-paymts
+            helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+            app.kubernetes.io/managed-by: {{ .Release.Service }}
+            app.kubernetes.io/instance: {{ template "hmcts.releasename.v2" $base }}-paymts
+            aadpodidbinding: {{ .Values.base.aadIdentityName }}
         spec:
           restartPolicy: OnFailure
+          {{- include "hmcts.interpodantiaffinity.v2" $base | indent 10 }}
+          {{- ( include "hmcts.dnsConfig.v2" $base ) | indent 10 }}
+          {{- if $globals.enableKeyVaults }}
+          volumes:
+            - name: vault-c100
+              csi:
+                driver: secrets-store.csi.k8s.io
+                readOnly: true
+                volumeAttributes:
+                  secretProviderClass: {{ .Release.Name }}-base-c100
+          {{- end }}
           containers:
-          - name: cronjob-payments-mop-up
-            image: {{ .Values.base.image }}
-            imagePullPolicy: IfNotPresent
-            command: ['bin/rails', 'payments_mop_up']
-            env:
-            {{ if .Values.redis.url }}
-              - name: DATABASE_URL
-                value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
-              - name: REDIS_URL
-                value: {{ .Values.redis.url }}
-            {{ end }}
+            - name: cronjob-payments-mop-up
+              image: {{ .Values.base.image }}
+              imagePullPolicy: IfNotPresent
+              command: ['bin/rails', 'payments_mop_up']
+              {{- ( include "hmcts.secretMounts.v2" $base ) | indent 14 }}
+              env:
+              {{ if .Values.redis.url }}
+                - name: DATABASE_URL
+                  value: postgres://{{ .Values.base.postgresql.auth.username}}:{{ .Values.base.postgresql.auth.password}}@{{ .Release.Name }}-postgresql/{{ .Values.base.postgresql.auth.database }}
+                - name: REDIS_URL
+                  value: {{ .Values.redis.url }}
+                - name: DATABASE_SSLMODE
+                  value: 'allow'
+              {{ end }}

@@ -33,8 +33,8 @@ module Application
     # in the pipeline.
     #
     # :nocov:
-    if Dir.exist?("../../../mnt/secrets/c100")
-      Dir["../../../mnt/secrets/c100/*"].each do |filepath|
+    if Dir.exist?("/mnt/secrets/c100")
+      Dir["/mnt/secrets/c100/*"].each do |filepath|
         name = filepath.split('/')[-1]
         value = File.open(filepath).read
         ENV[name] ||= value
