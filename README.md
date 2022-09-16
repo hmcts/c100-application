@@ -135,7 +135,7 @@ Alternatively, create the URL by hand. You can see the PR number in the url: "/p
 
 ## Environments
 
-- Dev:- deploys a unique build for each pull request. Unlike the other environments, does not have a permanent database or redis instance. Instead, it builds its own for each new build. Shortname: `dev`. Url: https://c100-application-pr-PR_NUMBER.dev.platform.hmcts.net/.
+- Dev:- deploys a unique build for each pull request. Unlike the other environments, does not have a permanent database or redis instance. Instead, it builds its own for each new build. Shortname: `dev`. Url: https://c100-application-pr-PR_NUMBER.dev.platform.hmcts.net/. Dev pulls all the keys from the staging key vault, and then over-rides a few of them in `charts/values.dev.template.yaml`.
 - Staging:- a replica of the live environment. Not used as part of the development process. Can be used to interact with a replica of the live deployment without having to put test data in the production database. Shortname: `stg`. Url https://c100-application.staging.platform.hmcts.net/.
 - Demo:- used for doing demonstrations to external stakeholders. Shortname: `demo`. Url https://c100-application.demo.platform.hmcts.net/.
 - Production:- the live environment. Access to the console not available to developers. Shortname: `demo`. Urls https://c100-application.platform.hmcts.net/ or https://apply-to-court-about-child-arrangements.service.justice.gov.uk/.
