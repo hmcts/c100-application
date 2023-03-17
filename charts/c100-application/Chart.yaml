@@ -5,7 +5,7 @@ version: 0.0.9
 description: C100 Application
 dependencies:
   - name: base
-    version: 0.2.3
+    version: 0.2.7
     repository: https://hmctspublic.azurecr.io/helm/v1/repo/
   - name: redis
     version: 17.0.6
